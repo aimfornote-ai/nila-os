@@ -387,11 +387,11 @@ function InfoBlock({ label, value, accent=T.gold }) {
   </div>;
 }
 
-function Button({ children, onClick, variant="primary", size="md", disabled=false }) {
+function Button({ children, onClick, variant="primary", size="md", disabled=false, fullWidth=false }) {
   const styles = { primary:{bg:T.indigo,color:"#fff",border:`1px solid ${T.indigo}`}, secondary:{bg:"transparent",color:T.indigo,border:`1px solid ${T.border}`}, gold:{bg:T.gold,color:"#fff",border:`1px solid ${T.gold}`}, amber:{bg:T.amber,color:"#fff",border:`1px solid ${T.amber}`} };
   const s = styles[variant]||styles.primary;
   const pad = size==="sm"?"6px 14px":"9px 20px";
-  return <button onClick={onClick} disabled={disabled} style={{ background:disabled?T.ground:s.bg, color:disabled?T.mist:s.color, border:disabled?`1px solid ${T.border}`:s.border, borderRadius:T.radius, padding:pad, fontSize:size==="sm"?T.sm:T.base, fontWeight:700, cursor:disabled?"not-allowed":"pointer", letterSpacing:"0.02em", transition:"opacity 0.15s" }}>{children}</button>;
+  return <button onClick={onClick} disabled={disabled} style={{ width:fullWidth?"100%":"auto", background:disabled?T.ground:s.bg, color:disabled?T.mist:s.color, border:disabled?`1px solid ${T.border}`:s.border, borderRadius:T.radius, padding:pad, fontSize:size==="sm"?T.sm:T.base, fontWeight:700, cursor:disabled?"not-allowed":"pointer", letterSpacing:"0.02em", transition:"opacity 0.15s" }}>{children}</button>;
 }
 
 // ────────────────────────────────────────────────────────────
