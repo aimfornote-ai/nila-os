@@ -40,28 +40,136 @@ const T = {
 // DATA: MOTIFS
 // ────────────────────────────────────────────────────────────
 const MOTIFS = [
-  { code:"NIL-KNK", name:"Kanok",      thai:"กนก",      era:"Sukhothai, 13th c.",      form:"Flame scroll / curvilinear tendril",         meaning:"Sacred fire, divine energy, royal lineage",      surfaces:"Border repeat, allover field, medallion",        tier:"Core" },
-  { code:"NIL-LGW", name:"Luk Gaew",   thai:"ลูกแก้ว",  era:"Ayutthaya, 15th c.",      form:"Faceted gem radial, multi-lobed",             meaning:"Wish-fulfilling jewel, clarity, enlightenment",  surfaces:"Spot motif, scattered repeat, tile centrepiece", tier:"Core" },
-  { code:"NIL-DKM", name:"Dok Mali",   thai:"ดอกมะลิ",  era:"Central Thai, classical", form:"Five-petal jasmine, strict radial symmetry",  meaning:"Maternal love, purity, ritual fragrance",        surfaces:"Delicate allover, fine textile, stationery",     tier:"Core" },
-  { code:"NIL-NAG", name:"Naga Scale", thai:"เกล็ดนาค", era:"Khmer-Thai, 12th c.",     form:"Interlocking semicircle scales",              meaning:"Serpent deity, water, protective boundary",      surfaces:"Geometric repeat, wall tile, floor covering",    tier:"Core" },
-  { code:"NIL-PKR", name:"Pra Kring",  thai:"พระกริ่ง", era:"Rattanakosin period",     form:"Amulet silhouette, rounded bell form",        meaning:"Sacred protection, healing, auspicious energy",  surfaces:"Spot motif, packaging focal point",              tier:"Signature" },
-  { code:"NIL-HNT", name:"Hong Tail",    thai:"หางหงส์",
-    era:"Ayutthaya Period (14th–18th century)",
-    meaning:"The elegant tail feather of the Hong (sacred swan) — symbol of grace, nobility, and fluid movement. Reimagined as a flowing repeat for luxury textile and wallcovering.",
-    tier:"Extended Tier",
-    globalKeywords:["Thai swan motif","Hong feather pattern","Ayutthaya heritage","Luxury textile design","Fluid botanical repeat"],
-    form:"Flowing swan-tail scroll", surfaces:"Textile · Wallcovering · Spa Linen", type:"Organic",
+  {
+    code:"NIL-KNK", name:"Kanok", thai:"กนก", tier:"Core",
+    era:"Associated with Thai classical ornament",
+    form:"Flame scroll / curvilinear tendril",
+    meaning:"Growth, vitality, divine energy, timeless beauty — the foundational vocabulary of Thai ornamental art.",
+    surfaces:"Border repeat, allover field, medallion, wallpaper, textile, packaging",
+    keywords:"Thai flame scroll, Kanok motif, curvilinear tendril, classical ornament, antique gold, heritage luxury",
+    do:"Use in refined textile repeat, wallpaper border, medallion layouts, and heritage packaging. Pair with emerald, antique gold, and ivory palettes.",
+    dont:"Avoid cartoonish tourist-souvenir styling or generic 'Asian-inspired' shortcuts.",
   },
-  { code:"NIL-PKB", name:"Phum Khaobin", thai:"พุ่มข้าวบิณฑ์",
-    era:"Sukhothai–Ayutthaya Period",
-    meaning:"The sacred rice offering bouquet — a floral arrangement offered at temples, symbolising abundance and gratitude. Translated into a refined botanical repeat for packaging and gifting.",
-    tier:"Core Tier",
-    globalKeywords:["Thai botanical motif","Rice bouquet pattern","Sacred floral design","Temple offering heritage","Luxury packaging"],
-    form:"Symmetrical floral bouquet", surfaces:"Packaging · Stationery · Wallcovering · Gifting", type:"Botanical",
+  {
+    code:"NIL-LKG", name:"Luk Gaew", thai:"ลูกแก้ว", tier:"Core",
+    era:"Inspired by Sukhothai-era decorative language",
+    form:"Sacred jewel sphere / radiating gem motif",
+    meaning:"Purity, spiritual aspiration, inner light, clarity of purpose.",
+    surfaces:"Medallion centerpiece, scarf focal, wallpaper drop repeat, packaging seal",
+    keywords:"Thai sacred jewel, Luk Gaew sphere, radiating gem, ornamental halo, warm ivory, antique gold linework",
+    do:"Use as a refined medallion, seal, or focal motif. Pair with antique gold, ivory, and deep emerald palettes.",
+    dont:"Do not depict sacred Buddhist objects. Avoid inappropriate surfaces or tourist-souvenir aesthetics.",
   },
-  { code:"NIL-LTB", name:"Lotus Bud",  thai:"ดอกบัวตูม",era:"Pan-Thai Buddhist",       form:"Elongated bud, layered petal base",           meaning:"Spiritual awakening, latent potential, rebirth", surfaces:"Vertical repeat, wallpaper, stationery",         tier:"Extended" },
-  { code:"NIL-BWR", name:"Bai Raka",   thai:"ใบระกา",  era:"Temple architecture",     form:"Serrated leaf gable ornament",                meaning:"Sacred threshold, protective boundary",          surfaces:"Edge trim, border repeat, frame device",         tier:"Extended" },
-  { code:"NIL-HNS", name:"Hong",       thai:"หงส์",    era:"Thai-Brahminic",          form:"Sacred goose in profile, long-necked",        meaning:"Grace, spiritual transcendence, nobility",       surfaces:"Allover, damask, textile statement",             tier:"Extended" },
+  {
+    code:"NIL-MNG", name:"Naga Scale", thai:"เกล็ดนาค", tier:"Core",
+    era:"Linked to traditional Thai architectural and decorative arts",
+    form:"Serpent scale / interlocking geometric repeat",
+    meaning:"Protection, guardianship, sacred boundary, architectural strength.",
+    surfaces:"Wall tile, architectural panel, wallcovering, fashion repeat, hospitality FF&E",
+    keywords:"Naga serpent scale, Thai geometric repeat, interlocking pattern, architectural luxury, deep teal, heritage stone",
+    do:"Use in architectural, tile, and wallcovering applications. Pair with stone, teal, and antique gold palettes.",
+    dont:"Avoid sacred serpent deity depictions in commercial contexts. Keep geometric — not figurative.",
+  },
+  {
+    code:"NIL-DKM", name:"Dok Mali", thai:"ดอกมะลิ", tier:"Core",
+    era:"Commonly found in Thai temple and textile ornament",
+    form:"Jasmine blossom / flowing botanical repeat",
+    meaning:"Maternal devotion, purity, gentle elegance, spiritual offering.",
+    surfaces:"Stationery, spa linen, packaging, textile border, gifting",
+    keywords:"Thai jasmine blossom, Dok Mali botanical, flowing repeat, soft ivory, wellness luxury, botanical heritage",
+    do:"Use in wellness, spa, gifting, and stationery contexts. Pair with soft lotus pink, ivory, and champagne gold.",
+    dont:"Avoid overscaling or heavy distortion — keep the floral form refined and recognisable.",
+  },
+  {
+    code:"NIL-HNT", name:"Hong Tail", thai:"หางหงส์", tier:"Extended",
+    era:"Contemporary interpretation of Thai heritage form",
+    form:"Flowing swan-tail scroll / elegant feather tendril",
+    meaning:"Grace, nobility, fluid movement, refined beauty.",
+    surfaces:"Textile repeat, wallcovering, spa linen, scarf border",
+    keywords:"Thai swan tail, Hong feather, flowing scroll, Ayutthaya-inspired, luxury textile, fluid botanical repeat",
+    do:"Use in flowing repeat textile and wallcovering. Pairs beautifully with soft golds and emerald palettes.",
+    dont:"Avoid rigid geometric settings — this motif thrives in organic, flowing layouts.",
+  },
+  {
+    code:"NIL-PKB", name:"Phum Khaobin", thai:"พุ่มข้าวบิณฑ์", tier:"Core",
+    era:"Contemporary interpretation of Thai heritage form",
+    form:"Symmetrical floral bouquet / sacred offering arrangement",
+    meaning:"Abundance, gratitude, spiritual devotion, harmonious balance.",
+    surfaces:"Packaging, stationery, wallcovering, gifting, textile border",
+    keywords:"Thai rice bouquet, Phum Khaobin botanical, symmetrical floral, sacred offering, luxury packaging, heritage gifting",
+    do:"Use in premium packaging, gifting, and stationery. Elegant as a repeat or standalone medallion.",
+    dont:"Keep the arrangement symmetrical and refined — avoid loose or cartoon-like interpretations.",
+  },
+  {
+    code:"NIL-BUA", name:"Lotus Bud", thai:"บัว", tier:"Core",
+    era:"Commonly found in Thai temple and textile ornament",
+    form:"Closed lotus bud / rising from water geometry",
+    meaning:"Spiritual awakening, purity, resilience, new beginnings.",
+    surfaces:"Allover repeat, spa linen, bedding, wallpaper, packaging",
+    keywords:"Thai lotus bud, Bua motif, rising lotus, purity, spa luxury, botanical repeat, warm ivory",
+    do:"Use across spa, wellness, bedding, and packaging. Versatile as allover field or medallion.",
+    dont:"Do not depict sacred Buddhist lotus offerings in commercial product patterns. Keep botanical — not ritual.",
+  },
+  {
+    code:"NIL-HSW", name:"Hong Swan", thai:"หงส์", tier:"Extended",
+    era:"Linked to traditional Thai architectural and decorative arts",
+    form:"Sacred swan / elegant bird silhouette in ornamental setting",
+    meaning:"Nobility, divine grace, cultural refinement, auspicious beauty.",
+    surfaces:"Wallcovering, textile medallion, hotel decor, fashion border",
+    keywords:"Thai Hong swan, sacred bird, ornamental silhouette, heritage luxury, antique gold, ivory background",
+    do:"Use as a focal or medallion motif in wallcovering and premium textile. Pair with antique gold and ivory.",
+    dont:"Avoid figurative depictions that feel costume-like. Keep elegant and ornamental, not illustrative.",
+  },
+  {
+    code:"NIL-RAC", name:"Racha", thai:"ราชา", tier:"Extended",
+    era:"Inspired by Thai classical ornament",
+    form:"Royal crown-inspired ornamental flourish",
+    meaning:"Authority, refinement, excellence, regal presence.",
+    surfaces:"Packaging crown detail, textile border, wallpaper header motif, premium gifting",
+    keywords:"Thai royal ornament, Racha flourish, crown-inspired detail, heritage luxury, antique gold, refined linework",
+    do:"Use as a decorative flourish or border detail. Elegant in packaging headers and textile edges.",
+    dont:"Do not use as a direct depiction of Thai royal regalia. Keep as an ornamental flourish only.",
+  },
+  {
+    code:"NIL-AUR", name:"Auspicious Radiance", thai:"รัศมีมงคล", tier:"Signature",
+    era:"Contemporary NILA signature motif",
+    form:"Ornamental halo / lotus geometry / gemstone-centered symmetry",
+    meaning:"Protection, blessing, prosperity, inner light, quiet power.",
+    surfaces:"Packaging seal, scarf medallion, wallpaper focal point, gift box, textile border, brand detail",
+    keywords:"auspicious radiance, Thai ornamental halo, lotus geometry, gemstone center, antique gold linework, warm ivory background, refined Thai heritage luxury",
+    do:"Use as a refined medallion, seal, or focal motif. Pair with antique gold, ivory, black gem, emerald, or champagne palettes.",
+    dont:"Do not depict Buddha images, monk imagery, amulets, or sacred ritual objects. Do not use on disrespectful surfaces.",
+  },
+  {
+    code:"NIL-GEM", name:"Nila Gem", thai:"อัญมณีนิล", tier:"Signature",
+    era:"Contemporary NILA signature motif",
+    form:"Black gemstone geometry / Thai ornamental framing",
+    meaning:"Inner strength, elegance, clarity, hidden value.",
+    surfaces:"Brand mark detail, packaging seal, scarf medallion, wallpaper focal motif",
+    keywords:"black gemstone, Thai ornamental frame, refined luxury, hidden gem, warm antique gold, contemporary Thai heritage",
+    do:"Use as a brand signature motif, packaging seal, or scarf medallion. Pairs beautifully with antique gold and ivory.",
+    dont:"Avoid overuse — this is a signature motif, best used sparingly as a focal or seal element.",
+  },
+  {
+    code:"NIL-NMK", name:"Nila Monogram Kanok", thai:"นิลากนกโมโนแกรม", tier:"Signature",
+    era:"Contemporary NILA signature motif",
+    form:"N monogram structure with Kanok-inspired flowing rhythm",
+    meaning:"Brand identity, continuity, Thai craft language, cultural refinement.",
+    surfaces:"Monogram repeat, jacquard textile, lining pattern, packaging tissue, ribbon, label",
+    keywords:"N monogram, Thai Kanok rhythm, luxury repeat, subtle brand signature, tone-on-tone textile",
+    do:"Use as a subtle tone-on-tone lining repeat, jacquard textile, or brand packaging tissue. Elegant and understated.",
+    dont:"Avoid heavy contrast — this motif works best in tone-on-tone or refined gold-on-black applications.",
+  },
+  {
+    code:"NIL-BGL", name:"Black Gem Lotus", thai:"บัวนิล", tier:"Signature",
+    era:"Contemporary NILA signature motif",
+    form:"Dark gem center lotus / NILA house motif",
+    meaning:"Awakening, purity, resilience, quiet power.",
+    surfaces:"Wallpaper medallion, silk scarf centerpiece, bedding motif, premium gift box, brand pattern",
+    keywords:"black lotus gem, Thai lotus geometry, warm ivory background, antique gold linework, refined heritage luxury",
+    do:"Use as a bold medallion or scarf centerpiece. Dramatic in black + antique gold on ivory.",
+    dont:"Do not depict sacred Buddhist lotus offerings. Keep as a contemporary design motif — elegant and refined.",
+  },
 ];
 
 // ────────────────────────────────────────────────────────────
@@ -93,12 +201,12 @@ const PROMPT_VOCAB = {
   styleModifiers:["Intricate and symmetrical","Refined and restrained","Maximalist sacred geometry","Deconstructed and minimal","Architectural and precise","Botanical and fluid","Ceremonial and monumental","Gossamer and delicate"],
   structures:["seamless allover repeat","half-drop repeat","mirror-tile repeat","ogee repeat","border stripe","medallion centrepiece","scattered spot motif","tossed print with directional flow","engineered panel"],
   colorways:[
-    { name:"Emerald Forest + Antique Gold",  value:"deep emerald #0F4D3A and antique gold #C7A24D on warm ivory #F7F4ED ground" },
-    { name:"Midnight Emerald + Ivory",       value:"near-black emerald #0A3528 and warm ivory #F7F4ED on linen #F0EDE4 ground" },
-    { name:"Antique Gold + Ivory",           value:"antique gold #C7A24D and warm ivory on deep emerald #0F4D3A ground — reversed" },
-    { name:"Lotus Blush + Ivory",            value:"dusty lotus #B85A72 and antique gold on warm ivory — feminine botanical" },
-    { name:"Deep Jade + Botanical Ivory",    value:"deep jade #2E7D67 and linen ivory on soft warm white — nature-led" },
-    { name:"Monochrome Emerald",             value:"single emerald #0F4D3A in varying tones on linen ivory ground" },
+    { name:"Midnight Siam — Black + Gold + Emerald", value:"Nila Black #0D0D0F base, antique gold #DAAF37 motif, deep emerald #0F3D2E accent, ivory silk #F6F3E8 highlight — flagship palette" },
+    { name:"Midnight Siam — Emerald Classic",        value:"deep emerald #0F4D3A and antique gold #C7A24D on warm ivory #F7F4ED — lighter colourway" },
+    { name:"Midnight Siam — Gold on Black",          value:"antique gold #DAAF37 motif on pure Nila Black #0D0D0F — most dramatic colourway" },
+    { name:"Lotus Blush + Ivory",                    value:"dusty lotus #B85A72 and antique gold on warm ivory — feminine botanical" },
+    { name:"Deep Jade + Botanical Ivory",            value:"deep jade #2E7D67 and linen ivory on soft warm white — nature-led" },
+    { name:"Monochrome Emerald",                     value:"single emerald #0F4D3A in varying tones on linen ivory ground" },
   ],
   surfaces:["luxury wallcovering","upholstery fabric","fine woven textile","glazed ceramic wall tile","porcelain floor tile","luxury silk scarf","cushion and throw fabric","premium gift wrap paper","rigid luxury packaging box","spa linen and towelling","premium notebook cover","fine stationery set","canvas tote bag","fashion accessory fabric"],
   moods:["warm heritage luxury, liveable and beautiful","botanical grandeur — lush, layered, organic","meditative nature — Thai forest and water calm","contemporary boutique hotel — emerald, gold, warm ivory palette","editorial lifestyle — scarf, cushion, luxury home","artisanal craft heritage — handmade warmth","refined tropical — luxury resort, spa, wellness","botanical scientific illustration — precise, elegant, natural"],
@@ -291,7 +399,7 @@ function Button({ children, onClick, variant="primary", size="md", disabled=fals
 // ────────────────────────────────────────────────────────────
 function Dashboard({ navigate }) {
   const kpis = [
-    { label:"Midnight Siam",            value:"In Production",                  sub:"20 patterns · Phase 1",       accent:T.indigo },
+    { label:"Midnight Siam",            value:"In Production",                  sub:"200 patterns · 10 collections · 2026–2028",       accent:T.indigo },
     { label:"Collections",             value:"4",                               sub:"Q2 2026 – Q1 2027 roadmap",   accent:T.gold   },
     { label:"Prospects Scored",        value:String(INIT_OPPORTUNITIES.length), sub:"Opportunity pipeline",        accent:T.lotus  },
     { label:"Studio Status",           value:"Pre-Launch",                      sub:"Not yet trading",             accent:T.amber  },
@@ -477,30 +585,166 @@ function DesignLanguage() {
 // ────────────────────────────────────────────────────────────
 function MotifLibrary() {
   const [filter, setFilter] = useState("All");
+  const [selectedMotif, setSelectedMotif] = useState(null);
   const tiers = ["All","Core","Signature","Extended"];
   const visible = filter==="All" ? MOTIFS : MOTIFS.filter(m=>m.tier===filter);
-  const tierColor = { Core:T.indigoL, Signature:T.gold, Extended:T.jade };
+
+  const tierColor = (t) => t==="Core"?T.jade : t==="Signature"?T.gold : T.amber;
+  const tierBg    = (t) => t==="Core"?`${T.jade}18` : t==="Signature"?`${T.gold}18` : `${T.amber}18`;
+
+  const Modal = ({motif, onClose}) => (
+    <div style={{ position:"fixed", inset:0, zIndex:999, background:"rgba(10,30,22,0.82)", backdropFilter:"blur(6px)", display:"flex", alignItems:"center", justifyContent:"center", padding:24 }}
+      onClick={onClose}>
+      <div onClick={e=>e.stopPropagation()} style={{ background:T.white, borderRadius:T.radiusL, maxWidth:640, width:"100%", maxHeight:"90vh", overflowY:"auto", boxShadow:"0 24px 80px rgba(15,77,58,0.25)", border:`2px solid ${T.gold}` }}>
+        {/* Header */}
+        <div style={{ background:`linear-gradient(135deg,${T.indigoD},${T.indigo})`, borderRadius:`${T.radiusL}px ${T.radiusL}px 0 0`, padding:"24px 28px" }}>
+          <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
+            <div>
+              <div style={{ fontFamily:"monospace", fontSize:T.xs, color:T.gold, fontWeight:700, marginBottom:4 }}>{motif.code}</div>
+              <div style={{ fontWeight:900, color:"#F7F4ED", fontSize:22, fontFamily:"Georgia,serif" }}>{motif.name}</div>
+              <div style={{ fontSize:18, color:"rgba(247,244,237,0.6)", marginTop:2 }}>{motif.thai}</div>
+            </div>
+            <div style={{ display:"flex", flexDirection:"column", alignItems:"flex-end", gap:8 }}>
+              <button onClick={onClose} style={{ background:"rgba(255,255,255,0.12)", border:"none", color:"#F7F4ED", width:32, height:32, borderRadius:"50%", cursor:"pointer", fontSize:16, display:"flex", alignItems:"center", justifyContent:"center" }}>✕</button>
+              <span style={{ background:tierBg(motif.tier), color:tierColor(motif.tier), border:`1px solid ${tierColor(motif.tier)}44`, borderRadius:20, padding:"3px 12px", fontSize:T.xs, fontWeight:700 }}>{motif.tier}</span>
+            </div>
+          </div>
+        </div>
+        {/* Body */}
+        <div style={{ padding:"24px 28px" }}>
+          {[
+            ["Cultural Reference & Form", motif.era + " — " + motif.form],
+            ["Symbolic Meaning", motif.meaning],
+            ["Surface Applications", motif.surfaces],
+          ].map(([label, value]) => (
+            <div key={label} style={{ marginBottom:18 }}>
+              <div style={{ fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>{label}</div>
+              <div style={{ fontSize:13, color:T.ink, lineHeight:1.75 }}>{value}</div>
+            </div>
+          ))}
+          {/* Do / Don't */}
+          <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:12, marginBottom:18 }}>
+            <div style={{ background:`${T.jade}10`, borderRadius:T.radius, padding:"12px 14px", borderLeft:`3px solid ${T.jade}` }}>
+              <div style={{ fontSize:T.xs, fontWeight:700, color:T.jade, marginBottom:6, textTransform:"uppercase", letterSpacing:"0.09em" }}>✓ Do</div>
+              <div style={{ fontSize:12, color:T.ink, lineHeight:1.7 }}>{motif.do}</div>
+            </div>
+            <div style={{ background:`${T.amber}10`, borderRadius:T.radius, padding:"12px 14px", borderLeft:`3px solid ${T.amber}` }}>
+              <div style={{ fontSize:T.xs, fontWeight:700, color:T.amber, marginBottom:6, textTransform:"uppercase", letterSpacing:"0.09em" }}>✕ Don't</div>
+              <div style={{ fontSize:12, color:T.ink, lineHeight:1.7 }}>{motif.dont}</div>
+            </div>
+          </div>
+          {/* Keywords */}
+          <div style={{ marginBottom:18 }}>
+            <div style={{ fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:8 }}>Prompt Keywords</div>
+            <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
+              {motif.keywords.split(",").map(k=>(
+                <span key={k} style={{ background:T.ground, border:`1px solid ${T.border}`, borderRadius:20, padding:"3px 10px", fontSize:11, color:T.mist }}>{k.trim()}</span>
+              ))}
+            </div>
+          </div>
+          {/* IP note */}
+          <div style={{ background:`${T.gold}10`, borderRadius:T.radius, padding:"10px 14px", border:`1px solid ${T.gold}30` }}>
+            <div style={{ fontSize:T.xs, fontWeight:700, color:T.gold, marginBottom:4 }}>Licensing & IP Usage</div>
+            <div style={{ fontSize:11, color:T.mist, lineHeight:1.6 }}>This motif is part of the NILA™ Heritage Living Cultural IP Library. All commercial use requires a valid NILA™ licence agreement. Unauthorised reproduction is prohibited.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div>
-      <SectionHead icon="❋" title="Thai Motif Library" subtitle="NILA's documented source vocabulary — 10 primary motifs with full provenance metadata" />
-      <div style={{ display:"flex", gap:8, marginBottom:20 }}>
-        {tiers.map(t=><button key={t} onClick={()=>setFilter(t)} style={{ padding:"6px 16px", borderRadius:20, border:`1px solid ${filter===t?T.indigo:T.border}`, background:filter===t?T.indigo:T.white, color:filter===t?"#fff":T.mist, fontSize:T.sm, fontWeight:700, cursor:"pointer" }}>{t}</button>)}
-      </div>
-      {visible.map(m=>(
-        <Card key={m.code} style={{ marginBottom:10 }} pad={16}>
-          <div style={{ display:"grid", gridTemplateColumns:"140px 1fr 1fr 1fr", gap:16, alignItems:"start" }}>
-            <div>
-              <div style={{ fontFamily:"monospace", fontSize:T.xs, color:T.gold, fontWeight:700, marginBottom:2 }}>{m.code}</div>
-              <div style={{ fontWeight:900, color:T.indigo, fontSize:T.lg, fontFamily:"Georgia,serif" }}>{m.name}</div>
-              <div style={{ fontSize:16, color:T.mist, marginBottom:6 }}>{m.thai}</div>
-              <Pill color={tierColor[m.tier]}>{m.tier}</Pill>
-            </div>
-            <div><div style={{ fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:4 }}>Origin & Form</div><div style={{ fontSize:T.sm, color:T.mist, marginBottom:3 }}>{m.era}</div><div style={{ fontSize:T.base, color:T.ink, lineHeight:1.6 }}>{m.form}</div></div>
-            <div><div style={{ fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:4 }}>Symbolic Meaning</div><div style={{ fontSize:T.base, color:T.ink, lineHeight:1.6 }}>{m.meaning}</div></div>
-            <div><div style={{ fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:4 }}>Surface Applications</div><div style={{ fontSize:T.base, color:T.ink, lineHeight:1.6 }}>{m.surfaces}</div></div>
+      {selectedMotif && <Modal motif={selectedMotif} onClose={()=>setSelectedMotif(null)} />}
+
+      {/* Header */}
+      <div style={{ marginBottom:28 }}>
+        <SectionHead icon="◈" title="Thai Motif Library" subtitle="Cultural IP Library — NILA Heritage Living™ Design OS v3.2 Beta" />
+
+        {/* Brand positioning */}
+        <div style={{ background:`linear-gradient(135deg,${T.indigoD},${T.indigo})`, borderRadius:T.radiusL, padding:"20px 24px", marginBottom:14 }}>
+          <div style={{ fontFamily:"Georgia,serif", fontSize:15, color:"#F7F4ED", fontStyle:"italic", lineHeight:1.7, marginBottom:10 }}>
+            "NILA Motif Library is the cultural vocabulary behind every pattern, product, and collection we create."
           </div>
-        </Card>
-      ))}
+          <div style={{ fontSize:11, color:"rgba(199,162,77,0.8)", lineHeight:1.8 }}>
+            NILA interprets Thai heritage motifs through a contemporary design lens. Sacred, royal, and ritual references are used with care.
+            The library avoids direct use of sacred Buddhist objects, costume cliché, tourist-souvenir aesthetics, and inappropriate sacred misuse in commercial product patterns.
+          </div>
+        </div>
+
+        {/* Pre-launch badge */}
+        <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:8 }}>
+          <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>
+            {tiers.map(t=>(
+              <button key={t} onClick={()=>setFilter(t)} style={{ padding:"6px 18px", borderRadius:20, fontSize:T.xs, fontWeight:700, border:`1px solid ${filter===t?T.indigo:T.border}`, background:filter===t?T.indigo:T.white, color:filter===t?"#fff":T.mist, cursor:"pointer", transition:"all 0.15s" }}>{t}</button>
+            ))}
+          </div>
+          <div style={{ fontSize:10, color:T.mist, border:`1px solid ${T.border}`, borderRadius:20, padding:"4px 12px", letterSpacing:"0.05em" }}>
+            Pre-launch Cultural IP Library · v3.2 Beta
+          </div>
+        </div>
+      </div>
+
+      {/* Motif count */}
+      <div style={{ fontSize:T.sm, color:T.mist, marginBottom:16 }}>
+        Showing {visible.length} of {MOTIFS.length} motifs
+        {filter!=="All" && <span style={{ marginLeft:8, color:tierColor(filter), fontWeight:700 }}>— {filter} tier</span>}
+      </div>
+
+      {/* Motif grid */}
+      <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(320px, 1fr))", gap:16 }}>
+        {visible.map(m=>(
+          <div key={m.code} style={{ background:T.white, borderRadius:T.radiusL, border:`1px solid ${T.border}`, overflow:"hidden", boxShadow:"0 2px 8px rgba(15,77,58,0.06)", transition:"transform 0.2s, box-shadow 0.2s" }}
+            onMouseEnter={e=>{ e.currentTarget.style.transform="translateY(-3px)"; e.currentTarget.style.boxShadow="0 8px 24px rgba(15,77,58,0.12)"; }}
+            onMouseLeave={e=>{ e.currentTarget.style.transform="translateY(0)"; e.currentTarget.style.boxShadow="0 2px 8px rgba(15,77,58,0.06)"; }}>
+
+            {/* Card header */}
+            <div style={{ background:`linear-gradient(135deg,${T.indigoD},${T.indigo})`, padding:"16px 20px", display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
+              <div>
+                <div style={{ fontFamily:"monospace", fontSize:10, color:T.gold, fontWeight:700, marginBottom:2 }}>{m.code}</div>
+                <div style={{ fontWeight:900, color:"#F7F4ED", fontSize:17, fontFamily:"Georgia,serif" }}>{m.name}</div>
+                <div style={{ fontSize:15, color:"rgba(247,244,237,0.55)", marginTop:1 }}>{m.thai}</div>
+              </div>
+              <span style={{ background:tierBg(m.tier), color:tierColor(m.tier), border:`1px solid ${tierColor(m.tier)}55`, borderRadius:20, padding:"4px 12px", fontSize:10, fontWeight:700, flexShrink:0, marginTop:2 }}>{m.tier}</span>
+            </div>
+
+            {/* Card body */}
+            <div style={{ padding:"16px 20px" }}>
+              {/* Cultural reference */}
+              <div style={{ marginBottom:12 }}>
+                <div style={{ fontSize:10, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:4 }}>Cultural Reference & Form</div>
+                <div style={{ fontSize:12.5, color:T.mist, lineHeight:1.6, fontStyle:"italic" }}>{m.era}</div>
+                <div style={{ fontSize:13, color:T.ink, lineHeight:1.6, marginTop:2 }}>{m.form}</div>
+              </div>
+
+              {/* Meaning */}
+              <div style={{ marginBottom:12 }}>
+                <div style={{ fontSize:10, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:4 }}>Symbolic Meaning</div>
+                <div style={{ fontSize:13, color:T.ink, lineHeight:1.7 }}>{m.meaning}</div>
+              </div>
+
+              {/* Surfaces */}
+              <div style={{ marginBottom:14 }}>
+                <div style={{ fontSize:10, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:4 }}>Surface Applications</div>
+                <div style={{ fontSize:12.5, color:T.indigo, lineHeight:1.6 }}>{m.surfaces}</div>
+              </div>
+
+              {/* View detail button */}
+              <button onClick={()=>setSelectedMotif(m)} style={{ width:"100%", padding:"9px", background:"transparent", border:`1px solid ${T.indigo}`, borderRadius:T.radius, color:T.indigo, fontSize:12, fontWeight:700, cursor:"pointer", letterSpacing:"0.05em", transition:"all 0.15s" }}
+                onMouseEnter={e=>{ e.currentTarget.style.background=T.indigo; e.currentTarget.style.color="#fff"; }}
+                onMouseLeave={e=>{ e.currentTarget.style.background="transparent"; e.currentTarget.style.color=T.indigo; }}>
+                View Motif Detail →
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Footer note */}
+      <div style={{ marginTop:28, padding:"16px 20px", background:T.ground, borderRadius:T.radius, border:`1px solid ${T.border}` }}>
+        <div style={{ fontSize:11, color:T.mist, lineHeight:1.8, textAlign:"center" }}>
+          <span style={{ color:T.gold, fontWeight:700 }}>NILA™ Heritage Living Cultural IP Library</span> — All motifs are interpreted through a contemporary design lens for use in licensed surface design, textile, wallcovering, and packaging applications. Sacred, royal, and ritual references are used with cultural respect and care. Unauthorised commercial use is prohibited.
+        </div>
+      </div>
     </div>
   );
 }
@@ -509,58 +753,240 @@ function MotifLibrary() {
 // PROMPT GENERATOR
 // ────────────────────────────────────────────────────────────
 function PromptGenerator() {
-  const [sel, setSel] = useState({ styleModifier:PROMPT_VOCAB.styleModifiers[0], motif:MOTIFS[0], structure:PROMPT_VOCAB.structures[0], colorway:PROMPT_VOCAB.colorways[0], surface:PROMPT_VOCAB.surfaces[0], mood:PROMPT_VOCAB.moods[0], platform:"Midjourney v6" });
+  const [activeTab, setActiveTab] = useState("pattern");
+  const [sel, setSel] = useState({
+    styleModifier: PROMPT_VOCAB.styleModifiers[0],
+    motif: MOTIFS[0],
+    structure: PROMPT_VOCAB.structures[0],
+    colorway: PROMPT_VOCAB.colorways[0],
+    surface: PROMPT_VOCAB.surfaces[0],
+    mood: PROMPT_VOCAB.moods[0],
+    platform: "Midjourney v6",
+  });
+
+  // Mockup state
+  const [mockup, setMockup] = useState({
+    product: "Silk Scarf 90x90cm",
+    collection: "Siam Tropical Elegance",
+    colorway: "Emerald + Antique Gold + Ivory",
+    setting: "Luxury editorial flat lay on marble surface",
+    lighting: "Soft natural daylight, warm editorial",
+    platform: "ChatGPT (DALL-E 3)",
+  });
+
   const [copied, setCopied] = useState(false);
-  const buildPrompt = () => `${sel.styleModifier} Thai ${sel.motif.name} (${sel.motif.thai}) ${sel.structure}, ${sel.colorway.value}, designed for ${sel.surface}, ${sel.mood}, seamless tileable, high resolution, museum-quality illustration --no ${PROMPT_VOCAB.negatives.join(", ")}`;
-  const copy = () => {
-    const text = buildPrompt();
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(text).then(()=>{ setCopied(true); setTimeout(()=>setCopied(false),1800); });
+  const [mockupCopied, setMockupCopied] = useState(false);
+
+  // ── PRODUCT LINE DATA
+  const PRODUCTS = [
+    { name:"Silk Scarf 90x90cm",     emoji:"🧣", setting:"Editorial flat lay on Italian marble surface, draped corner showing pattern detail", style:"Luxury fashion editorial, Vogue-style" },
+    { name:"Cushion Cover 50x50cm",  emoji:"🛋️", setting:"Luxury living room sofa, styled with throw blanket and indoor plants", style:"Architectural Digest interior lifestyle" },
+    { name:"Hotel Bed Runner",        emoji:"🏨", setting:"5-star hotel suite bed, white linens, tropical view through window", style:"Luxury hospitality editorial, Aman resort aesthetic" },
+    { name:"Kimono Robe",            emoji:"👘", setting:"Elegant model wearing robe, candlelit spa setting or luxury bathroom", style:"Premium fashion editorial, minimal background" },
+    { name:"Gift Box & Bag",         emoji:"📦", setting:"Luxury gift presentation on dark surface, jasmine flower accent, gold ribbon", style:"Premium packaging editorial, dark moody lighting" },
+    { name:"Tote Bag",               emoji:"👜", setting:"Lifestyle street editorial, model carrying bag in heritage setting or café", style:"Contemporary luxury lifestyle, natural light" },
+    { name:"Table Runner",           emoji:"🍽️", setting:"Elegant dining table setting, fine china, candles, fresh flowers", style:"Luxury dining editorial, warm candlelight" },
+    { name:"Zip Pouch",              emoji:"👝", setting:"Flat lay on linen fabric with herbs and flowers, detail shot", style:"Clean editorial flat lay, natural styling" },
+    { name:"Tea Cosy",               emoji:"🫖", setting:"Styled tea table setting, fine bone china, afternoon light", style:"British heritage lifestyle, warm editorial" },
+    { name:"Placemat Set",           emoji:"🍴", setting:"Restaurant table setting, luxury dining room", style:"Fine dining editorial, architectural lighting" },
+    { name:"Lamp Shade",             emoji:"💡", setting:"Luxury bedroom or reading corner, warm lamplight glowing through pattern", style:"Interior editorial, golden hour lighting" },
+    { name:"Cushion + Throw Set",    emoji:"🛋️", setting:"Designer sofa in minimalist luxury living room, layered styling", style:"Interior design editorial, neutral tones" },
+  ];
+
+  const SETTINGS = [
+    "Editorial flat lay on Italian marble surface",
+    "5-star luxury hotel suite interior",
+    "Minimalist luxury living room, high ceilings",
+    "Thai heritage architecture setting, golden hour",
+    "Contemporary Bangkok luxury condo",
+    "European luxury boutique hotel lobby",
+    "Outdoor tropical resort terrace, natural light",
+    "Dark moody studio, dramatic lighting",
+  ];
+
+  const LIGHTINGS = [
+    "Soft natural daylight, warm editorial",
+    "Warm golden hour sunbeams through window",
+    "Moody dramatic studio lighting, deep shadows",
+    "Bright clean Architectural Digest style",
+    "Candlelight ambiance, intimate warmth",
+    "Soft diffused overcast light, airy and clean",
+  ];
+
+  const selectedProduct = PRODUCTS.find(p => p.name === mockup.product) || PRODUCTS[0];
+
+  const buildPatternPrompt = () => {
+    const m = sel.motif;
+    return `${sel.styleModifier} Thai ${m.name} (${m.thai}) motif, ${m.era}, ${sel.structure}, color palette: ${sel.colorway.value}, target surface: ${sel.surface}, mood: ${sel.mood}, high resolution 300dpi seamless texture, luxury surface design, production ready ${sel.platform === "Midjourney v6" ? "--tile --ar 1:1 --v 6 --style raw" : sel.platform === "Adobe Firefly" ? ", seamless pattern, square format" : ", seamless tileable, 8k resolution"}`;
+  };
+
+  const buildMockupPrompt = () => {
+    return `An editorial luxury commercial photograph of a ${mockup.product} featuring the NILA Heritage Living™ ${mockup.collection} pattern.
+
+The pattern uses ${mockup.colorway} colorway with intricate Thai heritage motifs — Kanok flame scroll and botanical elements.
+
+Setting: ${mockup.setting}
+Lighting: ${mockup.lighting}
+Style: ${selectedProduct.style}
+
+The product is the hero of the image. Pattern detail is clearly visible. No other brand names visible. Brand mark reads "NILA™" subtly.
+
+Shot on 35mm lens, f/2.8 bokeh background, photorealistic, premium brand advertising quality, award-winning commercial photography.
+
+${mockup.platform === "Midjourney v6" ? "--ar 4:3 --v 6 --style raw --q 2" : mockup.platform === "ChatGPT (DALL-E 3)" ? "Photorealistic, ultra-detailed, luxury brand quality." : "Photorealistic, high resolution, luxury aesthetic."}`;
+  };
+
+  const copyPattern = () => {
+    navigator.clipboard?.writeText(buildPatternPrompt()).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
+  };
+
+  const copyMockup = () => {
+    const text = buildMockupPrompt();
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(text).then(() => { setMockupCopied(true); setTimeout(() => setMockupCopied(false), 2000); });
     } else {
-      const ta = document.createElement('textarea');
-      ta.value = text; document.body.appendChild(ta); ta.select();
-      document.execCommand('copy'); document.body.removeChild(ta);
-      setCopied(true); setTimeout(()=>setCopied(false),1800);
+      const ta = document.createElement("textarea"); ta.value = text;
+      document.body.appendChild(ta); ta.select(); document.execCommand("copy");
+      document.body.removeChild(ta);
+      setMockupCopied(true); setTimeout(() => setMockupCopied(false), 2000);
     }
   };
-  const sel1 = (key,val) => setSel(s=>({...s,[key]:val}));
-  const Field = ({ label, optKey, options, labelFn=o=>o, valFn=o=>o }) => (
+
+  const SelectField = ({label, value, onChange, options}) => (
     <div style={{ marginBottom:14 }}>
       <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>{label}</label>
-      <select value={valFn(sel[optKey])} onChange={e=>{ const raw=options.find(o=>valFn(o)===e.target.value)||e.target.value; sel1(optKey,raw); }}
-        style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, color:T.ink, fontFamily:"inherit" }}>
-        {options.map((o,i)=><option key={i} value={valFn(o)}>{labelFn(o)}</option>)}
+      <select value={value} onChange={e=>onChange(e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
+        {options.map(o=><option key={typeof o==="string"?o:o.name} value={typeof o==="string"?o:o.name}>{typeof o==="string"?o:o.name}</option>)}
       </select>
     </div>
   );
+
   return (
     <div>
-      <SectionHead icon="◎" title="Prompt Generator" subtitle="Build structured AI generation prompts from NILA's verified design vocabulary" />
-      <Grid cols={2} gap={14}>
-        <Card>
-          <Divider label="Design Parameters" />
-          <Field label="Style Modifier" optKey="styleModifier" options={PROMPT_VOCAB.styleModifiers} labelFn={o=>o} valFn={o=>o} />
-          <Field label="Thai Motif" optKey="motif" options={MOTIFS} labelFn={o=>`${o.name} (${o.thai}) — ${o.code}`} valFn={o=>o.code} />
-          <Field label="Repeat Structure" optKey="structure" options={PROMPT_VOCAB.structures} labelFn={o=>o} valFn={o=>o} />
-          <Field label="Colourway" optKey="colorway" options={PROMPT_VOCAB.colorways} labelFn={o=>o.name} valFn={o=>o.name} />
-          <Field label="Target Surface" optKey="surface" options={PROMPT_VOCAB.surfaces} labelFn={o=>o} valFn={o=>o} />
-          <Field label="Mood Qualifier" optKey="mood" options={PROMPT_VOCAB.moods} labelFn={o=>o} valFn={o=>o} />
-          <Field label="Generation Platform" optKey="platform" options={["Midjourney v6","Adobe Firefly","DALL-E 3","Stable Diffusion XL","Leonardo.ai"]} labelFn={o=>o} valFn={o=>o} />
-        </Card>
-        <div>
-          <Card style={{ position:"sticky", top:16 }}>
-            <Divider label="Generated Prompt" />
-            <div style={{ background:T.indigoD, borderRadius:T.radius, padding:"16px 18px", color:"#C8D8FF", fontFamily:"'JetBrains Mono',monospace", fontSize:T.sm, lineHeight:1.9, marginBottom:12, minHeight:120, wordBreak:"break-word" }}>{buildPrompt()}</div>
-            <Button onClick={copy} variant="gold">{copied?"✓ Copied to clipboard":"Copy prompt"}</Button>
-            <Divider label="Motif Context" />
-            {sel.motif && <div><InfoBlock label="Meaning" value={sel.motif.meaning} accent={T.gold} /><InfoBlock label="Historical Origin" value={`${sel.motif.era} · ${sel.motif.form}`} accent={T.indigo} /><InfoBlock label="Recommended Surfaces" value={sel.motif.surfaces} accent={T.jade} /></div>}
-            <Divider label="Universal Negatives" />
-            <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
-              {PROMPT_VOCAB.negatives.map(n=><span key={n} style={{ background:"#FEF2F2", color:"#991B1B", border:"1px solid #FECACA", borderRadius:20, padding:"2px 10px", fontSize:T.xs, fontWeight:600 }}>✗ {n}</span>)}
+      <SectionHead icon="◎" title="Prompt Generator" subtitle="Build AI prompts for pattern design and product mockups" />
+
+      {/* Tab selector */}
+      <div style={{ display:"flex", gap:8, marginBottom:20 }}>
+        {[["pattern","🎨 Pattern Design"],["mockup","🛋️ Product Mockup"]].map(([v,l])=>(
+          <button key={v} onClick={()=>setActiveTab(v)} style={{ padding:"8px 24px", borderRadius:20, fontSize:T.sm, fontWeight:700, border:`1px solid ${activeTab===v?T.indigo:T.border}`, background:activeTab===v?T.indigo:T.white, color:activeTab===v?"#fff":T.mist, cursor:"pointer", transition:"all 0.15s" }}>{l}</button>
+        ))}
+      </div>
+
+      {/* ── PATTERN TAB */}
+      {activeTab === "pattern" && (
+        <Grid cols={2} gap={14}>
+          <Card>
+            <Divider label="Pattern Parameters" />
+            <div style={{ marginBottom:14 }}>
+              <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Style Modifier</label>
+              <select value={sel.styleModifier} onChange={e=>setSel(s=>({...s,styleModifier:e.target.value}))} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
+                {PROMPT_VOCAB.styleModifiers.map(o=><option key={o}>{o}</option>)}
+              </select>
+            </div>
+            <div style={{ marginBottom:14 }}>
+              <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Thai Motif</label>
+              <select value={sel.motif.code} onChange={e=>setSel(s=>({...s,motif:MOTIFS.find(m=>m.code===e.target.value)||MOTIFS[0]}))} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
+                {MOTIFS.map(m=><option key={m.code} value={m.code}>{m.code} — {m.name} ({m.thai})</option>)}
+              </select>
+            </div>
+            {[["Repeat Structure","structure",PROMPT_VOCAB.structures],["Colourway","colorway",PROMPT_VOCAB.colorways.map(c=>c.name)],["Target Surface","surface",PROMPT_VOCAB.surfaces],["Mood","mood",PROMPT_VOCAB.moods]].map(([label,key,opts])=>(
+              <div key={key} style={{ marginBottom:14 }}>
+                <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>{label}</label>
+                <select value={key==="colorway"?sel.colorway.name:sel[key]} onChange={e=>{ if(key==="colorway"){ const c=PROMPT_VOCAB.colorways.find(x=>x.name===e.target.value); setSel(s=>({...s,colorway:c||PROMPT_VOCAB.colorways[0]})); } else setSel(s=>({...s,[key]:e.target.value})); }} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
+                  {(Array.isArray(opts)?opts:[]).map(o=><option key={typeof o==="string"?o:o.name}>{typeof o==="string"?o:o.name}</option>)}
+                </select>
+              </div>
+            ))}
+            <div style={{ marginBottom:14 }}>
+              <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>AI Platform</label>
+              <select value={sel.platform} onChange={e=>setSel(s=>({...s,platform:e.target.value}))} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
+                {["Midjourney v6","ChatGPT (DALL-E 3)","Adobe Firefly","Stable Diffusion"].map(p=><option key={p}>{p}</option>)}
+              </select>
             </div>
           </Card>
-        </div>
-      </Grid>
+          <Card>
+            <Divider label="Generated Pattern Prompt" />
+            <div style={{ background:T.indigoD, borderRadius:T.radius, padding:"14px 16px", color:"#C8D8FF", fontFamily:"monospace", fontSize:T.xs, lineHeight:1.8, minHeight:220, whiteSpace:"pre-wrap", wordBreak:"break-word", marginBottom:14 }}>
+              {buildPatternPrompt()}
+            </div>
+            <Button onClick={copyPattern} variant={copied?"secondary":"primary"} fullWidth>{copied?"✓ Copied!":"⧉ Copy Pattern Prompt"}</Button>
+            <Card style={{ marginTop:14, background:`${T.indigo}06` }}>
+              <Divider label="Selected Motif" />
+              <InfoBlock label="Code" value={sel.motif.code} accent={T.gold} />
+              <InfoBlock label="Era" value={sel.motif.era} accent={T.indigo} />
+              <div style={{ fontSize:T.sm, color:T.mist, lineHeight:1.6, marginTop:8 }}>{sel.motif.meaning}</div>
+            </Card>
+          </Card>
+        </Grid>
+      )}
+
+      {/* ── MOCKUP TAB */}
+      {activeTab === "mockup" && (
+        <Grid cols={2} gap={14}>
+          <Card>
+            <Divider label="Product Mockup Parameters" />
+            <AlertBox type="info">Select your product, collection, and setting — then copy the prompt into ChatGPT, Midjourney, or DALL-E 3 to generate your mockup image.</AlertBox>
+
+            {/* Product selector — visual grid */}
+            <div style={{ marginBottom:16 }}>
+              <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:8 }}>Product</label>
+              <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:8 }}>
+                {PRODUCTS.map(p=>(
+                  <button key={p.name} onClick={()=>setMockup(m=>({...m,product:p.name}))}
+                    style={{ padding:"8px 6px", borderRadius:T.radius, border:`1px solid ${mockup.product===p.name?T.gold:T.border}`, background:mockup.product===p.name?`${T.gold}15`:T.ground, cursor:"pointer", textAlign:"center", transition:"all 0.15s" }}>
+                    <div style={{ fontSize:18, marginBottom:2 }}>{p.emoji}</div>
+                    <div style={{ fontSize:9, color:mockup.product===p.name?T.gold:T.mist, fontWeight:mockup.product===p.name?700:400, lineHeight:1.3 }}>{p.name.split(" ").slice(0,2).join(" ")}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <SelectField label="Collection" value={mockup.collection} onChange={v=>setMockup(m=>({...m,collection:v}))} options={INIT_COLLECTIONS.map(c=>c.name)} />
+
+            <div style={{ marginBottom:14 }}>
+              <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Colorway</label>
+              <select value={mockup.colorway} onChange={e=>setMockup(m=>({...m,colorway:e.target.value}))} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
+                {PROMPT_VOCAB.colorways.map(c=><option key={c.name} value={c.value}>{c.name}</option>)}
+              </select>
+            </div>
+
+            <SelectField label="Setting" value={mockup.setting} onChange={v=>setMockup(m=>({...m,setting:v}))} options={SETTINGS} />
+            <SelectField label="Lighting" value={mockup.lighting} onChange={v=>setMockup(m=>({...m,lighting:v}))} options={LIGHTINGS} />
+            <SelectField label="AI Platform" value={mockup.platform} onChange={v=>setMockup(m=>({...m,platform:v}))} options={["ChatGPT (DALL-E 3)","Midjourney v6","Adobe Firefly","Gemini"]} />
+          </Card>
+
+          <div>
+            <Card style={{ border:`2px solid ${T.gold}` }}>
+              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:10 }}>
+                <div>
+                  <div style={{ fontWeight:900, color:T.indigo, fontSize:T.lg, fontFamily:"Georgia,serif" }}>{selectedProduct.emoji} {mockup.product}</div>
+                  <div style={{ fontSize:T.xs, color:T.mist, marginTop:2 }}>{mockup.collection} · {mockup.platform}</div>
+                </div>
+                <Tag color="gold">Mockup Prompt</Tag>
+              </div>
+              <div style={{ background:T.indigoD, borderRadius:T.radius, padding:"14px 16px", color:"#C8D8FF", fontFamily:"monospace", fontSize:T.xs, lineHeight:1.8, maxHeight:380, overflowY:"auto", whiteSpace:"pre-wrap", wordBreak:"break-word", marginBottom:14 }}>
+                {buildMockupPrompt()}
+              </div>
+              <Button onClick={copyMockup} variant={mockupCopied?"secondary":"gold"} fullWidth>{mockupCopied?"✓ Copied!":"⧉ Copy Mockup Prompt"}</Button>
+            </Card>
+
+            <Card style={{ marginTop:14 }}>
+              <Divider label="How to Use" />
+              {[
+                ["ChatGPT","Paste prompt → Press Enter → Download image (1024x1024)"],
+                ["Midjourney","Paste in Discord /imagine → Select best → U to upscale → Download"],
+                ["DALL-E 3","Use in ChatGPT Plus or API → Generate → Download PNG"],
+                ["Gemini","Paste in Gemini Advanced → Generate image → Save"],
+              ].map(([platform,how])=>(
+                <div key={platform} style={{ marginBottom:10 }}>
+                  <div style={{ fontSize:T.xs, fontWeight:700, color:T.gold }}>{platform}</div>
+                  <div style={{ fontSize:T.xs, color:T.mist, lineHeight:1.5 }}>{how}</div>
+                </div>
+              ))}
+            </Card>
+          </div>
+        </Grid>
+      )}
     </div>
   );
 }
@@ -569,14 +995,16 @@ function PromptGenerator() {
 // COLLECTION PLANNER
 // ────────────────────────────────────────────────────────────
 const INIT_COLLECTIONS = [
-  { id:1, name:"Midnight Siam",           motif:"NIL-KNK", season:"Q2 2026", status:"In Production", designs:20, surfaces:"Wallcovering, Textile, Packaging", colorways:3, notes:"Flagship collection — 20 patterns, 3 colourways, 10 mockups. Phase 1 priority." },
-  { id:2, name:"Dok Mali Botanical",    motif:"NIL-DKM", season:"Q3 2026", status:"In Brief",      designs:0, surfaces:"Stationery, Packaging",   colorways:2, notes:"Siamese Botanica crossover." },
-  { id:3, name:"Naga Sacred Geometry",  motif:"NIL-NAG", season:"Q4 2026", status:"Planned",       designs:0, surfaces:"Tile, Wallcovering",      colorways:3, notes:"Architecture-focused." },
-  { id:4, name:"Loi Krathong Ceremony", motif:"NIL-PKR", season:"Q1 2027", status:"Planned",       designs:0, surfaces:"Packaging, Gifting",      colorways:3, notes:"Holiday gifting market." },
-  { id:5, name:"Emerald Siam",           motif:"NIL-NAG", season:"Q2 2027", status:"Planned",       designs:0, surfaces:"Tile, Wallcovering",      colorways:3, notes:"Phase 4 — IP Export. Emerald palette." },
-  { id:6, name:"Lotus Blush",            motif:"NIL-DKM", season:"Q3 2027", status:"Planned",       designs:0, surfaces:"Textile, Spa Linen",       colorways:3, notes:"Phase 4 — Wellness & hospitality focus." },
-  { id:7, name:"Royal Azure",            motif:"NIL-LGW", season:"Q4 2027", status:"Planned",       designs:0, surfaces:"Wallcovering, Fashion",    colorways:3, notes:"Phase 4 — Premium fashion licensing tier." },
-  { id:8, name:"Golden Naga",            motif:"NIL-HNT", season:"Q1 2028", status:"Planned",       designs:0, surfaces:"Luxury Packaging, Hotel",  colorways:3, notes:"Phase 4 — Flagship export collection." },
+  { id:1,  name:"Siam Tropical Elegance", motif:"NIL-TRO", season:"Q2 2026", status:"In Production", designs:20, surfaces:"Wallpaper, Textile, Packaging",           colorways:3, notes:"Tropical Thai botanical luxury for resort lifestyle." },
+  { id:2,  name:"Emerald Siam",           motif:"NIL-EMS", season:"Q3 2026", status:"Planned",       designs:20, surfaces:"Wallcovering, Textile, Hotel Decor",       colorways:3, notes:"Emerald and antique gold heritage palette." },
+  { id:3,  name:"Lotus Blush",            motif:"NIL-LTB", season:"Q4 2026", status:"Planned",       designs:20, surfaces:"Textile, Spa Linen, Packaging",            colorways:3, notes:"Soft lotus palette for wellness and hospitality." },
+  { id:4,  name:"Ivory Kingdom",          motif:"NIL-IVK", season:"Q1 2027", status:"Planned",       designs:20, surfaces:"Wallcovering, Bedding, Luxury Packaging",   colorways:3, notes:"Ivory and champagne gold for refined interiors." },
+  { id:5,  name:"Midnight Siam",          motif:"NIL-MDS", season:"Q2 2027", status:"Flagship",      designs:20, surfaces:"Wallcovering, Textile, Packaging",          colorways:3, notes:"Black and antique gold flagship Thai heritage collection." },
+  { id:6,  name:"Royal Azure",            motif:"NIL-RAZ", season:"Q3 2027", status:"Planned",       designs:20, surfaces:"Wallcovering, Silk Scarf, Fashion",          colorways:3, notes:"Royal indigo, pearl, and soft gold for premium licensing." },
+  { id:7,  name:"Dok Mali Botanical",     motif:"NIL-DKM", season:"Q4 2027", status:"Planned",       designs:20, surfaces:"Stationery, Packaging, Textile",             colorways:2, notes:"Jasmine botanical crossover with Siamese Botanica mood." },
+  { id:8,  name:"Naga Sacred Geometry",   motif:"NIL-NAG", season:"Q1 2028", status:"Planned",       designs:20, surfaces:"Tile, Wallcovering, Hospitality",            colorways:3, notes:"Architecture-focused sacred geometry collection." },
+  { id:9,  name:"Loi Krathong Ceremony",  motif:"NIL-LKC", season:"Q2 2028", status:"Planned",       designs:20, surfaces:"Gift Wrap, Packaging, Home Decor",           colorways:3, notes:"Holiday gifting collection — lotus, water, candlelight." },
+  { id:10, name:"Golden Naga",            motif:"NIL-GNG", season:"Q3 2028", status:"Flagship",      designs:20, surfaces:"Luxury Packaging, Hotel, Wallpaper",         colorways:3, notes:"High-value export collection with ceremonial gold identity." },
 ];
 const STATUSES = ["Planned","In Brief","In Production","Curation","Released"];
 const STATUS_COLORS = { Planned:T.mist, "In Brief":T.lotus, "In Production":T.gold, Curation:T.indigoL, Released:T.jade };
@@ -924,7 +1352,7 @@ function StudioWorkflow() {
             ["Q2 2026","Midnight Siam — Flagship Collection","Kanok (NIL-KNK)","Wallcovering / Textile / Packaging","20 patterns, 3 colourways, 10 mockups — Phase 1"],
             ["Q3 2026","Dok Mali Botanical — Spa & Wellness","Dok Mali, Lotus Bud","Stationery / Packaging","6–8 designs, 2 colourways"],
             ["Q4 2026","Naga Sacred Geometry — Architecture","Naga Scale, Bai Raka","Tile / Wallcovering","8–10 designs, 3 colourways"],
-            ["Q1 2027","Loi Krathong — Ceremony & Light","Pra Kring, Phum Khaobin","Packaging / Gifting","10–12 designs, 3 colourways"],
+            ["Q1 2027","Loi Krathong — Ceremony & Light","Phum Khaobin, Auspicious Radiance","Packaging / Gifting","10–12 designs, 3 colourways"],
           ]} />
       </Card>
     </div>
@@ -3086,54 +3514,56 @@ function CollectionArchitecture() {
   const [view, setView] = useState("roadmap");
 
   const COLLECTION_ARCH = [
-    {
-      id:"C01", name:"Midnight Siam", season:"Q2 2026", phase:"Phase 1", status:"In Production",
-      motif:"Kanok (กนก)", palette:"Emerald Forest + Antique Gold + Ivory",
-      targets:["Luxury wallcovering","Upholstery fabric","Premium packaging"],
-      markets:["EU Surface Brands","Thai Luxury Hotels","Global POD"],
-      designs:20, colorways:3, mockups:10, status_color:T.amber,
-      story:"The sacred Kanok flame scroll of the Sukhothai period — reinterpreted in deep emerald and antique gold for contemporary luxury living."
-    },
-    {
-      id:"C02", name:"Lotus Blush", season:"Q3 2026", phase:"Phase 1", status:"In Brief",
-      motif:"Dok Mali (ดอกมะลิ)", palette:"Lotus Blossom + Antique Gold + Linen Ivory",
-      targets:["Stationery","Spa linen","Wellness packaging"],
-      markets:["Wellness brands","Thai Spa","Packaging buyers"],
-      designs:0, colorways:2, mockups:0, status_color:T.jade,
-      story:"The Dok Mali jasmine — Thailand's flower of maternal devotion — reimagined as a flowing organic botanical for spa and wellness surfaces."
-    },
-    {
-      id:"C03", name:"Royal Azure", season:"Q4 2026", phase:"Phase 1", status:"Planned",
-      motif:"Naga Scale (เกล็ดนาค)", palette:"Deep Emerald + Ivory + Antique Gold accent",
-      targets:["Wall tile","Architectural wallcovering","Fashion textile"],
-      markets:["Interior design studios","Tile manufacturers","Fashion brands"],
-      designs:0, colorways:3, mockups:0, status_color:T.mist,
-      story:"The mathematical precision of Naga serpent scales — a sacred geometric pattern optimised for architectural surfaces and luxury fashion."
-    },
-    {
-      id:"C04", name:"Loi Krathong", season:"Q1 2027", phase:"Phase 2", status:"Planned",
-      motif:"Pra Kring (พระกริ่ง)", palette:"Gold + Crimson + Ivory",
-      targets:["Luxury gifting","Holiday packaging","Premium stationery"],
-      markets:["Corporate gifting","Luxury retail","F&B brands"],
-      designs:0, colorways:3, mockups:0, status_color:T.mist,
-      story:"The ceremony of light and gratitude — Loi Krathong patterns for the global gifting and holiday market."
-    },
-    {
-      id:"C05", name:"Emerald Siam", season:"Q2 2027", phase:"Phase 4", status:"Planned",
-      motif:"Naga Scale (เกล็ดนาค)", palette:"Triple Emerald tones",
-      targets:["Tile","Wallcovering","Architecture"],
-      markets:["EU tile manufacturers","Hospitality FF&E"],
-      designs:0, colorways:3, mockups:0, status_color:T.mist,
-      story:"Phase 4 IP Export collection — Emerald geometric for international architectural specification."
-    },
-    {
-      id:"C06", name:"Golden Naga", season:"Q1 2028", phase:"Phase 4", status:"Planned",
-      motif:"Hong Tail (หางหงส์)", palette:"Antique Gold + Warm Ivory + Deep Emerald",
-      targets:["Luxury packaging","Hotel FF&E","Fashion accessories"],
-      markets:["Global luxury brands","Hotel groups"],
-      designs:0, colorways:3, mockups:0, status_color:T.mist,
-      story:"The apex Phase 4 collection — Hong Tail swan feather scroll in antique gold for the highest tier of global luxury licensing."
-    },
+    { id:"C01", name:"Siam Tropical Elegance", season:"Q2 2026", phase:"Phase 1", status:"In Production",
+      motif:"NIL-TRO", palette:"Tropical Green + Antique Gold + Ivory",
+      targets:["Wallpaper","Textile","Packaging"], markets:["Resort Lifestyle","EU Surface Brands","APAC Hotels"],
+      designs:20, colorways:3, status_color:T.amber,
+      story:"Tropical Thai botanical luxury — lush botanical motifs inspired by Thailand's resort gardens, reimagined for contemporary luxury surfaces." },
+    { id:"C02", name:"Emerald Siam",           season:"Q3 2026", phase:"Phase 1", status:"Planned",
+      motif:"NIL-EMS", palette:"Emerald Green + Antique Gold + Ivory",
+      targets:["Wallcovering","Textile","Hotel Decor"], markets:["EU Wallcovering Brands","APAC Hospitality"],
+      designs:20, colorways:3, status_color:T.jade,
+      story:"Emerald and antique gold heritage palette — the deep forest greens of Thailand's royal temples reinterpreted for global luxury interiors." },
+    { id:"C03", name:"Lotus Blush",            season:"Q4 2026", phase:"Phase 1", status:"Planned",
+      motif:"NIL-LTB", palette:"Lotus Pink + Antique Gold + Linen",
+      targets:["Textile","Spa Linen","Packaging"], markets:["Wellness Brands","Spa","Thai Hospitality"],
+      designs:20, colorways:3, status_color:T.mist,
+      story:"Soft lotus palette for wellness and hospitality — the sacred Thai lotus reimagined in blush tones for premium spa and wellness applications." },
+    { id:"C04", name:"Ivory Kingdom",          season:"Q1 2027", phase:"Phase 2", status:"Planned",
+      motif:"NIL-IVK", palette:"Ivory + Champagne Gold + Soft White",
+      targets:["Wallcovering","Bedding","Luxury Packaging"], markets:["Luxury Interiors","Boutique Hotels"],
+      designs:20, colorways:3, status_color:T.mist,
+      story:"Ivory and champagne gold for refined interiors — understated luxury at its most elegant, for discerning international clients." },
+    { id:"C05", name:"Midnight Siam",          season:"Q2 2027", phase:"Phase 2", status:"Flagship",
+      motif:"NIL-MDS", palette:"Nila Black + Antique Gold + Deep Emerald",
+      targets:["Wallcovering","Textile","Packaging"], markets:["Luxury Fashion","Premium Hospitality","Global Export"],
+      designs:20, colorways:3, status_color:T.gold,
+      story:"Black and antique gold flagship Thai heritage collection — the dramatic beauty of Siam after midnight, for the highest tier of global luxury licensing." },
+    { id:"C06", name:"Royal Azure",            season:"Q3 2027", phase:"Phase 2", status:"Planned",
+      motif:"NIL-RAZ", palette:"Royal Indigo + Pearl + Soft Gold",
+      targets:["Wallcovering","Silk Scarf","Fashion"], markets:["Fashion Brands","Luxury Retail","Premium Licensing"],
+      designs:20, colorways:3, status_color:T.mist,
+      story:"Royal indigo, pearl, and soft gold for premium licensing — inspired by Thailand's royal court, reinterpreted for international fashion and lifestyle." },
+    { id:"C07", name:"Dok Mali Botanical",     season:"Q4 2027", phase:"Phase 3", status:"Planned",
+      motif:"NIL-DKM", palette:"Jasmine White + Sage Green + Antique Gold",
+      targets:["Stationery","Packaging","Textile"], markets:["Stationery Brands","Wellness Packaging","Gifting"],
+      designs:20, colorways:2, status_color:T.mist,
+      story:"Jasmine botanical crossover — the sacred Dok Mali flower of Thailand, translated into an elegant botanical repeat for stationery and packaging." },
+    { id:"C08", name:"Naga Sacred Geometry",   season:"Q1 2028", phase:"Phase 3", status:"Planned",
+      motif:"NIL-NAG", palette:"Deep Teal + Antique Gold + Stone",
+      targets:["Tile","Wallcovering","Hospitality"], markets:["Tile Manufacturers","Architectural Firms","Hotel FF&E"],
+      designs:20, colorways:3, status_color:T.mist,
+      story:"Architecture-focused sacred geometry — Naga serpent scales transformed into precise geometric patterns for luxury architectural specification." },
+    { id:"C09", name:"Loi Krathong Ceremony",  season:"Q2 2028", phase:"Phase 4", status:"Planned",
+      motif:"NIL-LKC", palette:"Deep Blue + Gold + Lotus Pink",
+      targets:["Gift Wrap","Packaging","Home Decor"], markets:["Corporate Gifting","Luxury Retail","Holiday Market"],
+      designs:20, colorways:3, status_color:T.mist,
+      story:"Holiday gifting collection — inspired by lotus, water, and candlelight of the Loi Krathong ceremony, for the global premium gifting market." },
+    { id:"C10", name:"Golden Naga",            season:"Q3 2028", phase:"Phase 4", status:"Flagship",
+      motif:"NIL-GNG", palette:"Ceremonial Gold + Heritage Black + Ivory",
+      targets:["Luxury Packaging","Hotel","Wallpaper"], markets:["Global Luxury Brands","5-Star Hotels","IP Export"],
+      designs:20, colorways:3, status_color:T.gold,
+      story:"High-value export collection — ceremonial gold identity for the apex of NILA's global licensing programme." },
   ];
 
   const STATUS_CFG = {
@@ -3701,8 +4131,20 @@ function SplashScreen({ onEnter }) {
     }
   };
 
-  // Secret: triple-click NILA text to show password field
+  // Secret: type "admin" keyword to show password field
+  const [keyBuffer, setKeyBuffer] = useState("");
   const [clickCount, setClickCount] = useState(0);
+
+  useEffect(() => {
+    const handleKey = (e) => {
+      const newBuf = (keyBuffer + e.key).slice(-5);
+      setKeyBuffer(newBuf);
+      if (newBuf === "admin") { setShowPw(true); setKeyBuffer(""); }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [keyBuffer]);
+
   const handleLogoClick = () => {
     const n = clickCount + 1;
     setClickCount(n);
@@ -4169,10 +4611,10 @@ function ClientView() {
       </div>
       <div style={{ padding:"0 40px 80px", display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:24 }}>
         {[
-          { name:"Midnight Siam",  motif:"Kanok · กนก",          era:"Sukhothai, 13th century",   palette:"Emerald + Antique Gold + Ivory",
-            surfaces:"Wallcovering · Textile · Packaging",   status:"Available",      statusColor:T.jade,
+          { name:"Siam Tropical Elegance",  motif:"NIL-TRO · Tropical Botanical",          era:"Sukhothai, 13th century",   palette:"Nila Black + Antique Gold + Deep Emerald + Ivory Silk",
+            surfaces:"Wallcovering · Textile · Packaging · Fashion · Gifting",   status:"Available",      statusColor:T.jade,
             imageUrl: null,
-            desc:"The sacred flame scroll — Thailand's most iconic motif, reinterpreted for modern luxury surfaces." },
+            desc:"The sacred Kanok flame scroll — reinterpreted in Nila Black, Antique Gold & Deep Emerald. Inspired by the timeless beauty of Siam after sunset. Thai Soul, Global Appeal." },
           { name:"Lotus Blush",    motif:"Dok Mali · ดอกมะลิ",   era:"Central Plains Heritage",   palette:"Lotus Blossom + Antique Gold + Linen",
             surfaces:"Stationery · Spa Linen · Packaging",   status:"Coming Q3 2026", statusColor:T.amber,
             imageUrl: null,
