@@ -754,43 +754,39 @@ function MotifLibrary() {
 // ────────────────────────────────────────────────────────────
 function PromptGenerator() {
   const [activeTab, setActiveTab] = useState("pattern");
-  const [sel, setSel] = useState({
-    styleModifier: PROMPT_VOCAB.styleModifiers[0],
-    motif: MOTIFS[0],
-    structure: PROMPT_VOCAB.structures[0],
-    colorway: PROMPT_VOCAB.colorways[0],
-    surface: PROMPT_VOCAB.surfaces[0],
-    mood: PROMPT_VOCAB.moods[0],
-    platform: "Midjourney v6",
-  });
+  const [styleModifier, setStyleModifier] = useState(PROMPT_VOCAB.styleModifiers[0]);
+  const [motifCode, setMotifCode]         = useState(MOTIFS[0].code);
+  const [structure, setStructure]         = useState(PROMPT_VOCAB.structures[0]);
+  const [colorwayName, setColorwayName]   = useState(PROMPT_VOCAB.colorways[0].name);
+  const [surface, setSurface]             = useState(PROMPT_VOCAB.surfaces[0]);
+  const [mood, setMood]                   = useState(PROMPT_VOCAB.moods[0]);
+  const [platform, setPlatform]           = useState("Midjourney v6");
+  const [copied, setCopied]               = useState(false);
 
-  // Mockup state
-  const [mockup, setMockup] = useState({
-    product: "Silk Scarf 90x90cm",
-    collection: "Siam Tropical Elegance",
-    colorway: "Emerald + Antique Gold + Ivory",
-    setting: "Luxury editorial flat lay on marble surface",
-    lighting: "Soft natural daylight, warm editorial",
-    platform: "ChatGPT (DALL-E 3)",
-  });
-
-  const [copied, setCopied] = useState(false);
+  const [product, setProduct]       = useState("Silk Scarf 90x90cm");
+  const [collection, setCollection] = useState("Siam Tropical Elegance");
+  const [colorwayMockup, setColorwayMockup] = useState("deep emerald #0F4D3A and antique gold #C7A24D on warm ivory #F7F4ED");
+  const [setting, setSetting]       = useState("Editorial flat lay on Italian marble surface");
+  const [lighting, setLighting]     = useState("Soft natural daylight, warm editorial");
+  const [platformMockup, setPlatformMockup] = useState("ChatGPT (DALL-E 3)");
   const [mockupCopied, setMockupCopied] = useState(false);
 
-  // ── PRODUCT LINE DATA
+  const selMotif    = MOTIFS.find(m=>m.code===motifCode) || MOTIFS[0];
+  const selColorway = PROMPT_VOCAB.colorways.find(c=>c.name===colorwayName) || PROMPT_VOCAB.colorways[0];
+
   const PRODUCTS = [
-    { name:"Silk Scarf 90x90cm",     emoji:"🧣", setting:"Editorial flat lay on Italian marble surface, draped corner showing pattern detail", style:"Luxury fashion editorial, Vogue-style" },
-    { name:"Cushion Cover 50x50cm",  emoji:"🛋️", setting:"Luxury living room sofa, styled with throw blanket and indoor plants", style:"Architectural Digest interior lifestyle" },
-    { name:"Hotel Bed Runner",        emoji:"🏨", setting:"5-star hotel suite bed, white linens, tropical view through window", style:"Luxury hospitality editorial, Aman resort aesthetic" },
-    { name:"Kimono Robe",            emoji:"👘", setting:"Elegant model wearing robe, candlelit spa setting or luxury bathroom", style:"Premium fashion editorial, minimal background" },
-    { name:"Gift Box & Bag",         emoji:"📦", setting:"Luxury gift presentation on dark surface, jasmine flower accent, gold ribbon", style:"Premium packaging editorial, dark moody lighting" },
-    { name:"Tote Bag",               emoji:"👜", setting:"Lifestyle street editorial, model carrying bag in heritage setting or café", style:"Contemporary luxury lifestyle, natural light" },
-    { name:"Table Runner",           emoji:"🍽️", setting:"Elegant dining table setting, fine china, candles, fresh flowers", style:"Luxury dining editorial, warm candlelight" },
-    { name:"Zip Pouch",              emoji:"👝", setting:"Flat lay on linen fabric with herbs and flowers, detail shot", style:"Clean editorial flat lay, natural styling" },
-    { name:"Tea Cosy",               emoji:"🫖", setting:"Styled tea table setting, fine bone china, afternoon light", style:"British heritage lifestyle, warm editorial" },
-    { name:"Placemat Set",           emoji:"🍴", setting:"Restaurant table setting, luxury dining room", style:"Fine dining editorial, architectural lighting" },
-    { name:"Lamp Shade",             emoji:"💡", setting:"Luxury bedroom or reading corner, warm lamplight glowing through pattern", style:"Interior editorial, golden hour lighting" },
-    { name:"Cushion + Throw Set",    emoji:"🛋️", setting:"Designer sofa in minimalist luxury living room, layered styling", style:"Interior design editorial, neutral tones" },
+    { name:"Silk Scarf 90x90cm",     emoji:"🧣" },
+    { name:"Cushion Cover 50x50cm",  emoji:"🛋️" },
+    { name:"Hotel Bed Runner",        emoji:"🏨" },
+    { name:"Kimono Robe",             emoji:"👘" },
+    { name:"Gift Box & Bag",          emoji:"📦" },
+    { name:"Tote Bag",                emoji:"👜" },
+    { name:"Table Runner",            emoji:"🍽️" },
+    { name:"Zip Pouch",               emoji:"👝" },
+    { name:"Tea Cosy",                emoji:"🫖" },
+    { name:"Placemat Set",            emoji:"🍴" },
+    { name:"Lamp Shade",              emoji:"💡" },
+    { name:"Cushion + Throw Set",     emoji:"🛋️" },
   ];
 
   const SETTINGS = [
@@ -813,50 +809,50 @@ function PromptGenerator() {
     "Soft diffused overcast light, airy and clean",
   ];
 
-  const selectedProduct = PRODUCTS.find(p => p.name === mockup.product) || PRODUCTS[0];
-
   const buildPatternPrompt = () => {
-    const m = sel.motif;
-    return `${sel.styleModifier} Thai ${m.name} (${m.thai}) motif, ${m.era}, ${sel.structure}, color palette: ${sel.colorway.value}, target surface: ${sel.surface}, mood: ${sel.mood}, high resolution 300dpi seamless texture, luxury surface design, production ready ${sel.platform === "Midjourney v6" ? "--tile --ar 1:1 --v 6 --style raw" : sel.platform === "Adobe Firefly" ? ", seamless pattern, square format" : ", seamless tileable, 8k resolution"}`;
+    const suffix = platform==="Midjourney v6" ? " --tile --ar 1:1 --v 6 --style raw"
+      : platform==="Adobe Firefly" ? ", seamless pattern, square format"
+      : ", seamless tileable, 8k resolution";
+    return `${styleModifier} Thai ${selMotif.name} (${selMotif.thai}) motif, ${selMotif.era}, ${structure}, color palette: ${selColorway.value}, target surface: ${surface}, mood: ${mood}, high resolution 300dpi seamless texture, luxury surface design, production ready${suffix}`;
   };
 
   const buildMockupPrompt = () => {
-    return `An editorial luxury commercial photograph of a ${mockup.product} featuring the NILA Heritage Living™ ${mockup.collection} pattern.
+    const suffix = platformMockup==="Midjourney v6" ? "
 
-The pattern uses ${mockup.colorway} colorway with intricate Thai heritage motifs — Kanok flame scroll and botanical elements.
+--ar 4:3 --v 6 --style raw --q 2"
+      : platformMockup==="ChatGPT (DALL-E 3)" ? "
 
-Setting: ${mockup.setting}
-Lighting: ${mockup.lighting}
-Style: ${selectedProduct.style}
+Photorealistic, ultra-detailed, luxury brand quality."
+      : "
+
+Photorealistic, high resolution, luxury aesthetic.";
+    return `An editorial luxury commercial photograph of a ${product} featuring the NILA Heritage Living™ ${collection} pattern.
+
+The pattern uses ${colorwayMockup} colorway with intricate Thai heritage motifs — Kanok flame scroll and botanical elements.
+
+Setting: ${setting}
+Lighting: ${lighting}
 
 The product is the hero of the image. Pattern detail is clearly visible. No other brand names visible. Brand mark reads "NILA™" subtly.
 
-Shot on 35mm lens, f/2.8 bokeh background, photorealistic, premium brand advertising quality, award-winning commercial photography.
-
-${mockup.platform === "Midjourney v6" ? "--ar 4:3 --v 6 --style raw --q 2" : mockup.platform === "ChatGPT (DALL-E 3)" ? "Photorealistic, ultra-detailed, luxury brand quality." : "Photorealistic, high resolution, luxury aesthetic."}`;
+Shot on 35mm lens, f/2.8 bokeh background, photorealistic, premium brand advertising quality, award-winning commercial photography.${suffix}`;
   };
 
-  const copyPattern = () => {
-    navigator.clipboard?.writeText(buildPatternPrompt()).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
-  };
-
-  const copyMockup = () => {
-    const text = buildMockupPrompt();
+  const doCopy = (text, setFn) => {
     if (navigator.clipboard?.writeText) {
-      navigator.clipboard.writeText(text).then(() => { setMockupCopied(true); setTimeout(() => setMockupCopied(false), 2000); });
+      navigator.clipboard.writeText(text).then(()=>{ setFn(true); setTimeout(()=>setFn(false),2000); });
     } else {
-      const ta = document.createElement("textarea"); ta.value = text;
+      const ta = document.createElement("textarea"); ta.value=text;
       document.body.appendChild(ta); ta.select(); document.execCommand("copy");
-      document.body.removeChild(ta);
-      setMockupCopied(true); setTimeout(() => setMockupCopied(false), 2000);
+      document.body.removeChild(ta); setFn(true); setTimeout(()=>setFn(false),2000);
     }
   };
 
-  const SelectField = ({label, value, onChange, options}) => (
+  const LabeledSelect = ({label, value, onChange, options}) => (
     <div style={{ marginBottom:14 }}>
       <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>{label}</label>
-      <select value={value} onChange={e=>onChange(e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
-        {options.map(o=><option key={typeof o==="string"?o:o.name} value={typeof o==="string"?o:o.name}>{typeof o==="string"?o:o.name}</option>)}
+      <select value={value} onChange={e=>onChange(e.target.value)} style={{ width:"100%", padding:"9px 12px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:13, fontFamily:"inherit", color:T.ink }}>
+        {options.map(o=><option key={o} value={o}>{o}</option>)}
       </select>
     </div>
   );
@@ -865,7 +861,7 @@ ${mockup.platform === "Midjourney v6" ? "--ar 4:3 --v 6 --style raw --q 2" : moc
     <div>
       <SectionHead icon="◎" title="Prompt Generator" subtitle="Build AI prompts for pattern design and product mockups" />
 
-      {/* Tab selector */}
+      {/* Tabs */}
       <div style={{ display:"flex", gap:8, marginBottom:20 }}>
         {[["pattern","🎨 Pattern Design"],["mockup","🛋️ Product Mockup"]].map(([v,l])=>(
           <button key={v} onClick={()=>setActiveTab(v)} style={{ padding:"8px 24px", borderRadius:20, fontSize:T.sm, fontWeight:700, border:`1px solid ${activeTab===v?T.indigo:T.border}`, background:activeTab===v?T.indigo:T.white, color:activeTab===v?"#fff":T.mist, cursor:"pointer", transition:"all 0.15s" }}>{l}</button>
@@ -873,142 +869,117 @@ ${mockup.platform === "Midjourney v6" ? "--ar 4:3 --v 6 --style raw --q 2" : moc
       </div>
 
       {/* ── PATTERN TAB */}
-      {activeTab === "pattern" && (
-        <Grid cols={2} gap={14}>
-          <Card>
+      {activeTab==="pattern" && (
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:16 }}>
+          <div style={{ background:T.white, borderRadius:T.radiusL, border:`1px solid ${T.border}`, padding:24 }}>
             <Divider label="Pattern Parameters" />
-            <div style={{ marginBottom:14 }}>
-              <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Style Modifier</label>
-              <select value={sel.styleModifier} onChange={e=>setSel(s=>({...s,styleModifier:e.target.value}))} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
-                {PROMPT_VOCAB.styleModifiers.map(o=><option key={o}>{o}</option>)}
-              </select>
-            </div>
+            <LabeledSelect label="Style Modifier" value={styleModifier} onChange={setStyleModifier} options={PROMPT_VOCAB.styleModifiers} />
             <div style={{ marginBottom:14 }}>
               <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Thai Motif</label>
-              <select value={sel.motif.code} onChange={e=>setSel(s=>({...s,motif:MOTIFS.find(m=>m.code===e.target.value)||MOTIFS[0]}))} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
+              <select value={motifCode} onChange={e=>setMotifCode(e.target.value)} style={{ width:"100%", padding:"9px 12px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:13, fontFamily:"inherit", color:T.ink }}>
                 {MOTIFS.map(m=><option key={m.code} value={m.code}>{m.code} — {m.name} ({m.thai})</option>)}
               </select>
             </div>
-            {[["Repeat Structure","structure",PROMPT_VOCAB.structures],["Colourway","colorway",PROMPT_VOCAB.colorways.map(c=>c.name)],["Target Surface","surface",PROMPT_VOCAB.surfaces],["Mood","mood",PROMPT_VOCAB.moods]].map(([label,key,opts])=>(
-              <div key={key} style={{ marginBottom:14 }}>
-                <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>{label}</label>
-                <select value={key==="colorway"?sel.colorway.name:sel[key]} onChange={e=>{ if(key==="colorway"){ const c=PROMPT_VOCAB.colorways.find(x=>x.name===e.target.value); setSel(s=>({...s,colorway:c||PROMPT_VOCAB.colorways[0]})); } else setSel(s=>({...s,[key]:e.target.value})); }} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
-                  {(Array.isArray(opts)?opts:[]).map(o=><option key={typeof o==="string"?o:o.name}>{typeof o==="string"?o:o.name}</option>)}
-                </select>
-              </div>
-            ))}
+            <LabeledSelect label="Repeat Structure" value={structure} onChange={setStructure} options={PROMPT_VOCAB.structures} />
             <div style={{ marginBottom:14 }}>
-              <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>AI Platform</label>
-              <select value={sel.platform} onChange={e=>setSel(s=>({...s,platform:e.target.value}))} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
-                {["Midjourney v6","ChatGPT (DALL-E 3)","Adobe Firefly","Stable Diffusion"].map(p=><option key={p}>{p}</option>)}
+              <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Colourway</label>
+              <select value={colorwayName} onChange={e=>setColorwayName(e.target.value)} style={{ width:"100%", padding:"9px 12px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:13, fontFamily:"inherit", color:T.ink }}>
+                {PROMPT_VOCAB.colorways.map(c=><option key={c.name} value={c.name}>{c.name}</option>)}
               </select>
             </div>
-          </Card>
-          <Card>
-            <Divider label="Generated Pattern Prompt" />
-            <div style={{ background:T.indigoD, borderRadius:T.radius, padding:"14px 16px", color:"#C8D8FF", fontFamily:"monospace", fontSize:T.xs, lineHeight:1.8, minHeight:220, whiteSpace:"pre-wrap", wordBreak:"break-word", marginBottom:14 }}>
-              {buildPatternPrompt()}
+            <LabeledSelect label="Target Surface" value={surface} onChange={setSurface} options={PROMPT_VOCAB.surfaces} />
+            <LabeledSelect label="Mood" value={mood} onChange={setMood} options={PROMPT_VOCAB.moods} />
+            <LabeledSelect label="AI Platform" value={platform} onChange={setPlatform} options={["Midjourney v6","ChatGPT (DALL-E 3)","Adobe Firefly","Stable Diffusion"]} />
+          </div>
+
+          <div>
+            <div style={{ background:T.white, borderRadius:T.radiusL, border:`2px solid ${T.gold}`, padding:24, marginBottom:16 }}>
+              <Divider label="Generated Pattern Prompt" />
+              <div style={{ background:T.indigoD, borderRadius:T.radius, padding:"14px 16px", color:"#C8D8FF", fontFamily:"monospace", fontSize:12, lineHeight:1.8, minHeight:200, whiteSpace:"pre-wrap", wordBreak:"break-word", marginBottom:14 }}>
+                {buildPatternPrompt()}
+              </div>
+              <button onClick={()=>doCopy(buildPatternPrompt(),setCopied)} style={{ width:"100%", padding:"10px", background:copied?T.jade:T.indigo, border:"none", color:"#fff", borderRadius:T.radius, fontWeight:700, cursor:"pointer", fontSize:13, letterSpacing:"0.04em", transition:"background 0.2s" }}>
+                {copied?"✓ Copied!":"⧉ Copy Pattern Prompt"}
+              </button>
             </div>
-            <Button onClick={copyPattern} variant={copied?"secondary":"primary"} fullWidth>{copied?"✓ Copied!":"⧉ Copy Pattern Prompt"}</Button>
-            <Card style={{ marginTop:14, background:`${T.indigo}06` }}>
+            <div style={{ background:`${T.indigo}06`, borderRadius:T.radiusL, border:`1px solid ${T.border}`, padding:20 }}>
               <Divider label="Selected Motif" />
-              <InfoBlock label="Code" value={sel.motif.code} accent={T.gold} />
-              <InfoBlock label="Era" value={sel.motif.era} accent={T.indigo} />
-              <div style={{ fontSize:T.sm, color:T.mist, lineHeight:1.6, marginTop:8 }}>{sel.motif.meaning}</div>
-            </Card>
-          </Card>
-        </Grid>
+              <InfoBlock label="Code" value={selMotif.code} accent={T.gold} />
+              <InfoBlock label="Thai Name" value={selMotif.thai} accent={T.indigo} />
+              <InfoBlock label="Era" value={selMotif.era} accent={T.indigo} />
+              <div style={{ fontSize:T.sm, color:T.mist, lineHeight:1.7, marginTop:8 }}>{selMotif.meaning}</div>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* ── MOCKUP TAB */}
-      {activeTab === "mockup" && (
-        <Grid cols={2} gap={14}>
-          <Card>
+      {activeTab==="mockup" && (
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:16 }}>
+          <div style={{ background:T.white, borderRadius:T.radiusL, border:`1px solid ${T.border}`, padding:24 }}>
             <Divider label="Product Mockup Parameters" />
-            <AlertBox type="info">Select your product, collection, and setting — then copy the prompt into ChatGPT, Midjourney, or DALL-E 3 to generate your mockup image.</AlertBox>
+            <AlertBox type="info">Select your product, collection and setting — then copy the prompt into ChatGPT, Midjourney, or DALL-E 3.</AlertBox>
 
-            {/* Product selector — visual grid */}
+            {/* Product grid */}
             <div style={{ marginBottom:16 }}>
               <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:8 }}>Product</label>
               <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:8 }}>
                 {PRODUCTS.map(p=>(
-                  <button key={p.name} onClick={()=>setMockup(m=>({...m,product:p.name}))}
-                    style={{ padding:"8px 6px", borderRadius:T.radius, border:`1px solid ${mockup.product===p.name?T.gold:T.border}`, background:mockup.product===p.name?`${T.gold}15`:T.ground, cursor:"pointer", textAlign:"center", transition:"all 0.15s" }}>
+                  <button key={p.name} onClick={()=>setProduct(p.name)} style={{ padding:"8px 4px", borderRadius:T.radius, border:`1px solid ${product===p.name?T.gold:T.border}`, background:product===p.name?`${T.gold}18`:T.ground, cursor:"pointer", textAlign:"center", transition:"all 0.15s" }}>
                     <div style={{ fontSize:18, marginBottom:2 }}>{p.emoji}</div>
-                    <div style={{ fontSize:9, color:mockup.product===p.name?T.gold:T.mist, fontWeight:mockup.product===p.name?700:400, lineHeight:1.3 }}>{p.name.split(" ").slice(0,2).join(" ")}</div>
+                    <div style={{ fontSize:9, color:product===p.name?T.gold:T.mist, fontWeight:product===p.name?700:400, lineHeight:1.3 }}>{p.name.split(" ").slice(0,2).join(" ")}</div>
                   </button>
                 ))}
               </div>
             </div>
 
-            <SelectField label="Collection" value={mockup.collection} onChange={v=>setMockup(m=>({...m,collection:v}))} options={INIT_COLLECTIONS.map(c=>c.name)} />
-
+            <LabeledSelect label="Collection" value={collection} onChange={setCollection} options={INIT_COLLECTIONS.map(c=>c.name)} />
             <div style={{ marginBottom:14 }}>
               <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Colorway</label>
-              <select value={mockup.colorway} onChange={e=>setMockup(m=>({...m,colorway:e.target.value}))} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
+              <select value={colorwayMockup} onChange={e=>setColorwayMockup(e.target.value)} style={{ width:"100%", padding:"9px 12px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:13, fontFamily:"inherit", color:T.ink }}>
                 {PROMPT_VOCAB.colorways.map(c=><option key={c.name} value={c.value}>{c.name}</option>)}
               </select>
             </div>
-
-            <SelectField label="Setting" value={mockup.setting} onChange={v=>setMockup(m=>({...m,setting:v}))} options={SETTINGS} />
-            <SelectField label="Lighting" value={mockup.lighting} onChange={v=>setMockup(m=>({...m,lighting:v}))} options={LIGHTINGS} />
-            <SelectField label="AI Platform" value={mockup.platform} onChange={v=>setMockup(m=>({...m,platform:v}))} options={["ChatGPT (DALL-E 3)","Midjourney v6","Adobe Firefly","Gemini"]} />
-          </Card>
+            <LabeledSelect label="Setting" value={setting} onChange={setSetting} options={SETTINGS} />
+            <LabeledSelect label="Lighting" value={lighting} onChange={setLighting} options={LIGHTINGS} />
+            <LabeledSelect label="AI Platform" value={platformMockup} onChange={setPlatformMockup} options={["ChatGPT (DALL-E 3)","Midjourney v6","Adobe Firefly","Gemini"]} />
+          </div>
 
           <div>
-            <Card style={{ border:`2px solid ${T.gold}` }}>
-              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:10 }}>
-                <div>
-                  <div style={{ fontWeight:900, color:T.indigo, fontSize:T.lg, fontFamily:"Georgia,serif" }}>{selectedProduct.emoji} {mockup.product}</div>
-                  <div style={{ fontSize:T.xs, color:T.mist, marginTop:2 }}>{mockup.collection} · {mockup.platform}</div>
+            <div style={{ background:T.white, borderRadius:T.radiusL, border:`2px solid ${T.gold}`, padding:24 }}>
+              <div style={{ marginBottom:12 }}>
+                <div style={{ fontWeight:900, color:T.indigo, fontSize:T.lg, fontFamily:"Georgia,serif" }}>
+                  {PRODUCTS.find(p=>p.name===product)?.emoji} {product}
                 </div>
-                <Tag color="gold">Mockup Prompt</Tag>
+                <div style={{ fontSize:T.xs, color:T.mist, marginTop:2 }}>{collection} · {platformMockup}</div>
               </div>
-              <div style={{ background:T.indigoD, borderRadius:T.radius, padding:"14px 16px", color:"#C8D8FF", fontFamily:"monospace", fontSize:T.xs, lineHeight:1.8, maxHeight:380, overflowY:"auto", whiteSpace:"pre-wrap", wordBreak:"break-word", marginBottom:14 }}>
+              <div style={{ background:T.indigoD, borderRadius:T.radius, padding:"14px 16px", color:"#C8D8FF", fontFamily:"monospace", fontSize:11, lineHeight:1.8, maxHeight:380, overflowY:"auto", whiteSpace:"pre-wrap", wordBreak:"break-word", marginBottom:14 }}>
                 {buildMockupPrompt()}
               </div>
-              <Button onClick={copyMockup} variant={mockupCopied?"secondary":"gold"} fullWidth>{mockupCopied?"✓ Copied!":"⧉ Copy Mockup Prompt"}</Button>
-            </Card>
+              <button onClick={()=>doCopy(buildMockupPrompt(),setMockupCopied)} style={{ width:"100%", padding:"10px", background:mockupCopied?T.jade:T.gold, border:"none", color:"#fff", borderRadius:T.radius, fontWeight:700, cursor:"pointer", fontSize:13, letterSpacing:"0.04em", transition:"background 0.2s" }}>
+                {mockupCopied?"✓ Copied!":"⧉ Copy Mockup Prompt"}
+              </button>
+            </div>
 
-            <Card style={{ marginTop:14 }}>
+            <div style={{ background:T.ground, borderRadius:T.radiusL, border:`1px solid ${T.border}`, padding:20, marginTop:14 }}>
               <Divider label="How to Use" />
               {[
-                ["ChatGPT","Paste prompt → Press Enter → Download image (1024x1024)"],
-                ["Midjourney","Paste in Discord /imagine → Select best → U to upscale → Download"],
-                ["DALL-E 3","Use in ChatGPT Plus or API → Generate → Download PNG"],
-                ["Gemini","Paste in Gemini Advanced → Generate image → Save"],
-              ].map(([platform,how])=>(
-                <div key={platform} style={{ marginBottom:10 }}>
-                  <div style={{ fontSize:T.xs, fontWeight:700, color:T.gold }}>{platform}</div>
-                  <div style={{ fontSize:T.xs, color:T.mist, lineHeight:1.5 }}>{how}</div>
+                ["ChatGPT","Paste prompt → Press Enter → Download image"],
+                ["Midjourney","Paste in Discord /imagine → U to upscale → Download"],
+                ["Gemini","Paste in Gemini Advanced → Generate → Save"],
+              ].map(([p,h])=>(
+                <div key={p} style={{ marginBottom:10 }}>
+                  <div style={{ fontSize:T.xs, fontWeight:700, color:T.gold }}>{p}</div>
+                  <div style={{ fontSize:T.xs, color:T.mist, lineHeight:1.5 }}>{h}</div>
                 </div>
               ))}
-            </Card>
+            </div>
           </div>
-        </Grid>
+        </div>
       )}
     </div>
   );
 }
-
-// ────────────────────────────────────────────────────────────
-// COLLECTION PLANNER
-// ────────────────────────────────────────────────────────────
-const INIT_COLLECTIONS = [
-  { id:1,  name:"Siam Tropical Elegance", motif:"NIL-TRO", season:"Q2 2026", status:"In Production", designs:20, surfaces:"Wallpaper, Textile, Packaging",           colorways:3, notes:"Tropical Thai botanical luxury for resort lifestyle." },
-  { id:2,  name:"Emerald Siam",           motif:"NIL-EMS", season:"Q3 2026", status:"Planned",       designs:20, surfaces:"Wallcovering, Textile, Hotel Decor",       colorways:3, notes:"Emerald and antique gold heritage palette." },
-  { id:3,  name:"Lotus Blush",            motif:"NIL-LTB", season:"Q4 2026", status:"Planned",       designs:20, surfaces:"Textile, Spa Linen, Packaging",            colorways:3, notes:"Soft lotus palette for wellness and hospitality." },
-  { id:4,  name:"Ivory Kingdom",          motif:"NIL-IVK", season:"Q1 2027", status:"Planned",       designs:20, surfaces:"Wallcovering, Bedding, Luxury Packaging",   colorways:3, notes:"Ivory and champagne gold for refined interiors." },
-  { id:5,  name:"Midnight Siam",          motif:"NIL-MDS", season:"Q2 2027", status:"Flagship",      designs:20, surfaces:"Wallcovering, Textile, Packaging",          colorways:3, notes:"Black and antique gold flagship Thai heritage collection." },
-  { id:6,  name:"Royal Azure",            motif:"NIL-RAZ", season:"Q3 2027", status:"Planned",       designs:20, surfaces:"Wallcovering, Silk Scarf, Fashion",          colorways:3, notes:"Royal indigo, pearl, and soft gold for premium licensing." },
-  { id:7,  name:"Dok Mali Botanical",     motif:"NIL-DKM", season:"Q4 2027", status:"Planned",       designs:20, surfaces:"Stationery, Packaging, Textile",             colorways:2, notes:"Jasmine botanical crossover with Siamese Botanica mood." },
-  { id:8,  name:"Naga Sacred Geometry",   motif:"NIL-NAG", season:"Q1 2028", status:"Planned",       designs:20, surfaces:"Tile, Wallcovering, Hospitality",            colorways:3, notes:"Architecture-focused sacred geometry collection." },
-  { id:9,  name:"Loi Krathong Ceremony",  motif:"NIL-LKC", season:"Q2 2028", status:"Planned",       designs:20, surfaces:"Gift Wrap, Packaging, Home Decor",           colorways:3, notes:"Holiday gifting collection — lotus, water, candlelight." },
-  { id:10, name:"Golden Naga",            motif:"NIL-GNG", season:"Q3 2028", status:"Flagship",      designs:20, surfaces:"Luxury Packaging, Hotel, Wallpaper",         colorways:3, notes:"High-value export collection with ceremonial gold identity." },
-];
-const STATUSES = ["Planned","In Brief","In Production","Curation","Released"];
-const STATUS_COLORS = { Planned:T.mist, "In Brief":T.lotus, "In Production":T.gold, Curation:T.indigoL, Released:T.jade };
-
 function CollectionPlanner() {
   const [collections, setCollections] = useState(INIT_COLLECTIONS);
   const [form, setForm] = useState({ name:"", motif:"NIL-KNK", season:"Q2 2026", status:"Planned", designs:0, surfaces:"", colorways:2, notes:"" });
