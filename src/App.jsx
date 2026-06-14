@@ -4563,8 +4563,88 @@ function ClientView() {
   );
 
   // ── COLLECTIONS
-  const CollectionsSection = () => (
+  const CollectionsSection = () => {
+    const [modalCol, setModalCol] = useState(null);
+    const COLS = [
+      { name:"Midnight Siam — Classic",  motif:"Kanok · กนก",
+        era:"Associated with Thai classical ornament",
+        palette:"Emerald + Antique Gold + Ivory",
+        surfaces:"Wallcovering · Textile · Packaging · Scarf · Hotel",
+        status:"Available", statusColor:T.jade,
+        imageUrl:"/midnight-siam-2.jpg.png",
+        desc:"The sacred Kanok flame scroll in warm emerald and antique gold on ivory — heritage, liveable luxury for contemporary interiors." },
+      { name:"Midnight Siam — Premium",  motif:"Kanok · กนก",
+        era:"Associated with Thai classical ornament",
+        palette:"Nila Black + Antique Gold + Deep Emerald",
+        surfaces:"Wallcovering · Textile · Packaging · Scarf · Hotel",
+        status:"Available", statusColor:T.jade,
+        imageUrl:"/midnight-siam-1.jpg.png",
+        desc:"The dramatic flagship in Nila Black and antique gold — exclusive, night elegance for the highest tier of global luxury licensing." },
+      { name:"Lotus Blush",  motif:"Dok Mali · ดอกมะลิ",
+        era:"Contemporary Thai heritage form",
+        palette:"Lotus Blossom + Antique Gold + Linen",
+        surfaces:"Stationery · Spa Linen · Packaging",
+        status:"Coming Q3 2026", statusColor:T.amber,
+        imageUrl:null,
+        desc:"A soft luminous palette for wellness sanctuaries and refined hospitality spaces." },
+    ];
+    return (
     <div style={{ paddingTop:80, minHeight:"100vh", background:T.ground }}>
+      {/* ── Lightbox Modal */}
+      {modalCol && (
+        <div onClick={()=>setModalCol(null)} style={{
+          position:"fixed", inset:0, zIndex:1000,
+          background:"rgba(10,30,20,0.85)", display:"flex",
+          alignItems:"center", justifyContent:"center", padding:24, backdropFilter:"blur(6px)" }}>
+          <div onClick={e=>e.stopPropagation()} style={{
+            background:T.white, borderRadius:T.radiusXL, maxWidth:780, width:"100%",
+            maxHeight:"90vh", overflowY:"auto", boxShadow:"0 32px 80px rgba(0,0,0,0.5)",
+            display:"flex", flexDirection:"column" }}>
+            {/* Image large */}
+            <div style={{ position:"relative", flexShrink:0 }}>
+              <WatermarkedImage src={modalCol.imageUrl} alt={modalCol.name}
+                height={380} collection={modalCol.name} motif={modalCol.motif} />
+              <button onClick={()=>setModalCol(null)} style={{
+                position:"absolute", top:12, right:12, width:36, height:36,
+                borderRadius:"50%", border:"none", background:"rgba(0,0,0,0.5)",
+                color:"#fff", fontSize:18, cursor:"pointer", display:"flex",
+                alignItems:"center", justifyContent:"center", backdropFilter:"blur(4px)" }}>✕</button>
+              <div style={{ position:"absolute", top:12, left:12 }}>
+                <span style={{ background:`${modalCol.statusColor}ee`, color:"#fff", borderRadius:20,
+                  padding:"4px 12px", fontSize:10, fontWeight:700, backdropFilter:"blur(4px)" }}>{modalCol.status}</span>
+              </div>
+            </div>
+            {/* Detail */}
+            <div style={{ padding:"28px 32px 32px" }}>
+              <div style={{ fontFamily:"Georgia,serif", fontSize:26, fontWeight:900,
+                color:T.indigo, marginBottom:4 }}>{modalCol.name}</div>
+              <div style={{ fontSize:11, color:T.gold, fontWeight:700, letterSpacing:3,
+                textTransform:"uppercase", marginBottom:16 }}>{modalCol.motif}</div>
+              <div style={{ fontSize:13, color:T.mist, lineHeight:1.8, marginBottom:24 }}>{modalCol.desc}</div>
+              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:16, marginBottom:24 }}>
+                <div style={{ background:T.ground, borderRadius:T.radius, padding:"14px 16px" }}>
+                  <div style={{ fontSize:10, color:T.mist, fontWeight:700, textTransform:"uppercase",
+                    letterSpacing:1, marginBottom:6 }}>Surfaces</div>
+                  <div style={{ fontSize:13, color:T.ink, lineHeight:1.7 }}>{modalCol.surfaces}</div>
+                </div>
+                <div style={{ background:T.ground, borderRadius:T.radius, padding:"14px 16px" }}>
+                  <div style={{ fontSize:10, color:T.mist, fontWeight:700, textTransform:"uppercase",
+                    letterSpacing:1, marginBottom:6 }}>Palette</div>
+                  <div style={{ fontSize:13, color:T.ink, lineHeight:1.7 }}>{modalCol.palette}</div>
+                </div>
+              </div>
+              {modalCol.status === "Available" && (
+                <button onClick={()=>{ setModalCol(null); setActiveSection("enquiry"); }} style={{
+                  width:"100%", padding:"13px", background:T.indigo, border:"none",
+                  color:"#fff", fontSize:11, fontWeight:700, letterSpacing:4,
+                  textTransform:"uppercase", cursor:"pointer", borderRadius:T.radius }}>
+                  ENQUIRE ABOUT LICENSING →
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
       <div style={{ padding:"60px 40px 40px", textAlign:"center" }}>
         <div style={{ fontSize:10, color:T.gold, letterSpacing:5, textTransform:"uppercase", marginBottom:12 }}>Our Work</div>
         <div style={{ fontSize:40, fontWeight:900, color:T.indigo, fontFamily:"Georgia,serif", marginBottom:12 }}>Collections</div>
@@ -4575,43 +4655,26 @@ function ClientView() {
         </div>
       </div>
       <div style={{ padding:"0 40px 80px", display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:24 }}>
-        {[
-          { name:"Midnight Siam — Classic",  motif:"Kanok · กนก",
-            era:"Associated with Thai classical ornament",
-            palette:"Emerald + Antique Gold + Ivory",
-            surfaces:"Wallcovering · Textile · Packaging · Scarf · Hotel",
-            status:"Available", statusColor:T.jade,
-            imageUrl:"/midnight-siam-2.jpg.png",
-            desc:"The sacred Kanok flame scroll in warm emerald and antique gold on ivory — heritage, liveable luxury for contemporary interiors." },
-          { name:"Midnight Siam — Premium",  motif:"Kanok · กนก",
-            era:"Associated with Thai classical ornament",
-            palette:"Nila Black + Antique Gold + Deep Emerald",
-            surfaces:"Wallcovering · Textile · Packaging · Scarf · Hotel",
-            status:"Available", statusColor:T.jade,
-            imageUrl:"/midnight-siam-1.jpg.png",
-            desc:"The dramatic flagship in Nila Black and antique gold — exclusive, night elegance for the highest tier of global luxury licensing." },
-          { name:"Lotus Blush",  motif:"Dok Mali · ดอกมะลิ",
-            era:"Contemporary Thai heritage form",
-            palette:"Lotus Blossom + Antique Gold + Linen",
-            surfaces:"Stationery · Spa Linen · Packaging",
-            status:"Coming Q3 2026", statusColor:T.amber,
-            imageUrl:null,
-            desc:"The jasmine blossom of maternal devotion — reimagined as a flowing organic botanical for wellness and hospitality." },
-        ].map((c,i)=>(
+        {COLS.map((c,i)=>(
           <div key={i} style={{ background:T.white, borderRadius:T.radiusL,
             overflow:"hidden", boxShadow:"0 2px 12px rgba(15,77,58,0.08)",
             border:`1px solid ${T.border}`, transition:"transform 0.2s, box-shadow 0.2s" }}
             onMouseEnter={e=>{ e.currentTarget.style.transform="translateY(-4px)"; e.currentTarget.style.boxShadow="0 8px 32px rgba(15,77,58,0.15)"; }}
             onMouseLeave={e=>{ e.currentTarget.style.transform="translateY(0)"; e.currentTarget.style.boxShadow="0 2px 12px rgba(15,77,58,0.08)"; }}>
-            {/* Auto-watermarked design preview */}
-            <div style={{ position:"relative" }}>
-              <WatermarkedImage
-                src={c.imageUrl}
-                alt={c.name}
-                height={200}
-                collection={c.name}
-                motif={c.motif}
-              />
+            {/* Clickable image */}
+            <div style={{ position:"relative", cursor: c.imageUrl ? "zoom-in" : "default" }}
+              onClick={()=>{ if(c.imageUrl) setModalCol(c); }}>
+              <WatermarkedImage src={c.imageUrl} alt={c.name} height={200}
+                collection={c.name} motif={c.motif} />
+              {c.imageUrl && (
+                <div style={{ position:"absolute", inset:0, background:"rgba(15,77,58,0)",
+                  transition:"background 0.2s", display:"flex", alignItems:"center", justifyContent:"center" }}
+                  onMouseEnter={e=>e.currentTarget.style.background="rgba(15,77,58,0.18)"}
+                  onMouseLeave={e=>e.currentTarget.style.background="rgba(15,77,58,0)"}>
+                  <span style={{ color:"#fff", fontSize:22, opacity:0.85,
+                    textShadow:"0 2px 8px rgba(0,0,0,0.5)" }}>⊕</span>
+                </div>
+              )}
               <div style={{ position:"absolute", top:8, right:8, zIndex:2 }}>
                 <span style={{ background:`${c.statusColor}ee`, color:"#fff", borderRadius:20,
                   padding:"3px 10px", fontSize:10, fontWeight:700, backdropFilter:"blur(4px)" }}>{c.status}</span>
@@ -4642,7 +4705,8 @@ function ClientView() {
         ))}
       </div>
     </div>
-  );
+    );
+  };
 
   // ── HERITAGE / MOTIFS
   const HeritageSection = () => (
