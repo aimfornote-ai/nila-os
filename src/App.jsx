@@ -817,15 +817,9 @@ function PromptGenerator() {
   };
 
   const buildMockupPrompt = () => {
-    const suffix = platformMockup==="Midjourney v6" ? "
-
---ar 4:3 --v 6 --style raw --q 2"
-      : platformMockup==="ChatGPT (DALL-E 3)" ? "
-
-Photorealistic, ultra-detailed, luxury brand quality."
-      : "
-
-Photorealistic, high resolution, luxury aesthetic.";
+    const suffix = platformMockup==="Midjourney v6" ? `\n\n--ar 4:3 --v 6 --style raw --q 2`
+      : platformMockup==="ChatGPT (DALL-E 3)" ? `\n\nPhotorealistic, ultra-detailed, luxury brand quality.`
+      : `\n\nPhotorealistic, high resolution, luxury aesthetic.`;
     return `An editorial luxury commercial photograph of a ${product} featuring the NILA Heritage Living™ ${collection} pattern.
 
 The pattern uses ${colorwayMockup} colorway with intricate Thai heritage motifs — Kanok flame scroll and botanical elements.
