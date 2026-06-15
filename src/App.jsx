@@ -4449,6 +4449,7 @@ function ClientView() {
     { id:"collections", label:"Collections" },
     { id:"motifs",      label:"Heritage" },
     { id:"licensing",   label:"Licensing" },
+    { id:"about",       label:"About" },
     { id:"enquiry",     label:"Enquire" },
   ];
 
@@ -4486,79 +4487,313 @@ function ClientView() {
 
   // ── HOME
   const HomeSection = () => (
-    <div>
-      {/* Hero */}
-      <div style={{ minHeight:"100vh", background:`linear-gradient(160deg,#0A3528 0%,#0F4D3A 60%,#0A2A1E 100%)`,
+    <div style={{ fontFamily:"Georgia,serif" }}>
+
+      {/* ── HERO */}
+      <div style={{ minHeight:"100vh", background:"linear-gradient(160deg,#0A3528 0%,#0F4D3A 55%,#0A2A1E 100%)",
         display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center",
-        textAlign:"center", padding:"80px 40px 60px", position:"relative", overflow:"hidden" }}>
-        <div style={{ position:"absolute", width:600, height:600, borderRadius:"50%",
-          background:"radial-gradient(circle,rgba(199,162,77,0.06) 0%,transparent 70%)",
+        textAlign:"center", padding:"100px 24px 80px", position:"relative", overflow:"hidden" }}>
+        {/* Kanok pattern overlay */}
+        <div style={{ position:"absolute", inset:0, opacity:0.05,
+          backgroundImage:`url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C7A24D'%3E%3Cpath d='M50 8C50 8 63 30 50 50C37 30 50 8 50 8Z'/%3E%3Cpath d='M50 92C50 92 63 70 50 50C37 70 50 92 50 92Z'/%3E%3Cpath d='M8 50C8 50 30 63 50 50C30 37 8 50 8 50Z'/%3E%3Cpath d='M92 50C92 50 70 63 50 50C70 37 92 50 92 50Z'/%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize:"100px 100px" }} />
+        <div style={{ position:"absolute", width:700, height:700, borderRadius:"50%",
+          background:"radial-gradient(circle,rgba(199,162,77,0.07) 0%,transparent 70%)",
           top:"50%", left:"50%", transform:"translate(-50%,-50%)", pointerEvents:"none" }} />
-        <div style={{ fontSize:11, color:"#C7A24D", letterSpacing:6, textTransform:"uppercase",
-          marginBottom:24, opacity:0.8 }}>Thai Cultural IP Licensing Studio</div>
-        <div style={{ fontSize:64, fontWeight:900, color:"#F7F4ED", fontFamily:"Georgia,serif",
-          letterSpacing:8, lineHeight:1, marginBottom:16 }}>NILA™</div>
-        <div style={{ fontSize:16, fontWeight:700, color:"#C7A24D", letterSpacing:5,
-          textTransform:"uppercase", marginBottom:24 }}>HERITAGE LIVING</div>
-        <div style={{ width:80, height:1, background:"linear-gradient(90deg,transparent,#C7A24D,transparent)",
-          marginBottom:32 }} />
-        <div style={{ fontSize:20, color:"rgba(247,244,237,0.75)", fontFamily:"Georgia,serif",
-          fontStyle:"italic", marginBottom:16, maxWidth:600, lineHeight:1.7 }}>
-          "Inspired by Thai Heritage.<br/>Crafted for the World."
+        <div style={{ position:"relative", zIndex:2, maxWidth:860 }}>
+          <div style={{ fontSize:10, color:T.gold, letterSpacing:6, textTransform:"uppercase",
+            marginBottom:32, opacity:0.85, fontFamily:"'Inter',system-ui,sans-serif" }}>
+            Cultural Design House · Thailand
+          </div>
+          <div style={{ fontSize:"clamp(38px,6vw,80px)", fontWeight:300, color:"#F7F4ED",
+            lineHeight:1.08, marginBottom:28, letterSpacing:"-0.5px" }}>
+            Contemporary Thai<br/>
+            <em style={{ color:"#D9BA78", fontStyle:"italic" }}>Cultural Design</em><br/>
+            for Modern Living
+          </div>
+          <div style={{ width:44, height:1, background:T.gold, margin:"0 auto 28px" }} />
+          <div style={{ fontSize:"clamp(14px,1.8vw,19px)", color:"rgba(247,244,237,0.68)",
+            fontStyle:"italic", lineHeight:1.75, maxWidth:620, margin:"0 auto 44px" }}>
+            Discover premium design collections inspired by the art, nature, and heritage of Thailand —
+            thoughtfully crafted for homes, hospitality, and lifestyle brands around the world.
+          </div>
+          <div style={{ display:"flex", gap:14, justifyContent:"center", flexWrap:"wrap" }}>
+            <button onClick={()=>setActiveSection("collections")} style={{
+              padding:"14px 36px", background:T.gold, border:"none", color:"#fff",
+              fontSize:10, fontWeight:500, letterSpacing:4, textTransform:"uppercase",
+              cursor:"pointer", borderRadius:2, fontFamily:"'Inter',system-ui,sans-serif",
+              transition:"all 0.2s" }}
+              onMouseEnter={e=>e.currentTarget.style.background="#D9BA78"}
+              onMouseLeave={e=>e.currentTarget.style.background=T.gold}>
+              EXPLORE COLLECTIONS
+            </button>
+            <button onClick={()=>setActiveSection("enquiry")} style={{
+              padding:"14px 36px", background:"transparent",
+              border:"1px solid rgba(199,162,77,0.5)", color:"#C7A24D",
+              fontSize:10, fontWeight:500, letterSpacing:4, textTransform:"uppercase",
+              cursor:"pointer", borderRadius:2, fontFamily:"'Inter',system-ui,sans-serif",
+              transition:"all 0.2s" }}
+              onMouseEnter={e=>{ e.currentTarget.style.borderColor="#C7A24D"; e.currentTarget.style.background="rgba(199,162,77,0.08)"; }}
+              onMouseLeave={e=>{ e.currentTarget.style.borderColor="rgba(199,162,77,0.5)"; e.currentTarget.style.background="transparent"; }}>
+              LICENSING ENQUIRY
+            </button>
+          </div>
+          <div style={{ marginTop:56, fontSize:9, letterSpacing:4, textTransform:"uppercase",
+            color:"rgba(247,244,237,0.3)", fontFamily:"'Inter',system-ui,sans-serif" }}>
+            From the heart of Thailand to homes around the world
+          </div>
         </div>
-        <div style={{ fontSize:13, color:"rgba(247,244,237,0.45)", maxWidth:520, lineHeight:1.8, marginBottom:48 }}>
-          We translate Thailand's documented classical motifs — from Sukhothai temple art to Ayutthaya royal craft —
-          into contemporary surface design collections for international licensing.
+      </div>
+
+      {/* ── IP STATEMENT BAR */}
+      <div style={{ background:T.indigo, padding:"44px clamp(24px,6vw,80px)" }}>
+        <div style={{ maxWidth:1200, margin:"0 auto", display:"flex",
+          alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:28 }}>
+          <div>
+            <div style={{ fontSize:"clamp(20px,2.8vw,36px)", fontWeight:300, color:"#F7F4ED", lineHeight:1.3 }}>
+              We don't sell patterns.<br/>
+              <em style={{ color:"#D9BA78" }}>We license Cultural IP.</em>
+            </div>
+          </div>
+          <div style={{ maxWidth:460 }}>
+            <div style={{ fontSize:13, color:"rgba(247,244,237,0.52)", lineHeight:1.85,
+              fontFamily:"'Inter',system-ui,sans-serif", marginBottom:20 }}>
+              Every NILA™ collection carries documented cultural research, authentic Thai heritage context,
+              and original creative interpretation — designed for brands that demand more than a stock file.
+            </div>
+            <div style={{ display:"flex", gap:28, flexWrap:"wrap" }}>
+              <div>
+                <div style={{ fontSize:9, letterSpacing:3, textTransform:"uppercase",
+                  color:T.gold, marginBottom:4, fontFamily:"'Inter',system-ui,sans-serif" }}>Not this</div>
+                <div style={{ fontSize:12, color:"rgba(247,244,237,0.3)",
+                  textDecoration:"line-through", fontFamily:"'Inter',system-ui,sans-serif" }}>Stock pattern file</div>
+              </div>
+              <div style={{ color:"rgba(199,162,77,0.35)", fontSize:18, alignSelf:"flex-end", paddingBottom:2 }}>→</div>
+              <div>
+                <div style={{ fontSize:9, letterSpacing:3, textTransform:"uppercase",
+                  color:T.gold, marginBottom:4, fontFamily:"'Inter',system-ui,sans-serif" }}>This</div>
+                <div style={{ fontSize:12, color:"#F7F4ED", fontFamily:"'Inter',system-ui,sans-serif" }}>Licensed Cultural IP with story</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div style={{ display:"flex", gap:16 }}>
+      </div>
+
+      {/* ── WHAT YOU WILL DISCOVER */}
+      <div style={{ background:"#FFFFFF", padding:"clamp(64px,10vw,120px) clamp(24px,6vw,80px)" }}>
+        <div style={{ textAlign:"center", marginBottom:52 }}>
+          <div style={{ fontSize:9, color:T.gold, letterSpacing:5, textTransform:"uppercase",
+            marginBottom:16, fontFamily:"'Inter',system-ui,sans-serif" }}>What You Will Discover</div>
+          <div style={{ fontSize:"clamp(28px,3.5vw,50px)", fontWeight:300, color:T.indigo, lineHeight:1.1, marginBottom:16 }}>
+            Where Heritage <em style={{ fontStyle:"italic" }}>Meets the World</em>
+          </div>
+          <div style={{ width:44, height:1, background:T.gold, margin:"0 auto 24px" }} />
+          <div style={{ fontSize:14, color:T.mist, maxWidth:560, margin:"0 auto", lineHeight:1.85,
+            fontFamily:"'Inter',system-ui,sans-serif" }}>
+            NILA is a Creative Technology and Cultural IP company — transforming Thai cultural heritage
+            into contemporary design assets for a global audience.
+          </div>
+        </div>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))",
+          gap:1, background:T.ivory, maxWidth:1300, margin:"0 auto" }}>
+          {[
+            { num:"I",   title:"Premium Thai-Inspired Collections",   body:"Luxury design collections rooted in documented Thai cultural motifs — Kanok ornamentation, lotus botanicals, and classical heritage forms." },
+            { num:"II",  title:"Authentic Cultural Storytelling",      body:"Each collection carries the cultural context of its origin — the era, the motif, and the meaning — translated for contemporary audiences." },
+            { num:"III", title:"Contemporary Heritage Aesthetics",     body:"Traditional motifs reinterpreted through modern design — timeless in spirit, relevant in form, refined for the highest-tier markets." },
+            { num:"IV",  title:"For Homes, Hospitality & Brands",     body:"Designs for residential interiors, luxury hotel spaces, wellness sanctuaries, fashion accessories, and lifestyle product lines." },
+            { num:"V",   title:"Original Cultural IP",                 body:"Design assets developed through creative technology and rigorous cultural research — original, licensable, and globally relevant." },
+          ].map((d,i)=>(
+            <div key={i} style={{ background:"#fff", padding:"clamp(24px,3vw,44px) clamp(16px,2vw,32px)",
+              transition:"background 0.25s, color 0.25s", cursor:"default" }}
+              onMouseEnter={e=>{ e.currentTarget.style.background=T.indigo;
+                e.currentTarget.querySelectorAll('[data-hover]').forEach(el=>el.style.color=el.dataset.hoverColor); }}
+              onMouseLeave={e=>{ e.currentTarget.style.background="#fff";
+                e.currentTarget.querySelectorAll('[data-hover]').forEach(el=>el.style.color=el.dataset.origColor); }}>
+              <div data-hover="1" data-hover-color="rgba(247,244,237,0.12)" data-orig-color="rgba(10,53,40,0.1)"
+                style={{ fontSize:36, fontWeight:300, color:"rgba(10,53,40,0.1)", lineHeight:1, marginBottom:18 }}>{d.num}</div>
+              <div style={{ width:22, height:1, background:T.gold, marginBottom:14 }} />
+              <div data-hover="1" data-hover-color="#F7F4ED" data-orig-color=T.indigo
+                style={{ fontSize:"clamp(15px,1.4vw,20px)", fontWeight:400, color:T.indigo,
+                  marginBottom:12, lineHeight:1.2, fontFamily:"Georgia,serif" }}>{d.title}</div>
+              <div data-hover="1" data-hover-color="rgba(247,244,237,0.55)" data-orig-color=T.mist
+                style={{ fontSize:12, color:T.mist, lineHeight:1.75,
+                  fontFamily:"'Inter',system-ui,sans-serif" }}>{d.body}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── WHY NILA */}
+      <div style={{ background:T.indigo, padding:"clamp(64px,10vw,120px) clamp(24px,6vw,80px)" }}>
+        <div style={{ maxWidth:1200, margin:"0 auto", display:"grid",
+          gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))", gap:"clamp(40px,6vw,80px)", alignItems:"center" }}>
+          <div>
+            <div style={{ fontSize:9, color:T.gold, letterSpacing:5, textTransform:"uppercase",
+              marginBottom:18, fontFamily:"'Inter',system-ui,sans-serif" }}>Why NILA™</div>
+            <div style={{ fontSize:"clamp(28px,3.5vw,48px)", fontWeight:300, color:"#F7F4ED",
+              lineHeight:1.1, marginBottom:20 }}>
+              A Different Kind of<br/><em style={{ color:"#D9BA78", fontStyle:"italic" }}>Design House</em>
+            </div>
+            <div style={{ width:44, height:1, background:T.gold, marginBottom:24 }} />
+            <div style={{ fontSize:14, color:"rgba(247,244,237,0.6)", lineHeight:1.9, marginBottom:16,
+              fontFamily:"'Inter',system-ui,sans-serif" }}>
+              NILA transforms Thai cultural heritage into <span style={{ color:"#F7F4ED" }}>globally relevant design experiences</span>.
+              Rather than reproducing traditional motifs, NILA reinterprets them through contemporary design —
+              creating original Cultural IP that connects heritage, creativity, and modern living.
+            </div>
+            <div style={{ fontSize:14, color:"rgba(247,244,237,0.6)", lineHeight:1.9, marginBottom:28,
+              fontFamily:"'Inter',system-ui,sans-serif" }}>
+              Think <span style={{ color:"#F7F4ED" }}>Hermès and its cultural codes</span>, or <span style={{ color:"#F7F4ED" }}>Aesop and its botanical intelligence</span>.
+              NILA brings that same depth of cultural intentionality to Thai heritage — for the world's most discerning homes and hospitality brands.
+            </div>
+            <button onClick={()=>setActiveSection("motifs")} style={{
+              background:"none", border:"none", color:T.gold, fontSize:10, letterSpacing:4,
+              textTransform:"uppercase", cursor:"pointer", fontFamily:"'Inter',system-ui,sans-serif",
+              borderBottom:"1px solid rgba(199,162,77,0.4)", paddingBottom:3 }}>
+              DISCOVER OUR HERITAGE →
+            </button>
+          </div>
+          <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14 }}>
+            {[
+              { icon:"🌿", title:"Heritage Research",    body:"Every collection begins with documented cultural research — motif origin, historical context, and artistic tradition." },
+              { icon:"✦",  title:"Original IP",          body:"Not a reproduction. Each NILA design is original — reinterpreted, refined, and ready for global licensing." },
+              { icon:"◎",  title:"Creative Technology",  body:"AI-assisted design workflows expand creative possibilities while grounded in human expertise and cultural understanding." },
+              { icon:"⬡",  title:"Global Relevance",     body:"Distinctly Thai in character — designed to resonate across cultures, markets, and the highest tiers of global living." },
+            ].map((c,i)=>(
+              <div key={i} style={{ background:"rgba(247,244,237,0.04)", border:"1px solid rgba(199,162,77,0.1)",
+                padding:"clamp(18px,2.5vw,28px)", borderRadius:1,
+                transition:"background 0.25s, border-color 0.25s", cursor:"default" }}
+                onMouseEnter={e=>{ e.currentTarget.style.background="rgba(199,162,77,0.07)"; e.currentTarget.style.borderColor="rgba(199,162,77,0.3)"; }}
+                onMouseLeave={e=>{ e.currentTarget.style.background="rgba(247,244,237,0.04)"; e.currentTarget.style.borderColor="rgba(199,162,77,0.1)"; }}>
+                <div style={{ fontSize:20, marginBottom:12 }}>{c.icon}</div>
+                <div style={{ fontSize:16, color:"#F7F4ED", marginBottom:8, fontFamily:"Georgia,serif" }}>{c.title}</div>
+                <div style={{ fontSize:12, color:"rgba(247,244,237,0.48)", lineHeight:1.75,
+                  fontFamily:"'Inter',system-ui,sans-serif" }}>{c.body}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── COLLECTIONS TEASER */}
+      <div style={{ background:T.ground, padding:"clamp(64px,10vw,120px) clamp(24px,6vw,80px)" }}>
+        <div style={{ textAlign:"center", marginBottom:52 }}>
+          <div style={{ fontSize:9, color:T.gold, letterSpacing:5, textTransform:"uppercase",
+            marginBottom:16, fontFamily:"'Inter',system-ui,sans-serif" }}>Signature Collections</div>
+          <div style={{ fontSize:"clamp(28px,3.5vw,50px)", fontWeight:300, color:T.indigo, lineHeight:1.1, marginBottom:16 }}>
+            Design for the <em style={{ fontStyle:"italic" }}>World's Finest Spaces</em>
+          </div>
+          <div style={{ width:44, height:1, background:T.gold, margin:"0 auto 24px" }} />
+          <div style={{ fontSize:13, color:T.mist, maxWidth:520, margin:"0 auto", lineHeight:1.85,
+            fontFamily:"'Inter',system-ui,sans-serif" }}>
+            Available for non-exclusive, regional exclusive, and global exclusive licensing.
+          </div>
+        </div>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",
+          gap:24, maxWidth:1200, margin:"0 auto 40px" }}>
+          {[
+            { name:"Midnight Siam — Classic",  motif:"Kanok · กนก", badge:"Available", badgeColor:T.jade,
+              bg:"linear-gradient(135deg,#0A3528 0%,#1B5C46 100%)",
+              desc:"The sacred Kanok flame scroll in warm emerald and antique gold — heritage luxury for contemporary interiors." },
+            { name:"Midnight Siam — Premium",  motif:"Kanok · กนก", badge:"Available", badgeColor:T.jade,
+              bg:"linear-gradient(135deg,#061E16 0%,#0A3528 100%)",
+              desc:"The dramatic flagship in Nila Black and antique gold — exclusive night elegance for global luxury licensing." },
+            { name:"Lotus Blush",               motif:"Lotus · บัว",  badge:"Preview Collection", badgeColor:T.amber,
+              bg:"linear-gradient(135deg,#C7A24D 0%,#EDE9DF 100%)",
+              desc:"A soft luminous palette for wellness sanctuaries and refined hospitality spaces." },
+          ].map((c,i)=>(
+            <div key={i} style={{ background:"#fff", overflow:"hidden",
+              boxShadow:"0 2px 16px rgba(10,53,40,0.07)", cursor:"pointer",
+              transition:"transform 0.25s, box-shadow 0.25s" }}
+              onClick={()=>setActiveSection("collections")}
+              onMouseEnter={e=>{ e.currentTarget.style.transform="translateY(-6px)"; e.currentTarget.style.boxShadow="0 14px 40px rgba(10,53,40,0.14)"; }}
+              onMouseLeave={e=>{ e.currentTarget.style.transform="translateY(0)"; e.currentTarget.style.boxShadow="0 2px 16px rgba(10,53,40,0.07)"; }}>
+              <div style={{ height:200, background:c.bg, display:"flex", alignItems:"center",
+                justifyContent:"center", position:"relative" }}>
+                <div style={{ fontSize:11, letterSpacing:3, textTransform:"uppercase",
+                  color:"rgba(247,244,237,0.35)", textAlign:"center", lineHeight:1.8,
+                  fontFamily:"'Inter',system-ui,sans-serif" }}>
+                  {c.name.toUpperCase()}<br/>COLLECTION
+                </div>
+                <span style={{ position:"absolute", top:12, right:12, background:`${c.badgeColor}ee`,
+                  color:"#fff", borderRadius:20, padding:"3px 12px", fontSize:9,
+                  fontWeight:600, letterSpacing:2, fontFamily:"'Inter',system-ui,sans-serif" }}>{c.badge}</span>
+              </div>
+              <div style={{ padding:24 }}>
+                <div style={{ fontSize:20, color:T.indigo, marginBottom:4 }}>{c.name}</div>
+                <div style={{ fontSize:10, color:T.gold, letterSpacing:3, textTransform:"uppercase",
+                  marginBottom:12, fontFamily:"'Inter',system-ui,sans-serif" }}>{c.motif}</div>
+                <div style={{ fontSize:12, color:T.mist, lineHeight:1.7,
+                  fontFamily:"'Inter',system-ui,sans-serif" }}>{c.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div style={{ textAlign:"center" }}>
           <button onClick={()=>setActiveSection("collections")} style={{
-            padding:"14px 40px", background:T.gold, border:"none", color:"#fff",
-            fontSize:11, fontWeight:700, letterSpacing:4, textTransform:"uppercase",
-            cursor:"pointer", borderRadius:2, transition:"all 0.2s" }}>
-            VIEW COLLECTIONS
+            padding:"12px 36px", background:"transparent", border:`1px solid ${T.gold}`,
+            color:T.gold, fontSize:10, fontWeight:500, letterSpacing:4, textTransform:"uppercase",
+            cursor:"pointer", borderRadius:2, fontFamily:"'Inter',system-ui,sans-serif",
+            transition:"all 0.2s" }}
+            onMouseEnter={e=>{ e.currentTarget.style.background=T.gold; e.currentTarget.style.color="#fff"; }}
+            onMouseLeave={e=>{ e.currentTarget.style.background="transparent"; e.currentTarget.style.color=T.gold; }}>
+            VIEW ALL COLLECTIONS →
+          </button>
+        </div>
+      </div>
+
+      {/* ── BRAND STATEMENT */}
+      <div style={{ background:"#fff", padding:"clamp(80px,12vw,160px) clamp(24px,8vw,140px)", textAlign:"center" }}>
+        <div style={{ fontFamily:"Georgia,serif", fontSize:72, color:T.gold, opacity:0.15,
+          lineHeight:0.6, marginBottom:16 }}>"</div>
+        <blockquote style={{ fontFamily:"Georgia,serif", fontSize:"clamp(20px,3vw,42px)",
+          fontWeight:300, fontStyle:"italic", color:T.indigo, lineHeight:1.5,
+          maxWidth:840, margin:"0 auto 28px" }}>
+          Culture should not remain behind museum walls.<br/>
+          It should live in the spaces people inhabit,
+          the objects they cherish — and the <span style={{ color:T.gold }}>experiences they share.</span>
+        </blockquote>
+        <div style={{ width:44, height:1, background:T.gold, margin:"0 auto 20px" }} />
+        <div style={{ fontSize:9, letterSpacing:5, textTransform:"uppercase", color:T.mist,
+          fontFamily:"'Inter',system-ui,sans-serif" }}>NILA™ Heritage Living · Brand Philosophy</div>
+      </div>
+
+      {/* ── LICENSING CTA */}
+      <div style={{ background:T.indigo, padding:"clamp(64px,10vw,120px) clamp(24px,6vw,80px)", textAlign:"center" }}>
+        <div style={{ fontSize:9, color:T.gold, letterSpacing:5, textTransform:"uppercase",
+          marginBottom:20, fontFamily:"'Inter',system-ui,sans-serif" }}>Ready to Begin</div>
+        <div style={{ fontSize:"clamp(28px,4vw,56px)", fontWeight:300, color:"#F7F4ED",
+          lineHeight:1.1, marginBottom:20 }}>
+          Bring <em style={{ color:"#D9BA78", fontStyle:"italic" }}>Thai Heritage</em><br/>Into Your World
+        </div>
+        <div style={{ fontSize:14, color:"rgba(247,244,237,0.5)", lineHeight:1.8,
+          maxWidth:500, margin:"0 auto 40px", fontFamily:"'Inter',system-ui,sans-serif" }}>
+          NILA collections are available for licensing across interiors, hospitality,
+          wellness, fashion accessories, and lifestyle brands globally.
+        </div>
+        <div style={{ display:"flex", gap:14, justifyContent:"center", flexWrap:"wrap" }}>
+          <button onClick={()=>setActiveSection("enquiry")} style={{
+            padding:"14px 36px", background:T.gold, border:"none", color:"#fff",
+            fontSize:10, fontWeight:500, letterSpacing:4, textTransform:"uppercase",
+            cursor:"pointer", borderRadius:2, fontFamily:"'Inter',system-ui,sans-serif",
+            transition:"all 0.2s" }}
+            onMouseEnter={e=>e.currentTarget.style.background="#D9BA78"}
+            onMouseLeave={e=>e.currentTarget.style.background=T.gold}>
+            ENQUIRE ABOUT LICENSING
           </button>
           <button onClick={()=>setActiveSection("enquiry")} style={{
-            padding:"14px 40px", background:"transparent",
-            border:"1px solid rgba(199,162,77,0.6)", color:"#C7A24D",
-            fontSize:11, fontWeight:700, letterSpacing:4, textTransform:"uppercase",
-            cursor:"pointer", borderRadius:2, transition:"all 0.2s" }}>
-            LICENSING ENQUIRY
+            padding:"14px 36px", background:"transparent",
+            border:"1px solid rgba(199,162,77,0.5)", color:"#C7A24D",
+            fontSize:10, fontWeight:500, letterSpacing:4, textTransform:"uppercase",
+            cursor:"pointer", borderRadius:2, fontFamily:"'Inter',system-ui,sans-serif",
+            transition:"all 0.2s" }}
+            onMouseEnter={e=>{ e.currentTarget.style.borderColor="#C7A24D"; e.currentTarget.style.background="rgba(199,162,77,0.08)"; }}
+            onMouseLeave={e=>{ e.currentTarget.style.borderColor="rgba(199,162,77,0.5)"; e.currentTarget.style.background="transparent"; }}>
+            REQUEST LOOKBOOK
           </button>
         </div>
       </div>
 
-      {/* Values strip */}
-      <div style={{ background:"#F7F4ED", padding:"60px 40px", display:"grid",
-        gridTemplateColumns:"repeat(4,1fr)", gap:40 }}>
-        {[
-          { icon:"◈", title:"Cultural Authenticity", desc:"Every motif documented with historical source — era, meaning, and provenance." },
-          { icon:"◆", title:"International Licensing", desc:"Four-tier structure from POD to global exclusive commissions." },
-          { icon:"◎", title:"Contemporary Application", desc:"Classical patterns engineered for luxury wallcovering, textile, and packaging." },
-          { icon:"◐", title:"Thai Heritage Custodians", desc:"Rooted in Thailand. Designed for homes around the world." },
-        ].map((v,i)=>(
-          <div key={i} style={{ textAlign:"center" }}>
-            <div style={{ fontSize:28, color:T.indigo, marginBottom:12 }}>{v.icon}</div>
-            <div style={{ fontSize:13, fontWeight:800, color:T.indigo, marginBottom:8, letterSpacing:1 }}>{v.title}</div>
-            <div style={{ fontSize:12, color:T.mist, lineHeight:1.7 }}>{v.desc}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* Featured collection teaser */}
-      <div style={{ background:T.ground, padding:"80px 40px", textAlign:"center" }}>
-        <div style={{ fontSize:10, color:T.gold, letterSpacing:5, textTransform:"uppercase", marginBottom:16 }}>Now Available</div>
-        <div style={{ fontSize:40, fontWeight:900, color:T.indigo, fontFamily:"Georgia,serif", marginBottom:8 }}>Midnight Siam</div>
-        <div style={{ fontSize:13, color:T.mist, maxWidth:500, margin:"0 auto 32px", lineHeight:1.8 }}>
-          The sacred Kanok flame scroll of the Sukhothai period — reinterpreted in deep emerald and antique gold
-          for contemporary luxury surfaces.
-        </div>
-        <button onClick={()=>setActiveSection("collections")} style={{
-          padding:"12px 36px", background:"transparent", border:`1px solid ${T.gold}`,
-          color:T.gold, fontSize:11, fontWeight:700, letterSpacing:4, textTransform:"uppercase",
-          cursor:"pointer", borderRadius:2 }}>
-          EXPLORE COLLECTION →
-        </button>
-      </div>
     </div>
   );
 
@@ -4961,8 +5196,285 @@ function ClientView() {
     </div>
   );
 
+  // ── ABOUT
+  const AboutSection = () => (
+    <div style={{ paddingTop:60 }}>
+      {/* Hero */}
+      <div style={{ background:T.indigo, padding:"clamp(80px,12vw,140px) clamp(24px,6vw,80px)", textAlign:"center", position:"relative", overflow:"hidden" }}>
+        <div style={{ position:"absolute", inset:0, opacity:0.05,
+          backgroundImage:`url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C7A24D'%3E%3Cpath d='M50 8C50 8 63 30 50 50C37 30 50 8 50 8Z'/%3E%3Cpath d='M50 92C50 92 63 70 50 50C37 70 50 92 50 92Z'/%3E%3Cpath d='M8 50C8 50 30 63 50 50C30 37 8 50 8 50Z'/%3E%3Cpath d='M92 50C92 50 70 63 50 50C70 37 92 50 92 50Z'/%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize:"100px 100px" }} />
+        <div style={{ position:"relative", zIndex:2 }}>
+          <div style={{ fontSize:9, color:T.gold, letterSpacing:5, textTransform:"uppercase",
+            marginBottom:20, fontFamily:"'Inter',system-ui,sans-serif" }}>Creative Technology · Cultural IP · Thai Heritage</div>
+          <div style={{ fontSize:"clamp(36px,6vw,80px)", fontWeight:300, color:"#F7F4ED",
+            lineHeight:1.05, marginBottom:20, fontFamily:"Georgia,serif" }}>
+            NILA™<br/><em style={{ fontStyle:"italic", color:"#D9BA78" }}>Heritage Living</em>
+          </div>
+          <div style={{ width:44, height:1, background:T.gold, margin:"0 auto 24px" }} />
+          <div style={{ fontSize:"clamp(15px,2vw,20px)", fontStyle:"italic", color:"rgba(247,244,237,0.7)",
+            fontFamily:"Georgia,serif" }}>Inspired by Thai Heritage. Crafted for the World.</div>
+        </div>
+      </div>
+      {/* About text */}
+      <div style={{ background:"#fff", padding:"clamp(64px,10vw,120px) clamp(24px,6vw,80px)" }}>
+        <div style={{ maxWidth:1100, margin:"0 auto", display:"grid",
+          gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))", gap:"clamp(40px,6vw,80px)" }}>
+          <div>
+            <div style={{ fontSize:9, color:T.gold, letterSpacing:5, textTransform:"uppercase",
+              marginBottom:20, fontFamily:"'Inter',system-ui,sans-serif" }}>About NILA™</div>
+            <div style={{ fontSize:"clamp(28px,3vw,44px)", fontWeight:300, color:T.indigo,
+              lineHeight:1.1, marginBottom:28, fontFamily:"Georgia,serif" }}>Where Heritage<br/><em>Meets the World</em></div>
+            <div style={{ width:44, height:1, background:T.gold, marginBottom:28 }} />
+            {["NILA™ Heritage Living is a contemporary cultural design brand that transforms the richness of Thai heritage into timeless patterns, products, and lifestyle experiences for a global audience.",
+              "Rooted in the belief that culture should continue to evolve, NILA reinterprets traditional Thai motifs, craftsmanship, and visual traditions through modern design and creative technology. Our work bridges the past and the future — creating collections that honor heritage while feeling relevant to contemporary living.",
+              "Inspired by Thailand's artistic legacy — from lotus blossoms and tropical botanicals to Kanok ornamentation, traditional textiles, and architectural details — each collection is carefully developed to balance authenticity, elegance, and international appeal.",
+              "NILA began as a small idea and gradually became a new way of helping Thai heritage travel across the world."
+            ].map((p,i)=>(
+              <div key={i} style={{ fontSize:14, color:T.mist, lineHeight:1.9, marginBottom:18,
+                fontFamily:"'Inter',system-ui,sans-serif" }}>{p}</div>
+            ))}
+          </div>
+          <div>
+            {/* Vision */}
+            <div style={{ background:T.indigo, padding:"clamp(28px,3vw,44px)", marginBottom:16, borderRadius:1 }}>
+              <div style={{ fontSize:9, color:T.gold, letterSpacing:4, textTransform:"uppercase",
+                marginBottom:14, fontFamily:"'Inter',system-ui,sans-serif" }}>Our Vision</div>
+              <div style={{ fontSize:"clamp(18px,2vw,26px)", color:"#F7F4ED", lineHeight:1.3,
+                marginBottom:16, fontFamily:"Georgia,serif" }}>A globally recognized cultural design house</div>
+              <div style={{ fontSize:13, color:"rgba(247,244,237,0.55)", lineHeight:1.85,
+                fontFamily:"'Inter',system-ui,sans-serif" }}>
+                To become a globally recognized cultural design house that brings Thai heritage into contemporary life through design, technology, and creativity.
+              </div>
+            </div>
+            {/* Mission */}
+            <div style={{ background:T.ground, padding:"clamp(28px,3vw,44px)", borderRadius:1 }}>
+              <div style={{ fontSize:9, color:T.gold, letterSpacing:4, textTransform:"uppercase",
+                marginBottom:14, fontFamily:"'Inter',system-ui,sans-serif" }}>Our Mission</div>
+              {["Preserve and reinterpret Thai cultural heritage through contemporary design.",
+                "Create original cultural design assets for global lifestyle markets.",
+                "Use creative technology and AI-assisted workflows to expand cultural storytelling.",
+                "Support the global appreciation of Thai design and craftsmanship.",
+                "Build sustainable cultural value that can inspire future generations."
+              ].map((m,i)=>(
+                <div key={i} style={{ display:"flex", gap:14, marginBottom:12 }}>
+                  <div style={{ width:20, height:1, background:T.gold, flexShrink:0, marginTop:10 }} />
+                  <div style={{ fontSize:13, color:T.mist, lineHeight:1.7,
+                    fontFamily:"'Inter',system-ui,sans-serif" }}>{m}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Design Philosophy */}
+      <div style={{ background:T.ground, padding:"clamp(64px,10vw,100px) clamp(24px,6vw,80px)" }}>
+        <div style={{ textAlign:"center", marginBottom:48 }}>
+          <div style={{ fontSize:9, color:T.gold, letterSpacing:5, textTransform:"uppercase",
+            marginBottom:16, fontFamily:"'Inter',system-ui,sans-serif" }}>How We Work</div>
+          <div style={{ fontSize:"clamp(28px,3vw,44px)", fontWeight:300, color:T.indigo,
+            fontFamily:"Georgia,serif" }}>Design Philosophy</div>
+        </div>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",
+          gap:1, background:T.ivory, maxWidth:1200, margin:"0 auto" }}>
+          {[
+            { num:"01", title:"Heritage First",                body:"Every collection begins with cultural research and deep respect for authentic Thai artistic traditions. Heritage is the foundation." },
+            { num:"02", title:"Contemporary Interpretation",   body:"Traditional motifs thoughtfully reimagined for modern interiors — honoring the past while speaking to the present." },
+            { num:"03", title:"Creative Technology",           body:"AI-assisted workflows enable new creative possibilities while remaining guided by human expertise and cultural understanding." },
+            { num:"04", title:"Global Relevance",              body:"Distinctly Thai in character — designed to resonate across cultures and the highest tiers of global living." },
+          ].map((p,i)=>(
+            <div key={i} style={{ background:"#fff", padding:"clamp(28px,3vw,44px) clamp(20px,2vw,32px)",
+              transition:"background 0.25s", cursor:"default" }}
+              onMouseEnter={e=>e.currentTarget.style.background=T.indigo}
+              onMouseLeave={e=>e.currentTarget.style.background="#fff"}>
+              <div style={{ fontSize:9, color:T.gold, letterSpacing:3, textTransform:"uppercase",
+                marginBottom:16, fontFamily:"'Inter',system-ui,sans-serif" }}>{p.num}</div>
+              <div style={{ fontSize:"clamp(18px,1.8vw,24px)", color:T.indigo, marginBottom:12,
+                fontFamily:"Georgia,serif" }}>{p.title}</div>
+              <div style={{ fontSize:12, color:T.mist, lineHeight:1.8,
+                fontFamily:"'Inter',system-ui,sans-serif" }}>{p.body}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* Brand Statement */}
+      <div style={{ background:T.indigo, padding:"clamp(64px,10vw,100px) clamp(24px,8vw,120px)", textAlign:"center" }}>
+        <div style={{ fontFamily:"Georgia,serif", fontSize:64, color:T.gold, opacity:0.18, lineHeight:0.6, marginBottom:16 }}>"</div>
+        <div style={{ fontFamily:"Georgia,serif", fontSize:"clamp(18px,2.8vw,38px)", fontWeight:300,
+          fontStyle:"italic", color:"#F7F4ED", lineHeight:1.5, maxWidth:820, margin:"0 auto 24px" }}>
+          NILA™ is more than a pattern brand. It is a <span style={{ color:"#D9BA78" }}>Cultural IP platform</span> and
+          contemporary Thai heritage design house — dedicated to transforming Thai heritage into meaningful design for the world.
+        </div>
+        <div style={{ width:44, height:1, background:T.gold, margin:"0 auto 20px" }} />
+        <div style={{ fontSize:9, letterSpacing:4, textTransform:"uppercase",
+          color:"rgba(199,162,77,0.55)", fontFamily:"'Inter',system-ui,sans-serif" }}>
+          Creative Technology · Cultural IP · Thai Heritage
+        </div>
+      </div>
+    </div>
+  );
+
+  // ── PRICING
+  const PricingSection = () => (
+    <div style={{ paddingTop:60, background:T.ground, minHeight:"100vh" }}>
+      <div style={{ padding:"clamp(64px,10vw,100px) clamp(24px,6vw,80px)" }}>
+        <div style={{ textAlign:"center", marginBottom:52 }}>
+          <div style={{ fontSize:9, color:T.gold, letterSpacing:5, textTransform:"uppercase",
+            marginBottom:16, fontFamily:"'Inter',system-ui,sans-serif" }}>Licensing Investment</div>
+          <div style={{ fontSize:"clamp(28px,3.5vw,50px)", fontWeight:300, color:T.indigo,
+            lineHeight:1.1, marginBottom:16, fontFamily:"Georgia,serif" }}>
+            Transparent <em style={{ fontStyle:"italic" }}>Pricing</em>
+          </div>
+          <div style={{ width:44, height:1, background:T.gold, margin:"0 auto 24px" }} />
+          <div style={{ fontSize:13, color:T.mist, maxWidth:520, margin:"0 auto", lineHeight:1.85,
+            fontFamily:"'Inter',system-ui,sans-serif" }}>
+            All licenses are annual and include full commercial use rights for the specified territory and application.
+            Custom and exclusive arrangements available on request.
+          </div>
+        </div>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))",
+          gap:20, maxWidth:1100, margin:"0 auto 48px" }}>
+          {[
+            { tier:"Non-Exclusive", price:"From $2,500", desc:"Use the pattern across your products and interiors. Other licensees may use the same design in different territories.",
+              features:["Annual commercial license","Single territory","1 collection / 1 colorway","Digital pattern files included","NILA™ attribution required"],
+              highlight:false },
+            { tier:"Regional Exclusive", price:"From $8,000", desc:"Exclusive rights to the pattern within your country or region. No competing licensees in your territory.",
+              features:["Annual commercial license","Country or regional exclusivity","1 collection / up to 2 colorways","Digital files + print-ready assets","Priority support"],
+              highlight:true },
+            { tier:"Global Exclusive", price:"Contact Us", desc:"Full worldwide exclusivity. The most prestigious tier — reserved for global luxury brands and flagship collaborations.",
+              features:["Worldwide exclusivity","Multi-year terms available","Full collection access","Custom colorway development","Dedicated account management"],
+              highlight:false },
+          ].map((p,i)=>(
+            <div key={i} style={{ background: p.highlight ? T.indigo : "#fff",
+              border: p.highlight ? "none" : `1px solid ${T.border}`,
+              padding:"clamp(28px,3vw,44px)", position:"relative",
+              boxShadow: p.highlight ? "0 20px 60px rgba(10,53,40,0.2)" : "none",
+              transform: p.highlight ? "translateY(-8px)" : "none" }}>
+              {p.highlight && <div style={{ position:"absolute", top:-1, left:"50%", transform:"translateX(-50%)",
+                background:T.gold, color:"#fff", fontSize:8, letterSpacing:3, textTransform:"uppercase",
+                padding:"4px 16px", fontFamily:"'Inter',system-ui,sans-serif" }}>Most Popular</div>}
+              <div style={{ fontSize:9, color: p.highlight ? T.gold : T.gold, letterSpacing:4,
+                textTransform:"uppercase", marginBottom:12, fontFamily:"'Inter',system-ui,sans-serif" }}>{p.tier}</div>
+              <div style={{ fontFamily:"Georgia,serif", fontSize:"clamp(24px,2.5vw,36px)",
+                color: p.highlight ? "#F7F4ED" : T.indigo, marginBottom:16, fontWeight:300 }}>{p.price}</div>
+              <div style={{ fontSize:12, color: p.highlight ? "rgba(247,244,237,0.55)" : T.mist,
+                lineHeight:1.75, marginBottom:24, fontFamily:"'Inter',system-ui,sans-serif" }}>{p.desc}</div>
+              <div style={{ width:"100%", height:1, background: p.highlight ? "rgba(199,162,77,0.2)" : T.border, marginBottom:20 }} />
+              {p.features.map((f,j)=>(
+                <div key={j} style={{ display:"flex", gap:12, marginBottom:10 }}>
+                  <div style={{ color:T.gold, fontSize:12, flexShrink:0 }}>✓</div>
+                  <div style={{ fontSize:12, color: p.highlight ? "rgba(247,244,237,0.65)" : T.mist,
+                    fontFamily:"'Inter',system-ui,sans-serif", lineHeight:1.5 }}>{f}</div>
+                </div>
+              ))}
+              <button onClick={()=>setActiveSection("enquiry")} style={{
+                marginTop:24, width:"100%", padding:"12px",
+                background: p.highlight ? T.gold : "transparent",
+                border: p.highlight ? "none" : `1px solid ${T.gold}`,
+                color: p.highlight ? "#fff" : T.gold,
+                fontSize:10, fontWeight:500, letterSpacing:3, textTransform:"uppercase",
+                cursor:"pointer", fontFamily:"'Inter',system-ui,sans-serif", transition:"all 0.2s" }}
+                onMouseEnter={e=>{ e.currentTarget.style.background=T.gold; e.currentTarget.style.color="#fff"; e.currentTarget.style.border="none"; }}
+                onMouseLeave={e=>{ e.currentTarget.style.background=p.highlight?T.gold:"transparent"; e.currentTarget.style.color=p.highlight?"#fff":T.gold; }}>
+                {p.price==="Contact Us" ? "GET IN TOUCH" : "ENQUIRE NOW"}
+              </button>
+            </div>
+          ))}
+        </div>
+        <div style={{ background:"#fff", padding:"clamp(28px,3vw,44px)", maxWidth:1100, margin:"0 auto",
+          border:`1px solid ${T.border}`, textAlign:"center" }}>
+          <div style={{ fontSize:13, fontFamily:"Georgia,serif", color:T.indigo, marginBottom:8 }}>
+            Need something bespoke?
+          </div>
+          <div style={{ fontSize:12, color:T.mist, lineHeight:1.75, marginBottom:20,
+            fontFamily:"'Inter',system-ui,sans-serif" }}>
+            Custom collection development, OEM licensing, multi-year agreements, and bundle packages are available.
+            Contact us to discuss your specific requirements.
+          </div>
+          <button onClick={()=>setActiveSection("enquiry")} style={{
+            padding:"11px 32px", background:"transparent", border:`1px solid ${T.gold}`,
+            color:T.gold, fontSize:10, letterSpacing:3, textTransform:"uppercase",
+            cursor:"pointer", fontFamily:"'Inter',system-ui,sans-serif" }}>
+            DISCUSS CUSTOM LICENSING →
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  // ── FAQ
+  const FAQSection = () => {
+    const [open, setOpen] = useState(null);
+    const faqs = [
+      { q:"What is a NILA™ design license?",
+        a:"A NILA™ license grants you the right to commercially use one or more of our original cultural design collections for a specified territory, application, and duration. Unlike stock pattern files, each license includes cultural documentation, brand story, and the authenticity of the NILA™ heritage research process." },
+      { q:"What is the difference between non-exclusive and exclusive licensing?",
+        a:"A non-exclusive license allows multiple clients to use the same design in different territories. A regional exclusive license gives you sole rights within your country or region. A global exclusive license means no other brand may use that design anywhere in the world." },
+      { q:"What file formats are included?",
+        a:"All licenses include high-resolution digital pattern files suitable for print and digital application. Formats typically include PNG, PDF, and TIFF at 300dpi minimum. Production-ready files for specific applications (wallcovering, textile, packaging) can be arranged upon request." },
+      { q:"Can I request a custom colorway?",
+        a:"Yes. Custom colorway development is available for Regional Exclusive and Global Exclusive licensees, and as an add-on for Non-Exclusive licenses. Please include your colorway requirements in your enquiry." },
+      { q:"How long does the licensing process take?",
+        a:"Once we receive your enquiry, we typically respond within 2–3 business days. After agreement on terms, licensing documentation is issued within 5–7 business days. Files are delivered digitally upon receipt of payment." },
+      { q:"Is NILA™ open to collaborations with hotels and hospitality brands?",
+        a:"Yes — hospitality is one of our primary markets. We welcome conversations with boutique hotels, luxury resorts, wellness retreats, and spa brands looking to incorporate authentic Thai heritage design into their guest experience." },
+      { q:"Can I use NILA™ designs for print-on-demand products?",
+        a:"Print-on-demand use falls under our entry-level licensing tier. Please contact us with details of your platform and product range to discuss the most appropriate arrangement." },
+      { q:"How does NILA™ protect its Cultural IP?",
+        a:"Each NILA™ collection is supported by documented cultural research, creative process records, and copyright registration. Our watermarked preview images are not for reproduction — all commercial use requires a valid license agreement." },
+    ];
+    return (
+      <div style={{ paddingTop:60, background:"#fff", minHeight:"100vh" }}>
+        <div style={{ padding:"clamp(64px,10vw,100px) clamp(24px,6vw,80px)" }}>
+          <div style={{ textAlign:"center", marginBottom:52 }}>
+            <div style={{ fontSize:9, color:T.gold, letterSpacing:5, textTransform:"uppercase",
+              marginBottom:16, fontFamily:"'Inter',system-ui,sans-serif" }}>Common Questions</div>
+            <div style={{ fontSize:"clamp(28px,3.5vw,50px)", fontWeight:300, color:T.indigo,
+              lineHeight:1.1, marginBottom:16, fontFamily:"Georgia,serif" }}>
+              Licensing <em style={{ fontStyle:"italic" }}>FAQ</em>
+            </div>
+            <div style={{ width:44, height:1, background:T.gold, margin:"0 auto" }} />
+          </div>
+          <div style={{ maxWidth:800, margin:"0 auto" }}>
+            {faqs.map((f,i)=>(
+              <div key={i} style={{ borderBottom:`1px solid ${T.border}` }}>
+                <button onClick={()=>setOpen(open===i?null:i)} style={{
+                  width:"100%", padding:"22px 0", background:"none", border:"none",
+                  display:"flex", justifyContent:"space-between", alignItems:"center",
+                  cursor:"pointer", gap:20, textAlign:"left" }}>
+                  <span style={{ fontSize:"clamp(14px,1.5vw,17px)", color:T.indigo,
+                    fontFamily:"Georgia,serif", fontWeight:400, lineHeight:1.3 }}>{f.q}</span>
+                  <span style={{ color:T.gold, fontSize:20, flexShrink:0, transition:"transform 0.2s",
+                    transform: open===i ? "rotate(45deg)" : "rotate(0)" }}>+</span>
+                </button>
+                {open===i && (
+                  <div style={{ paddingBottom:24 }}>
+                    <div style={{ fontSize:13, color:T.mist, lineHeight:1.85,
+                      fontFamily:"'Inter',system-ui,sans-serif" }}>{f.a}</div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign:"center", marginTop:56 }}>
+            <div style={{ fontSize:14, color:T.mist, marginBottom:20,
+              fontFamily:"'Inter',system-ui,sans-serif" }}>Still have questions?</div>
+            <button onClick={()=>setActiveSection("enquiry")} style={{
+              padding:"12px 36px", background:T.indigo, border:"none", color:"#F7F4ED",
+              fontSize:10, letterSpacing:3, textTransform:"uppercase",
+              cursor:"pointer", fontFamily:"'Inter',system-ui,sans-serif" }}>
+              CONTACT US →
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const sections = { home:<HomeSection/>, collections:<CollectionsSection/>,
-    motifs:<HeritageSection/>, licensing:<LicensingSection/>, enquiry:<EnquirySection/> };
+    motifs:<HeritageSection/>, licensing:<LicensingSection/>,
+    about:<AboutSection/>, pricing:<PricingSection/>, faq:<FAQSection/>,
+    enquiry:<EnquirySection/> };
 
   return (
     <div style={{ minHeight:"100vh", background:T.white,
