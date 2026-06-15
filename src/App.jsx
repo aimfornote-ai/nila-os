@@ -4135,11 +4135,10 @@ function SplashScreen({ onEnter }) {
         </div>
         {/* Triple-click here to show admin login */}
         <div onClick={handleLogoClick} style={{ cursor:"default", userSelect:"none" }}>
-          <div style={{ fontSize:72, fontWeight:900, color:"#F7F4ED", fontFamily:"Georgia,serif",
-            letterSpacing:16, lineHeight:1, marginBottom:8 }}>NILA</div>
+          <img src="/nila-logo.png.png" alt="NILA Heritage Living"
+            style={{ width:220, height:"auto", marginBottom:16,
+              filter:"drop-shadow(0 4px 32px rgba(199,162,77,0.3))" }} />
         </div>
-        <div style={{ fontSize:13, fontWeight:700, color:"#C7A24D", letterSpacing:8,
-          textTransform:"uppercase", marginBottom:6 }}>HERITAGE LIVING™</div>
         <div style={{ fontSize:11, color:"rgba(247,244,237,0.45)", letterSpacing:3, fontStyle:"italic" }}>
           Inspired by Thai Heritage. Crafted for the World.
         </div>
@@ -4459,8 +4458,12 @@ function ClientView() {
       borderBottom:"1px solid rgba(199,162,77,0.2)", height:60,
       display:"flex", alignItems:"center", justifyContent:"space-between",
       padding:"0 40px" }}>
-      <div style={{ fontFamily:"Georgia,serif", fontSize:22, fontWeight:900,
-        color:"#F7F4ED", letterSpacing:6 }}>NILA™</div>
+      <div style={{ display:"flex", alignItems:"center", gap:10, cursor:"pointer" }}
+        onClick={()=>setActiveSection("home")}>
+        <img src="/nila-logo.png.png" alt="NILA Heritage Living"
+          style={{ height:38, width:"auto", filter:"brightness(0) invert(1) sepia(1) saturate(2) hue-rotate(5deg)",
+            opacity:0.92 }} />
+      </div>
       <div style={{ display:"flex", gap:32 }}>
         {navItems.map(n=>(
           <button key={n.id} onClick={()=>setActiveSection(n.id)} style={{
@@ -4612,10 +4615,10 @@ function ClientView() {
               <div data-hover="1" data-hover-color="rgba(247,244,237,0.12)" data-orig-color="rgba(10,53,40,0.1)"
                 style={{ fontSize:36, fontWeight:300, color:"rgba(10,53,40,0.1)", lineHeight:1, marginBottom:18 }}>{d.num}</div>
               <div style={{ width:22, height:1, background:T.gold, marginBottom:14 }} />
-              <div data-hover="1" data-hover-color="#F7F4ED" data-orig-color=T.indigo
+              <div data-hover="1" data-hover-color="#F7F4ED" data-orig-color="#0F4D3A"
                 style={{ fontSize:"clamp(15px,1.4vw,20px)", fontWeight:400, color:T.indigo,
                   marginBottom:12, lineHeight:1.2, fontFamily:"Georgia,serif" }}>{d.title}</div>
-              <div data-hover="1" data-hover-color="rgba(247,244,237,0.55)" data-orig-color=T.mist
+              <div data-hover="1" data-hover-color="rgba(247,244,237,0.55)" data-orig-color="#7A8C7E"
                 style={{ fontSize:12, color:T.mist, lineHeight:1.75,
                   fontFamily:"'Inter',system-ui,sans-serif" }}>{d.body}</div>
             </div>
