@@ -4452,19 +4452,23 @@ function ClientView() {
     { id:"enquiry",     label:"Enquire" },
   ];
 
-  const NavBar = () => (
+  const NavBar = () => {
+    const [mobileOpen, setMobileOpen] = useState(false);
+    return (
     <nav style={{ position:"fixed", top:0, left:0, right:0, zIndex:100,
-      background:"rgba(10,53,40,0.96)", backdropFilter:"blur(12px)",
+      background:"rgba(10,53,40,0.97)", backdropFilter:"blur(12px)",
       borderBottom:"1px solid rgba(199,162,77,0.2)", height:60,
       display:"flex", alignItems:"center", justifyContent:"space-between",
-      padding:"0 40px" }}>
+      padding:"0 clamp(16px,4vw,40px)" }}>
       <div style={{ display:"flex", alignItems:"center", gap:10, cursor:"pointer" }}
-        onClick={()=>setActiveSection("home")}>
+        onClick={()=>{ setActiveSection("home"); setMobileOpen(false); }}>
         <img src="/nila-logo.png.png" alt="NILA Heritage Living"
           style={{ height:38, width:"auto", filter:"brightness(0) invert(1) sepia(1) saturate(2) hue-rotate(5deg)",
             opacity:0.92 }} />
       </div>
-      <div style={{ display:"flex", gap:32 }}>
+      {/* Desktop nav */}
+      <div style={{ display:"flex", gap:28, "@media(max-width:768px)":{display:"none"} }}
+        className="nila-desktop-nav">
         {navItems.map(n=>(
           <button key={n.id} onClick={()=>setActiveSection(n.id)} style={{
             background:"none", border:"none", color:activeSection===n.id?"#C7A24D":"rgba(247,244,237,0.6)",
@@ -4476,7 +4480,9 @@ function ClientView() {
           </button>
         ))}
       </div>
-      <button onClick={()=>setActiveSection("enquiry")} style={{
+      {/* Desktop CTA */}
+      <button onClick={()=>setActiveSection("enquiry")} className="nila-desktop-cta"
+        style={{
         background:"transparent", border:"1px solid rgba(199,162,77,0.7)",
         color:"#C7A24D", padding:"8px 20px", fontSize:10, fontWeight:700,
         letterSpacing:3, textTransform:"uppercase", cursor:"pointer",
@@ -4485,44 +4491,85 @@ function ClientView() {
         onMouseLeave={e=>e.currentTarget.style.background="transparent"}>
         ENQUIRE NOW
       </button>
+      {/* Hamburger */}
+      <button className="nila-hamburger"
+        onClick={()=>setMobileOpen(o=>!o)}
+        style={{ display:"none", background:"none", border:"none",
+          color:"#C7A24D", fontSize:22, cursor:"pointer", padding:4,
+          lineHeight:1, flexDirection:"column", gap:4 }}
+        aria-label="Menu">
+        {mobileOpen ? "✕" : "☰"}
+      </button>
+      {/* Mobile drawer */}
+      {mobileOpen && (
+        <div style={{ position:"fixed", top:60, left:0, right:0,
+          background:"rgba(10,40,28,0.98)", backdropFilter:"blur(12px)",
+          borderBottom:"1px solid rgba(199,162,77,0.2)",
+          padding:"20px 24px 28px", display:"flex", flexDirection:"column", gap:0,
+          zIndex:200 }}>
+          {navItems.map(n=>(
+            <button key={n.id} onClick={()=>{ setActiveSection(n.id); setMobileOpen(false); }} style={{
+              background:"none", border:"none", borderBottom:"1px solid rgba(199,162,77,0.1)",
+              color:activeSection===n.id?"#C7A24D":"rgba(247,244,237,0.7)",
+              fontSize:13, fontWeight:700, letterSpacing:3, textTransform:"uppercase",
+              cursor:"pointer", textAlign:"left", padding:"16px 0" }}>
+              {n.label}
+            </button>
+          ))}
+          <button onClick={()=>{ setActiveSection("enquiry"); setMobileOpen(false); }} style={{
+            marginTop:16, padding:"13px", background:T.gold, border:"none",
+            color:"#fff", fontSize:11, fontWeight:700, letterSpacing:3,
+            textTransform:"uppercase", cursor:"pointer", borderRadius:2 }}>
+            ENQUIRE NOW →
+          </button>
+        </div>
+      )}
+      <style>{`
+        @media (max-width: 768px) {
+          .nila-desktop-nav { display: none !important; }
+          .nila-desktop-cta { display: none !important; }
+          .nila-hamburger { display: flex !important; }
+        }
+      `}</style>
     </nav>
   );
+  };
 
   // ── HOME
   const HomeSection = () => (
     <div style={{ fontFamily:"Georgia,serif" }}>
 
-      {/* ── HERO */}
-      <div style={{ minHeight:"100vh", background:"linear-gradient(160deg,#0A3528 0%,#0F4D3A 55%,#0A2A1E 100%)",
-        display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center",
-        textAlign:"center", padding:"100px 24px 80px", position:"relative", overflow:"hidden" }}>
+      {/* ── HERO — editorial split layout */}
+      <div className="nila-hero-split" style={{ minHeight:"100vh", background:"linear-gradient(160deg,#0A3528 0%,#0F4D3A 55%,#0A2A1E 100%)",
+        display:"flex", alignItems:"stretch", position:"relative", overflow:"hidden", paddingTop:60 }}>
         {/* Kanok pattern overlay */}
-        <div style={{ position:"absolute", inset:0, opacity:0.05,
+        <div style={{ position:"absolute", inset:0, opacity:0.04,
           backgroundImage:`url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C7A24D'%3E%3Cpath d='M50 8C50 8 63 30 50 50C37 30 50 8 50 8Z'/%3E%3Cpath d='M50 92C50 92 63 70 50 50C37 70 50 92 50 92Z'/%3E%3Cpath d='M8 50C8 50 30 63 50 50C30 37 8 50 8 50Z'/%3E%3Cpath d='M92 50C92 50 70 63 50 50C70 37 92 50 92 50Z'/%3E%3C/g%3E%3C/svg%3E")`,
           backgroundSize:"100px 100px" }} />
-        <div style={{ position:"absolute", width:700, height:700, borderRadius:"50%",
-          background:"radial-gradient(circle,rgba(199,162,77,0.07) 0%,transparent 70%)",
-          top:"50%", left:"50%", transform:"translate(-50%,-50%)", pointerEvents:"none" }} />
-        <div style={{ position:"relative", zIndex:2, maxWidth:860 }}>
+
+        {/* LEFT — copy */}
+        <div className="nila-hero-left" style={{ flex:"0 0 auto", width:"clamp(300px,46%,580px)",
+          display:"flex", flexDirection:"column", justifyContent:"center",
+          padding:"clamp(48px,8vw,100px) clamp(24px,5vw,72px)", position:"relative", zIndex:2 }}>
           <div style={{ fontSize:10, color:T.gold, letterSpacing:6, textTransform:"uppercase",
-            marginBottom:32, opacity:0.85, fontFamily:"'Inter',system-ui,sans-serif" }}>
+            marginBottom:28, opacity:0.85, fontFamily:"'Inter',system-ui,sans-serif" }}>
             Cultural Design House · Thailand
           </div>
-          <div style={{ fontSize:"clamp(38px,6vw,80px)", fontWeight:300, color:"#F7F4ED",
-            lineHeight:1.08, marginBottom:28, letterSpacing:"-0.5px" }}>
+          <div style={{ fontSize:"clamp(34px,4.5vw,68px)", fontWeight:300, color:"#F7F4ED",
+            lineHeight:1.08, marginBottom:24, letterSpacing:"-0.5px" }}>
             Contemporary Thai<br/>
             <em style={{ color:"#D9BA78", fontStyle:"italic" }}>Cultural Design</em><br/>
             for Modern Living
           </div>
-          <div style={{ width:44, height:1, background:T.gold, margin:"0 auto 28px" }} />
-          <div style={{ fontSize:"clamp(14px,1.8vw,19px)", color:"rgba(247,244,237,0.68)",
-            fontStyle:"italic", lineHeight:1.75, maxWidth:620, margin:"0 auto 44px" }}>
-            Discover premium design collections inspired by the art, nature, and heritage of Thailand —
-            thoughtfully crafted for homes, hospitality, and lifestyle brands around the world.
+          <div style={{ width:44, height:1, background:T.gold, marginBottom:24 }} />
+          <div style={{ fontSize:"clamp(13px,1.4vw,16px)", color:"rgba(247,244,237,0.65)",
+            fontStyle:"italic", lineHeight:1.8, maxWidth:460, marginBottom:40 }}>
+            Premium design collections rooted in Thai heritage — thoughtfully crafted
+            for homes, hospitality, and lifestyle brands around the world.
           </div>
-          <div style={{ display:"flex", gap:14, justifyContent:"center", flexWrap:"wrap" }}>
+          <div style={{ display:"flex", gap:12, flexWrap:"wrap" }}>
             <button onClick={()=>setActiveSection("collections")} style={{
-              padding:"14px 36px", background:T.gold, border:"none", color:"#fff",
+              padding:"13px 32px", background:T.gold, border:"none", color:"#fff",
               fontSize:10, fontWeight:500, letterSpacing:4, textTransform:"uppercase",
               cursor:"pointer", borderRadius:2, fontFamily:"'Inter',system-ui,sans-serif",
               transition:"all 0.2s" }}
@@ -4531,7 +4578,7 @@ function ClientView() {
               EXPLORE COLLECTIONS
             </button>
             <button onClick={()=>setActiveSection("enquiry")} style={{
-              padding:"14px 36px", background:"transparent",
+              padding:"13px 32px", background:"transparent",
               border:"1px solid rgba(199,162,77,0.5)", color:"#C7A24D",
               fontSize:10, fontWeight:500, letterSpacing:4, textTransform:"uppercase",
               cursor:"pointer", borderRadius:2, fontFamily:"'Inter',system-ui,sans-serif",
@@ -4541,9 +4588,116 @@ function ClientView() {
               LICENSING ENQUIRY
             </button>
           </div>
-          <div style={{ marginTop:56, fontSize:9, letterSpacing:4, textTransform:"uppercase",
-            color:"rgba(247,244,237,0.3)", fontFamily:"'Inter',system-ui,sans-serif" }}>
+          <div style={{ marginTop:52, fontSize:9, letterSpacing:4, textTransform:"uppercase",
+            color:"rgba(247,244,237,0.25)", fontFamily:"'Inter',system-ui,sans-serif" }}>
             From the heart of Thailand to homes around the world
+          </div>
+        </div>
+
+        {/* RIGHT — editorial product visual mockups */}
+        <div className="nila-hero-right" style={{ flex:1, display:"flex", alignItems:"center", justifyContent:"center",
+          padding:"clamp(40px,5vw,80px) clamp(20px,3vw,48px)", position:"relative", zIndex:2,
+          gap:16 }}>
+
+          {/* Tall card — Wallcovering */}
+          <div style={{ flex:"0 0 auto", width:200, display:"flex", flexDirection:"column", gap:14 }}>
+            <div style={{ background:"linear-gradient(160deg,#0A2A1E,#1A5C46)",
+              borderRadius:8, overflow:"hidden", aspectRatio:"2/3", position:"relative",
+              border:"1px solid rgba(199,162,77,0.18)", boxShadow:"0 16px 48px rgba(0,0,0,0.4)" }}>
+              {/* SVG Kanok pattern inside card */}
+              <svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg"
+                style={{ position:"absolute", inset:0, width:"100%", height:"100%", opacity:0.5 }}>
+                <defs>
+                  <pattern id="kanok1" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+                    <path d="M25 4C25 4 31.5 15 25 25C18.5 15 25 4 25 4Z" fill="#C7A24D" opacity="0.8"/>
+                    <path d="M25 46C25 46 31.5 35 25 25C18.5 35 25 46 25 46Z" fill="#C7A24D" opacity="0.8"/>
+                    <path d="M4 25C4 25 15 31.5 25 25C15 18.5 4 25 4 25Z" fill="#C7A24D" opacity="0.8"/>
+                    <path d="M46 25C46 25 35 31.5 25 25C35 18.5 46 25 46 25Z" fill="#C7A24D" opacity="0.8"/>
+                    <circle cx="25" cy="25" r="3" fill="#D9BA78" opacity="0.6"/>
+                    <path d="M25 4C25 4 28 10 25 14C22 10 25 4 25 4Z" fill="#F7F4ED" opacity="0.3"/>
+                  </pattern>
+                </defs>
+                <rect width="200" height="300" fill="url(#kanok1)"/>
+              </svg>
+              <div style={{ position:"absolute", inset:0, background:"linear-gradient(to top,rgba(10,40,28,0.9) 0%,transparent 50%)" }}/>
+              <div style={{ position:"absolute", bottom:0, left:0, right:0, padding:"14px 12px" }}>
+                <div style={{ fontSize:8, color:T.gold, letterSpacing:3, textTransform:"uppercase",
+                  fontFamily:"'Inter',system-ui,sans-serif", marginBottom:3 }}>WALLCOVERING</div>
+                <div style={{ fontSize:11, color:"#F7F4ED", fontFamily:"Georgia,serif" }}>Midnight Siam</div>
+              </div>
+            </div>
+            {/* Small scarf card */}
+            <div style={{ background:"linear-gradient(135deg,#C7A24D10,#0F4D3A40)",
+              borderRadius:6, overflow:"hidden", aspectRatio:"1/1", position:"relative",
+              border:"1px solid rgba(199,162,77,0.25)", boxShadow:"0 8px 24px rgba(0,0,0,0.3)" }}>
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
+                style={{ position:"absolute", inset:0, width:"100%", height:"100%", opacity:0.65 }}>
+                <defs>
+                  <pattern id="lotus1" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse">
+                    <ellipse cx="12.5" cy="6" rx="4" ry="6" fill="#B85A72" opacity="0.7"/>
+                    <ellipse cx="19" cy="12.5" rx="6" ry="4" fill="#B85A72" opacity="0.5"/>
+                    <ellipse cx="6" cy="12.5" rx="6" ry="4" fill="#B85A72" opacity="0.5"/>
+                    <circle cx="12.5" cy="12.5" r="2.5" fill="#D9BA78"/>
+                  </pattern>
+                </defs>
+                <rect width="100" height="100" fill="url(#lotus1)"/>
+              </svg>
+              <div style={{ position:"absolute", bottom:0, left:0, right:0, padding:"8px 10px",
+                background:"linear-gradient(to top,rgba(10,40,28,0.85),transparent)" }}>
+                <div style={{ fontSize:7, color:T.gold, letterSpacing:2, textTransform:"uppercase",
+                  fontFamily:"'Inter',system-ui,sans-serif" }}>SILK SCARF · TEXTILE</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right column */}
+          <div style={{ flex:"0 0 auto", width:180, display:"flex", flexDirection:"column", gap:14, marginTop:40 }}>
+            {/* Square — Hospitality interior */}
+            <div style={{ background:"linear-gradient(135deg,#0A1E16,#1A4030)",
+              borderRadius:8, overflow:"hidden", aspectRatio:"1/1.1", position:"relative",
+              border:"1px solid rgba(199,162,77,0.2)", boxShadow:"0 12px 36px rgba(0,0,0,0.4)" }}>
+              <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg"
+                style={{ position:"absolute", inset:0, width:"100%", height:"100%", opacity:0.45 }}>
+                <defs>
+                  <pattern id="naga1" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+                    <path d="M0 15 Q7.5 7.5 15 15 Q22.5 22.5 30 15" stroke="#C7A24D" strokeWidth="1.2" fill="none" opacity="0.8"/>
+                    <path d="M0 0 Q7.5 7.5 15 0 Q22.5 -7.5 30 0" stroke="#C7A24D" strokeWidth="0.8" fill="none" opacity="0.4"/>
+                    <path d="M15 0 Q22.5 7.5 15 15 Q7.5 22.5 15 30" stroke="#C7A24D" strokeWidth="0.8" fill="none" opacity="0.4"/>
+                  </pattern>
+                </defs>
+                <rect width="180" height="200" fill="url(#naga1)"/>
+              </svg>
+              <div style={{ position:"absolute", inset:0,
+                background:"linear-gradient(135deg,rgba(10,53,40,0.3),rgba(10,30,22,0.6))" }}/>
+              <div style={{ position:"absolute", bottom:0, left:0, right:0, padding:"12px 12px" }}>
+                <div style={{ fontSize:7, color:T.gold, letterSpacing:2, textTransform:"uppercase",
+                  fontFamily:"'Inter',system-ui,sans-serif", marginBottom:2 }}>HOSPITALITY · FF&E</div>
+                <div style={{ fontSize:10, color:"#F7F4ED", fontFamily:"Georgia,serif" }}>Interior Application</div>
+              </div>
+            </div>
+            {/* Tall card — Packaging */}
+            <div style={{ background:"linear-gradient(160deg,#1A0D05,#3D2010)",
+              borderRadius:6, overflow:"hidden", aspectRatio:"2/3", position:"relative",
+              border:"1px solid rgba(199,162,77,0.3)", boxShadow:"0 10px 30px rgba(0,0,0,0.4)" }}>
+              <svg viewBox="0 0 180 270" xmlns="http://www.w3.org/2000/svg"
+                style={{ position:"absolute", inset:0, width:"100%", height:"100%", opacity:0.55 }}>
+                <defs>
+                  <pattern id="gem1" x="0" y="0" width="36" height="36" patternUnits="userSpaceOnUse">
+                    <polygon points="18,2 34,18 18,34 2,18" fill="none" stroke="#C7A24D" strokeWidth="1" opacity="0.9"/>
+                    <polygon points="18,8 28,18 18,28 8,18" fill="none" stroke="#D9BA78" strokeWidth="0.6" opacity="0.6"/>
+                    <circle cx="18" cy="18" r="2" fill="#C7A24D"/>
+                  </pattern>
+                </defs>
+                <rect width="180" height="270" fill="url(#gem1)"/>
+              </svg>
+              <div style={{ position:"absolute", inset:0,
+                background:"linear-gradient(to top,rgba(61,32,16,0.9) 0%,transparent 55%)" }}/>
+              <div style={{ position:"absolute", bottom:0, left:0, right:0, padding:"12px 10px" }}>
+                <div style={{ fontSize:7, color:T.gold, letterSpacing:2, textTransform:"uppercase",
+                  fontFamily:"'Inter',system-ui,sans-serif", marginBottom:2 }}>LUXURY PACKAGING</div>
+                <div style={{ fontSize:10, color:"#F7F4ED", fontFamily:"Georgia,serif" }}>Gifting & Spa</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -4554,8 +4708,8 @@ function ClientView() {
           alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:28 }}>
           <div>
             <div style={{ fontSize:"clamp(20px,2.8vw,36px)", fontWeight:300, color:"#F7F4ED", lineHeight:1.3 }}>
-              We don't sell patterns.<br/>
-              <em style={{ color:"#D9BA78" }}>We license Cultural IP.</em>
+              We don't sell generic patterns.<br/>
+              <em style={{ color:"#D9BA78" }}>We build and license Cultural IP.</em>
             </div>
           </div>
           <div style={{ maxWidth:460 }}>
@@ -4646,8 +4800,8 @@ function ClientView() {
             </div>
             <div style={{ fontSize:14, color:"rgba(247,244,237,0.6)", lineHeight:1.9, marginBottom:28,
               fontFamily:"'Inter',system-ui,sans-serif" }}>
-              Think <span style={{ color:"#F7F4ED" }}>Hermès and its cultural codes</span>, or <span style={{ color:"#F7F4ED" }}>Aesop and its botanical intelligence</span>.
-              NILA brings that same depth of cultural intentionality to Thai heritage — for the world's most discerning homes and hospitality brands.
+              Imagine a design house where <span style={{ color:"#F7F4ED" }}>cultural codes, botanical intelligence, and refined craftsmanship</span> come together.
+              NILA brings that depth of cultural intentionality to Thai heritage — for the world's most discerning homes and hospitality brands.
             </div>
             <button onClick={()=>setActiveSection("motifs")} style={{
               background:"none", border:"none", color:T.gold, fontSize:10, letterSpacing:4,
@@ -4695,35 +4849,79 @@ function ClientView() {
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",
           gap:24, maxWidth:1200, margin:"0 auto 40px" }}>
           {[
-            { name:"Midnight Siam — Classic",  motif:"Kanok · กนก", badge:"Available", badgeColor:T.jade,
-              bg:"linear-gradient(135deg,#0A3528 0%,#1B5C46 100%)",
-              desc:"The sacred Kanok flame scroll in warm emerald and antique gold — heritage luxury for contemporary interiors." },
-            { name:"Midnight Siam — Premium",  motif:"Kanok · กนก", badge:"Available", badgeColor:T.jade,
-              bg:"linear-gradient(135deg,#061E16 0%,#0A3528 100%)",
-              desc:"The dramatic flagship in Nila Black and antique gold — exclusive night elegance for global luxury licensing." },
-            { name:"Lotus Blush",               motif:"Lotus · บัว",  badge:"Preview Collection", badgeColor:T.amber,
-              bg:"linear-gradient(135deg,#C7A24D 0%,#EDE9DF 100%)",
-              desc:"A soft luminous palette for wellness sanctuaries and refined hospitality spaces." },
+            { name:"Midnight Siam — Classic", motif:"Kanok · กนก", badge:"Available", badgeColor:T.jade,
+              bg:"linear-gradient(160deg,#0A3528 0%,#1A5C46 100%)",
+              desc:"The sacred Kanok flame scroll in warm emerald and antique gold — heritage luxury for contemporary interiors.",
+              svgId:"ms-classic",
+              svgPattern: `<defs>
+                <pattern id="ms-classic" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+                  <path d="M30 5C30 5 38 20 30 30C22 20 30 5 30 5Z" fill="#C7A24D" opacity="0.75"/>
+                  <path d="M30 55C30 55 38 40 30 30C22 40 30 55 30 55Z" fill="#C7A24D" opacity="0.75"/>
+                  <path d="M5 30C5 30 20 38 30 30C20 22 5 30 5 30Z" fill="#C7A24D" opacity="0.75"/>
+                  <path d="M55 30C55 30 40 38 30 30C40 22 55 30 55 30Z" fill="#C7A24D" opacity="0.75"/>
+                  <path d="M30 12C30 12 33 18 30 22C27 18 30 12 30 12Z" fill="#F7F4ED" opacity="0.35"/>
+                  <circle cx="30" cy="30" r="3.5" fill="#D9BA78" opacity="0.8"/>
+                  <circle cx="30" cy="30" r="1.5" fill="#F7F4ED" opacity="0.9"/>
+                </pattern></defs>
+                <rect width="400" height="220" fill="url(#ms-classic)"/>` },
+            { name:"Midnight Siam — Premium", motif:"Kanok · กนก", badge:"Available", badgeColor:T.jade,
+              bg:"linear-gradient(160deg,#050F09 0%,#0A2A1A 100%)",
+              desc:"The dramatic flagship in Nila Black and antique gold — exclusive night elegance for global luxury licensing.",
+              svgId:"ms-premium",
+              svgPattern: `<defs>
+                <pattern id="ms-premium" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+                  <path d="M25 4C25 4 32 16 25 25C18 16 25 4 25 4Z" fill="#DAAF37" opacity="0.85"/>
+                  <path d="M25 46C25 46 32 34 25 25C18 34 25 46 25 46Z" fill="#DAAF37" opacity="0.85"/>
+                  <path d="M4 25C4 25 16 32 25 25C16 18 4 25 4 25Z" fill="#DAAF37" opacity="0.85"/>
+                  <path d="M46 25C46 25 34 32 25 25C34 18 46 25 46 25Z" fill="#DAAF37" opacity="0.85"/>
+                  <circle cx="25" cy="25" r="4" fill="#0D0D0F"/>
+                  <circle cx="25" cy="25" r="2" fill="#DAAF37" opacity="0.9"/>
+                  <path d="M25 9C25 9 28 14 25 18C22 14 25 9 25 9Z" fill="#F6F3E8" opacity="0.3"/>
+                </pattern></defs>
+                <rect width="400" height="220" fill="url(#ms-premium)"/>` },
+            { name:"Lotus Blush", motif:"Lotus · บัว", badge:"Preview · Q3 2026", badgeColor:T.amber,
+              bg:"linear-gradient(160deg,#2E1A20 0%,#5C2E3A 100%)",
+              desc:"A soft luminous palette for wellness sanctuaries and refined hospitality spaces.",
+              svgId:"lotus-blush",
+              svgPattern: `<defs>
+                <pattern id="lotus-blush" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+                  <ellipse cx="25" cy="14" rx="6" ry="10" fill="#E8A0B0" opacity="0.6"/>
+                  <ellipse cx="25" cy="14" rx="3.5" ry="6" fill="#F2C5D0" opacity="0.7"/>
+                  <ellipse cx="15" cy="25" rx="10" ry="6" fill="#E8A0B0" opacity="0.5"/>
+                  <ellipse cx="35" cy="25" rx="10" ry="6" fill="#E8A0B0" opacity="0.5"/>
+                  <ellipse cx="25" cy="36" rx="6" ry="10" fill="#E8A0B0" opacity="0.4"/>
+                  <circle cx="25" cy="25" r="4" fill="#D9BA78" opacity="0.8"/>
+                  <circle cx="25" cy="25" r="2" fill="#F7F4ED" opacity="0.9"/>
+                </pattern></defs>
+                <rect width="400" height="220" fill="url(#lotus-blush)"/>` },
           ].map((c,i)=>(
             <div key={i} style={{ background:"#fff", overflow:"hidden",
               boxShadow:"0 2px 16px rgba(10,53,40,0.07)", cursor:"pointer",
               transition:"transform 0.25s, box-shadow 0.25s" }}
               onClick={()=>setActiveSection("collections")}
-              onMouseEnter={e=>{ e.currentTarget.style.transform="translateY(-6px)"; e.currentTarget.style.boxShadow="0 14px 40px rgba(10,53,40,0.14)"; }}
+              onMouseEnter={e=>{ e.currentTarget.style.transform="translateY(-6px)"; e.currentTarget.style.boxShadow="0 14px 40px rgba(10,53,40,0.16)"; }}
               onMouseLeave={e=>{ e.currentTarget.style.transform="translateY(0)"; e.currentTarget.style.boxShadow="0 2px 16px rgba(10,53,40,0.07)"; }}>
-              <div style={{ height:200, background:c.bg, display:"flex", alignItems:"center",
-                justifyContent:"center", position:"relative" }}>
-                <div style={{ fontSize:11, letterSpacing:3, textTransform:"uppercase",
-                  color:"rgba(247,244,237,0.35)", textAlign:"center", lineHeight:1.8,
-                  fontFamily:"'Inter',system-ui,sans-serif" }}>
-                  {c.name.toUpperCase()}<br/>COLLECTION
-                </div>
+              {/* Pattern preview — SVG inline */}
+              <div style={{ height:200, background:c.bg, position:"relative", overflow:"hidden" }}>
+                <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg"
+                  style={{ position:"absolute", inset:0, width:"100%", height:"100%" }}
+                  dangerouslySetInnerHTML={{ __html: c.svgPattern }} />
+                {/* Subtle vignette overlay */}
+                <div style={{ position:"absolute", inset:0,
+                  background:"radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }}/>
                 <span style={{ position:"absolute", top:12, right:12, background:`${c.badgeColor}ee`,
                   color:"#fff", borderRadius:20, padding:"3px 12px", fontSize:9,
-                  fontWeight:600, letterSpacing:2, fontFamily:"'Inter',system-ui,sans-serif" }}>{c.badge}</span>
+                  fontWeight:600, letterSpacing:2, fontFamily:"'Inter',system-ui,sans-serif",
+                  backdropFilter:"blur(4px)" }}>{c.badge}</span>
+                {/* Surface label bottom-left */}
+                <div style={{ position:"absolute", bottom:12, left:14,
+                  fontSize:8, color:"rgba(247,244,237,0.55)", letterSpacing:3,
+                  textTransform:"uppercase", fontFamily:"'Inter',system-ui,sans-serif" }}>
+                  Wallcovering · Textile · Scarf
+                </div>
               </div>
               <div style={{ padding:24 }}>
-                <div style={{ fontSize:20, color:T.indigo, marginBottom:4 }}>{c.name}</div>
+                <div style={{ fontSize:20, color:T.indigo, marginBottom:4, fontFamily:"Georgia,serif" }}>{c.name}</div>
                 <div style={{ fontSize:10, color:T.gold, letterSpacing:3, textTransform:"uppercase",
                   marginBottom:12, fontFamily:"'Inter',system-ui,sans-serif" }}>{c.motif}</div>
                 <div style={{ fontSize:12, color:T.mist, lineHeight:1.7,
@@ -5068,7 +5266,72 @@ function ClientView() {
   };
 
   // ── ENQUIRY FORM
-  const EnquirySection = () => (
+  const EnquirySection = () => {
+    const [errors, setErrors]     = useState({});
+    const [lastSent, setLastSent] = useState(0);
+    const [honey, setHoney]       = useState(""); // honeypot
+
+    const validate = () => {
+      const e = {};
+      if (!enquiry.name.trim() || enquiry.name.trim().length < 2)
+        e.name = "Please enter your full name.";
+      if (!enquiry.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/))
+        e.email = "Please enter a valid email address.";
+      if (enquiry.message.trim().length > 0 && enquiry.message.trim().length < 10)
+        e.message = "Message is too short — please share a bit more about your project.";
+      return e;
+    };
+
+    const handleSend = async () => {
+      // Honeypot check (bot filled hidden field)
+      if (honey) return;
+      // Simple rate-limit: 60s between submissions
+      const now = Date.now();
+      if (now - lastSent < 60000) {
+        setSendError("Please wait a moment before sending another enquiry.");
+        return;
+      }
+      const e = validate();
+      setErrors(e);
+      if (Object.keys(e).length) return;
+
+      setSending(true); setSendError("");
+      try {
+        if (!window.emailjs) {
+          await new Promise((res, rej) => {
+            const s = document.createElement("script");
+            s.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
+            s.onload = res; s.onerror = rej;
+            document.head.appendChild(s);
+          });
+          window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+        }
+        await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+          name:       enquiry.name.trim(),
+          company:    enquiry.company.trim() || "—",
+          email:      enquiry.email.trim(),
+          segment:    enquiry.segment,
+          collection: enquiry.collection,
+          message:    enquiry.message.trim() || "—",
+          time: new Date().toLocaleString("en-GB", { timeZone:"Asia/Bangkok" }),
+        });
+        setLastSent(Date.now());
+        setSubmitted(true);
+      } catch(err) {
+        setSendError("ขออภัยค่ะ ไม่สามารถส่งได้ตอนนี้ กรุณาติดต่อ studio@niladesign.co โดยตรงค่ะ");
+      } finally {
+        setSending(false);
+      }
+    };
+
+    const fieldStyle = (key) => ({
+      width:"100%", padding:"12px 14px", borderRadius:T.radius,
+      border:`1px solid ${errors[key] ? "#991B1B" : T.border}`,
+      fontSize:13, background:T.white,
+      boxSizing:"border-box", fontFamily:"inherit", outline:"none"
+    });
+
+    return (
     <div style={{ paddingTop:80, minHeight:"100vh", background:T.white }}>
       <div style={{ padding:"60px 40px 40px", textAlign:"center" }}>
         <div style={{ fontSize:10, color:T.gold, letterSpacing:5, textTransform:"uppercase", marginBottom:12 }}>Get In Touch</div>
@@ -5092,19 +5355,24 @@ function ClientView() {
         ) : (
           <div style={{ background:T.ground, borderRadius:T.radiusL, padding:40,
             boxShadow:"0 2px 12px rgba(15,77,58,0.06)" }}>
+
+            {/* Honeypot — hidden from real users */}
+            <input type="text" value={honey} onChange={e=>setHoney(e.target.value)}
+              style={{ position:"absolute", left:"-9999px", opacity:0, pointerEvents:"none" }}
+              tabIndex={-1} autoComplete="off" />
+
             {[
-              ["Full Name","name","text","Your name"],
+              ["Full Name *","name","text","Your name"],
               ["Company / Brand","company","text","Company or brand name"],
-              ["Email Address","email","email","your@email.com"],
+              ["Email Address *","email","email","your@email.com"],
             ].map(([label,key,type,ph])=>(
               <div key={key} style={{ marginBottom:20 }}>
                 <label style={{ display:"block", fontSize:10, fontWeight:700, color:T.mist,
                   textTransform:"uppercase", letterSpacing:2, marginBottom:6 }}>{label}</label>
                 <input type={type} value={enquiry[key]} placeholder={ph}
-                  onChange={e=>setEnquiry(q=>({...q,[key]:e.target.value}))}
-                  style={{ width:"100%", padding:"12px 14px", borderRadius:T.radius,
-                    border:`1px solid ${T.border}`, fontSize:13, background:T.white,
-                    boxSizing:"border-box", fontFamily:"inherit", outline:"none" }} />
+                  onChange={e=>{ setEnquiry(q=>({...q,[key]:e.target.value})); setErrors(r=>({...r,[key]:""})); }}
+                  style={fieldStyle(key)} />
+                {errors[key] && <div style={{ fontSize:11, color:"#991B1B", marginTop:4 }}>{errors[key]}</div>}
               </div>
             ))}
             <div style={{ marginBottom:20 }}>
@@ -5128,61 +5396,33 @@ function ClientView() {
             <div style={{ marginBottom:28 }}>
               <label style={{ display:"block", fontSize:10, fontWeight:700, color:T.mist,
                 textTransform:"uppercase", letterSpacing:2, marginBottom:6 }}>Message</label>
-              <textarea value={enquiry.message} placeholder="Tell us about your project — surfaces, volume, territory, timeline..."
-                onChange={e=>setEnquiry(q=>({...q,message:e.target.value}))}
+              <textarea value={enquiry.message}
+                placeholder="Tell us about your project — surfaces, volume, territory, timeline..."
+                onChange={e=>{ setEnquiry(q=>({...q,message:e.target.value})); setErrors(r=>({...r,message:""})); }}
                 style={{ width:"100%", padding:"12px 14px", borderRadius:T.radius,
-                  border:`1px solid ${T.border}`, fontSize:13, background:T.white,
+                  border:`1px solid ${errors.message ? "#991B1B" : T.border}`, fontSize:13, background:T.white,
                   minHeight:120, resize:"vertical", fontFamily:"inherit", boxSizing:"border-box",
                   outline:"none", lineHeight:1.6 }} />
+              {errors.message && <div style={{ fontSize:11, color:"#991B1B", marginTop:4 }}>{errors.message}</div>}
             </div>
-            <button
-              onClick={async () => {
-                if (!enquiry.name || !enquiry.email) return;
-                setSending(true); setSendError("");
-                try {
-                  // Load EmailJS from CDN if not loaded
-                  if (!window.emailjs) {
-                    await new Promise((res, rej) => {
-                      const s = document.createElement("script");
-                      s.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
-                      s.onload = res; s.onerror = rej;
-                      document.head.appendChild(s);
-                    });
-                    window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-                  }
-                  await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-                    name: enquiry.name,
-                    company: enquiry.company || "—",
-                    email: enquiry.email,
-                    segment: enquiry.segment,
-                    collection: enquiry.collection,
-                    message: enquiry.message || "—",
-                    time: new Date().toLocaleString("en-GB", { timeZone:"Asia/Bangkok" }),
-                  });
-                  setSubmitted(true);
-                } catch(err) {
-                  setSendError("ขออภัยค่ะ ไม่สามารถส่งได้ตอนนี้ กรุณาติดต่อ studio@niladesign.co โดยตรงค่ะ");
-                  console.error("EmailJS error:", err);
-                } finally {
-                  setSending(false);
-                }
-              }}
-              disabled={!enquiry.name||!enquiry.email||sending}
-              style={{ width:"100%", padding:"14px", background:enquiry.name&&enquiry.email?T.indigo:"#ccc",
+            <button onClick={handleSend} disabled={sending}
+              style={{ width:"100%", padding:"14px", background:sending ? "#888" : T.indigo,
                 border:"none", color:"#fff", fontSize:11, fontWeight:700, letterSpacing:4,
-                textTransform:"uppercase", cursor:enquiry.name&&enquiry.email?"pointer":"not-allowed",
+                textTransform:"uppercase", cursor:sending?"not-allowed":"pointer",
                 borderRadius:T.radius, transition:"background 0.2s" }}>
-              SEND ENQUIRY
+              {sending ? "SENDING…" : "SEND ENQUIRY"}
             </button>
             <div style={{ textAlign:"center", marginTop:16, fontSize:11, color:T.mist }}>
               Response within 3 business days · All enquiries treated confidentially
             </div>
-            {sendError && <div style={{ marginTop:12, padding:"10px 14px", background:"#FEF2F2", borderRadius:T.radius, fontSize:T.sm, color:"#991B1B" }}>{sendError}</div>}
+            {sendError && <div style={{ marginTop:12, padding:"10px 14px", background:"#FEF2F2",
+              borderRadius:T.radius, fontSize:T.sm, color:"#991B1B" }}>{sendError}</div>}
           </div>
         )}
       </div>
     </div>
   );
+  };
 
   // Footer
   const Footer = () => (
@@ -5482,6 +5722,17 @@ function ClientView() {
   return (
     <div style={{ minHeight:"100vh", background:T.white,
       fontFamily:"'Inter',system-ui,sans-serif", fontSize:T.base, color:T.ink }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .nila-hero-split { flex-direction: column !important; }
+          .nila-hero-left  { width: 100% !important; padding: 48px 24px 32px !important; text-align: center; align-items: center; }
+          .nila-hero-right { display: none !important; }
+          .nila-hero-left > div:last-child { justify-content: center !important; }
+        }
+        @media (max-width: 900px) {
+          .nila-hero-right { padding: 24px 16px 40px !important; }
+        }
+      `}</style>
       <NavBar />
       {sections[activeSection]||<HomeSection/>}
       <Footer />
