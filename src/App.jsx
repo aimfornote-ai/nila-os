@@ -4756,76 +4756,69 @@ function ClientView() {
       </div>
 
       {/* ── COLLECTIONS TEASER */}
-      <div style={{ background:T.ground, padding:"clamp(64px,10vw,120px) clamp(24px,6vw,80px)" }}>
-        <div style={{ textAlign:"center", marginBottom:52 }}>
+      <div style={{ background:T.ground, padding:"clamp(64px,10vw,120px) 0" }}>
+        <div style={{ textAlign:"center", marginBottom:48, padding:"0 clamp(24px,6vw,80px)" }}>
           <div style={{ fontSize:9, color:T.gold, letterSpacing:5, textTransform:"uppercase",
             marginBottom:16, fontFamily:"'Inter',system-ui,sans-serif" }}>Signature Collections</div>
-          <div style={{ fontSize:"clamp(28px,3.5vw,50px)", fontWeight:300, color:T.indigo, lineHeight:1.1, marginBottom:16 }}>
-            Design for the <em style={{ fontStyle:"italic" }}>World's Finest Spaces</em>
+          <div style={{ fontSize:"clamp(24px,3vw,44px)", fontWeight:300, color:T.indigo, lineHeight:1.15, marginBottom:16 }}>
+            A curated library of Thai-inspired cultural design systems<br/>
+            <em style={{ fontStyle:"italic" }}>for global interiors, textiles, hospitality, and lifestyle brands.</em>
           </div>
-          <div style={{ width:44, height:1, background:T.gold, margin:"0 auto 24px" }} />
-          <div style={{ fontSize:13, color:T.mist, maxWidth:520, margin:"0 auto", lineHeight:1.85,
-            fontFamily:"'Inter',system-ui,sans-serif" }}>
-            Available for non-exclusive, regional exclusive, and global exclusive licensing.
-          </div>
+          <div style={{ width:44, height:1, background:T.gold, margin:"0 auto" }} />
         </div>
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))",
-          gap:24, maxWidth:1200, margin:"0 auto 40px" }}>
+
+        {/* 5-card horizontal row */}
+        <div style={{ display:"flex", gap:16, overflowX:"auto", padding:"0 clamp(24px,4vw,60px) 8px",
+          scrollbarWidth:"none", msOverflowStyle:"none" }}>
           {[
-            { img:"/images/col-midnight-siam.png",
-              name:"Midnight Siam", motif:"Kanok · กนก", badge:"Available", badgeColor:T.jade,
-              desc:"The sacred Kanok flame scroll in indigo and antique gold — heritage luxury for contemporary interiors." },
-            { img:"/images/col-lotus-pink.png",
-              name:"Lotus Pink & Sage", motif:"Lotus · บัว", badge:"Available", badgeColor:T.jade,
-              desc:"Tropical banana leaves and golden Kranok art — a true reflection of Thai botanical heritage." },
-            { img:"/images/col-lotus-damask.png",
-              name:"Lotus Damask", motif:"Lotus · บัว", badge:"Preview · Q3 2026", badgeColor:T.amber,
-              desc:"A soft luminous palette for wellness sanctuaries and refined hospitality spaces." },
-            { img:"/images/col-tea-set.png",
-              name:"Lotus Pink & Sage — Lifestyle", motif:"Tea Set · เซรามิก", badge:"Licensing Available", badgeColor:T.jade,
-              desc:"Inspired by the sacred lotus — timeless beauty for everyday luxury tableware and gifting." },
+            { img:"/images/col-midnight-siam.png",  name:"Midnight Siam",              label:"COLLECTION" },
+            { img:"/images/col-lotus-pink.png",     name:"Lotus Pink & Sage",          label:"COLLECTION" },
+            { img:"/images/col-lotus-damask.png",   name:"Golden Heritage",            label:"COLLECTION" },
+            { img:"/images/col-midnight-siam.png",  name:"Lotus Reverie",              label:"COLLECTION" },
+            { img:"/images/col-tea-set.png",        name:"Lotus & Plumeria · Tea",     label:"LIFESTYLE" },
           ].map((c,i)=>(
-            <div key={i} style={{ background:"#fff", overflow:"hidden", borderRadius:4,
-              boxShadow:"0 2px 16px rgba(10,53,40,0.07)", cursor:"pointer",
-              transition:"transform 0.25s, box-shadow 0.25s" }}
-              onClick={()=>setActiveSection("collections")}
-              onMouseEnter={e=>{ e.currentTarget.style.transform="translateY(-6px)"; e.currentTarget.style.boxShadow="0 14px 40px rgba(10,53,40,0.16)"; }}
-              onMouseLeave={e=>{ e.currentTarget.style.transform="translateY(0)"; e.currentTarget.style.boxShadow="0 2px 16px rgba(10,53,40,0.07)"; }}>
-              <div style={{ height:220, position:"relative", overflow:"hidden" }}>
-                <img src={c.img} alt={c.name}
-                  style={{ width:"100%", height:"100%", objectFit:"cover", display:"block",
-                    transition:"transform 0.4s" }}
-                  onMouseEnter={e=>e.currentTarget.style.transform="scale(1.04)"}
-                  onMouseLeave={e=>e.currentTarget.style.transform="scale(1)"} />
-                <div style={{ position:"absolute", inset:0,
-                  background:"linear-gradient(to top,rgba(5,20,14,0.45) 0%,transparent 60%)" }}/>
-                <span style={{ position:"absolute", top:12, right:12,
-                  background:`${c.badgeColor}ee`, color:"#fff", borderRadius:20,
-                  padding:"3px 12px", fontSize:9, fontWeight:600, letterSpacing:2,
-                  fontFamily:"'Inter',system-ui,sans-serif", backdropFilter:"blur(4px)" }}>
-                  {c.badge}
-                </span>
-              </div>
-              <div style={{ padding:24 }}>
-                <div style={{ fontSize:18, color:T.indigo, marginBottom:4, fontFamily:"Georgia,serif" }}>{c.name}</div>
-                <div style={{ fontSize:10, color:T.gold, letterSpacing:3, textTransform:"uppercase",
-                  marginBottom:10, fontFamily:"'Inter',system-ui,sans-serif" }}>{c.motif}</div>
-                <div style={{ fontSize:12, color:T.mist, lineHeight:1.75,
-                  fontFamily:"'Inter',system-ui,sans-serif" }}>{c.desc}</div>
+            <div key={i} onClick={()=>setActiveSection("collections")}
+              style={{ flex:"0 0 220px", borderRadius:10, overflow:"hidden", cursor:"pointer",
+                position:"relative", aspectRatio:"3/4",
+                boxShadow:"0 4px 20px rgba(10,53,40,0.12)",
+                transition:"transform 0.25s, box-shadow 0.25s" }}
+              onMouseEnter={e=>{ e.currentTarget.style.transform="translateY(-4px)"; e.currentTarget.style.boxShadow="0 12px 36px rgba(10,53,40,0.22)"; }}
+              onMouseLeave={e=>{ e.currentTarget.style.transform="translateY(0)"; e.currentTarget.style.boxShadow="0 4px 20px rgba(10,53,40,0.12)"; }}>
+              <img src={c.img} alt={c.name}
+                style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+              <div style={{ position:"absolute", inset:0,
+                background:"linear-gradient(to top,rgba(5,20,14,0.75) 0%,transparent 55%)" }}/>
+              <div style={{ position:"absolute", bottom:0, left:0, right:0, padding:"16px 14px" }}>
+                <div style={{ fontSize:16, color:"#F7F4ED", fontFamily:"Georgia,serif",
+                  marginBottom:4 }}>{c.name}</div>
+                <div style={{ fontSize:8, color:"#C7A24D", letterSpacing:3, textTransform:"uppercase",
+                  fontFamily:"'Inter',system-ui,sans-serif" }}>{c.label}</div>
               </div>
             </div>
           ))}
-        </div>
-        <div style={{ textAlign:"center" }}>
-          <button onClick={()=>setActiveSection("collections")} style={{
-            padding:"12px 36px", background:"transparent", border:`1px solid ${T.gold}`,
-            color:T.gold, fontSize:10, fontWeight:500, letterSpacing:4, textTransform:"uppercase",
-            cursor:"pointer", borderRadius:2, fontFamily:"'Inter',system-ui,sans-serif",
-            transition:"all 0.2s" }}
-            onMouseEnter={e=>{ e.currentTarget.style.background=T.gold; e.currentTarget.style.color="#fff"; }}
-            onMouseLeave={e=>{ e.currentTarget.style.background="transparent"; e.currentTarget.style.color=T.gold; }}>
-            VIEW ALL COLLECTIONS →
-          </button>
+
+          {/* VIEW ALL card */}
+          <div onClick={()=>setActiveSection("collections")}
+            style={{ flex:"0 0 180px", borderRadius:10, overflow:"hidden", cursor:"pointer",
+              background:"#F0EDE6", display:"flex", flexDirection:"column",
+              alignItems:"center", justifyContent:"center", gap:16,
+              aspectRatio:"3/4", border:"1px solid rgba(199,162,77,0.3)",
+              transition:"background 0.2s" }}
+            onMouseEnter={e=>e.currentTarget.style.background="#E8E3D8"}
+            onMouseLeave={e=>e.currentTarget.style.background="#F0EDE6"}>
+            {/* NILA diamond icon */}
+            <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 4L44 24L24 44L4 24Z" fill="none" stroke="#C7A24D" strokeWidth="1.5"/>
+              <path d="M24 12L36 24L24 36L12 24Z" fill="none" stroke="#C7A24D" strokeWidth="1"/>
+              <circle cx="24" cy="24" r="3" fill="#C7A24D"/>
+            </svg>
+            <div style={{ textAlign:"center" }}>
+              <div style={{ fontSize:10, color:T.gold, letterSpacing:3, textTransform:"uppercase",
+                fontFamily:"'Inter',system-ui,sans-serif", fontWeight:700 }}>VIEW ALL</div>
+              <div style={{ fontSize:10, color:T.gold, letterSpacing:3, textTransform:"uppercase",
+                fontFamily:"'Inter',system-ui,sans-serif", fontWeight:700 }}>COLLECTIONS</div>
+            </div>
+          </div>
         </div>
       </div>
 
