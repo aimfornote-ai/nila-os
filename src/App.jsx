@@ -4594,110 +4594,33 @@ function ClientView() {
           </div>
         </div>
 
-        {/* RIGHT — editorial product visual mockups */}
+        {/* RIGHT — 2×2 real image grid */}
         <div className="nila-hero-right" style={{ flex:1, display:"flex", alignItems:"center", justifyContent:"center",
-          padding:"clamp(40px,5vw,80px) clamp(20px,3vw,48px)", position:"relative", zIndex:2,
-          gap:16 }}>
-
-          {/* Tall card — Wallcovering */}
-          <div style={{ flex:"0 0 auto", width:200, display:"flex", flexDirection:"column", gap:14 }}>
-            <div style={{ background:"linear-gradient(160deg,#0A2A1E,#1A5C46)",
-              borderRadius:8, overflow:"hidden", aspectRatio:"2/3", position:"relative",
-              border:"1px solid rgba(199,162,77,0.18)", boxShadow:"0 16px 48px rgba(0,0,0,0.4)" }}>
-              {/* SVG Kanok pattern inside card */}
-              <svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg"
-                style={{ position:"absolute", inset:0, width:"100%", height:"100%", opacity:0.5 }}>
-                <defs>
-                  <pattern id="kanok1" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
-                    <path d="M25 4C25 4 31.5 15 25 25C18.5 15 25 4 25 4Z" fill="#C7A24D" opacity="0.8"/>
-                    <path d="M25 46C25 46 31.5 35 25 25C18.5 35 25 46 25 46Z" fill="#C7A24D" opacity="0.8"/>
-                    <path d="M4 25C4 25 15 31.5 25 25C15 18.5 4 25 4 25Z" fill="#C7A24D" opacity="0.8"/>
-                    <path d="M46 25C46 25 35 31.5 25 25C35 18.5 46 25 46 25Z" fill="#C7A24D" opacity="0.8"/>
-                    <circle cx="25" cy="25" r="3" fill="#D9BA78" opacity="0.6"/>
-                    <path d="M25 4C25 4 28 10 25 14C22 10 25 4 25 4Z" fill="#F7F4ED" opacity="0.3"/>
-                  </pattern>
-                </defs>
-                <rect width="200" height="300" fill="url(#kanok1)"/>
-              </svg>
-              <div style={{ position:"absolute", inset:0, background:"linear-gradient(to top,rgba(10,40,28,0.9) 0%,transparent 50%)" }}/>
-              <div style={{ position:"absolute", bottom:0, left:0, right:0, padding:"14px 12px" }}>
-                <div style={{ fontSize:8, color:T.gold, letterSpacing:3, textTransform:"uppercase",
-                  fontFamily:"'Inter',system-ui,sans-serif", marginBottom:3 }}>WALLCOVERING</div>
-                <div style={{ fontSize:11, color:"#F7F4ED", fontFamily:"Georgia,serif" }}>Midnight Siam</div>
+          padding:"clamp(40px,4vw,70px) clamp(16px,3vw,40px)", position:"relative", zIndex:2 }}>
+          <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:12,
+            width:"100%", maxWidth:520 }}>
+            {[
+              { img:"/images/hero-wallcovering.png", label:"WALLCOVERING", name:"Midnight Siam" },
+              { img:"/images/hero-scarf.png",        label:"SILK SCARF · TEXTILE", name:"Siam Tropical" },
+              { img:"/images/hero-hospitality.png",  label:"HOSPITALITY · FF&E", name:"Interior Application" },
+              { img:"/images/hero-spa.png",          label:"GIFTING & LIFESTYLE", name:"Lotus & Plumeria" },
+            ].map((c,i)=>(
+              <div key={i} style={{ borderRadius:10, overflow:"hidden", position:"relative",
+                aspectRatio:"1/1",
+                boxShadow:"0 8px 32px rgba(0,0,0,0.45)",
+                border:"1px solid rgba(199,162,77,0.2)" }}>
+                <img src={c.img} alt={c.name}
+                  style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
+                <div style={{ position:"absolute", inset:0,
+                  background:"linear-gradient(to top,rgba(5,20,14,0.82) 0%,transparent 55%)" }}/>
+                <div style={{ position:"absolute", bottom:0, left:0, right:0, padding:"12px 10px" }}>
+                  <div style={{ fontSize:7, color:"#C7A24D", letterSpacing:2.5, textTransform:"uppercase",
+                    fontFamily:"'Inter',system-ui,sans-serif", marginBottom:2 }}>{c.label}</div>
+                  <div style={{ fontSize:11, color:"#F7F4ED", fontFamily:"Georgia,serif",
+                    fontStyle:"italic" }}>{c.name}</div>
+                </div>
               </div>
-            </div>
-            {/* Small scarf card */}
-            <div style={{ background:"linear-gradient(135deg,#C7A24D10,#0F4D3A40)",
-              borderRadius:6, overflow:"hidden", aspectRatio:"1/1", position:"relative",
-              border:"1px solid rgba(199,162,77,0.25)", boxShadow:"0 8px 24px rgba(0,0,0,0.3)" }}>
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
-                style={{ position:"absolute", inset:0, width:"100%", height:"100%", opacity:0.65 }}>
-                <defs>
-                  <pattern id="lotus1" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse">
-                    <ellipse cx="12.5" cy="6" rx="4" ry="6" fill="#B85A72" opacity="0.7"/>
-                    <ellipse cx="19" cy="12.5" rx="6" ry="4" fill="#B85A72" opacity="0.5"/>
-                    <ellipse cx="6" cy="12.5" rx="6" ry="4" fill="#B85A72" opacity="0.5"/>
-                    <circle cx="12.5" cy="12.5" r="2.5" fill="#D9BA78"/>
-                  </pattern>
-                </defs>
-                <rect width="100" height="100" fill="url(#lotus1)"/>
-              </svg>
-              <div style={{ position:"absolute", bottom:0, left:0, right:0, padding:"8px 10px",
-                background:"linear-gradient(to top,rgba(10,40,28,0.85),transparent)" }}>
-                <div style={{ fontSize:7, color:T.gold, letterSpacing:2, textTransform:"uppercase",
-                  fontFamily:"'Inter',system-ui,sans-serif" }}>SILK SCARF · TEXTILE</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right column */}
-          <div style={{ flex:"0 0 auto", width:180, display:"flex", flexDirection:"column", gap:14, marginTop:40 }}>
-            {/* Square — Hospitality interior */}
-            <div style={{ background:"linear-gradient(135deg,#0A1E16,#1A4030)",
-              borderRadius:8, overflow:"hidden", aspectRatio:"1/1.1", position:"relative",
-              border:"1px solid rgba(199,162,77,0.2)", boxShadow:"0 12px 36px rgba(0,0,0,0.4)" }}>
-              <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg"
-                style={{ position:"absolute", inset:0, width:"100%", height:"100%", opacity:0.45 }}>
-                <defs>
-                  <pattern id="naga1" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
-                    <path d="M0 15 Q7.5 7.5 15 15 Q22.5 22.5 30 15" stroke="#C7A24D" strokeWidth="1.2" fill="none" opacity="0.8"/>
-                    <path d="M0 0 Q7.5 7.5 15 0 Q22.5 -7.5 30 0" stroke="#C7A24D" strokeWidth="0.8" fill="none" opacity="0.4"/>
-                    <path d="M15 0 Q22.5 7.5 15 15 Q7.5 22.5 15 30" stroke="#C7A24D" strokeWidth="0.8" fill="none" opacity="0.4"/>
-                  </pattern>
-                </defs>
-                <rect width="180" height="200" fill="url(#naga1)"/>
-              </svg>
-              <div style={{ position:"absolute", inset:0,
-                background:"linear-gradient(135deg,rgba(10,53,40,0.3),rgba(10,30,22,0.6))" }}/>
-              <div style={{ position:"absolute", bottom:0, left:0, right:0, padding:"12px 12px" }}>
-                <div style={{ fontSize:7, color:T.gold, letterSpacing:2, textTransform:"uppercase",
-                  fontFamily:"'Inter',system-ui,sans-serif", marginBottom:2 }}>HOSPITALITY · FF&E</div>
-                <div style={{ fontSize:10, color:"#F7F4ED", fontFamily:"Georgia,serif" }}>Interior Application</div>
-              </div>
-            </div>
-            {/* Tall card — Packaging */}
-            <div style={{ background:"linear-gradient(160deg,#1A0D05,#3D2010)",
-              borderRadius:6, overflow:"hidden", aspectRatio:"2/3", position:"relative",
-              border:"1px solid rgba(199,162,77,0.3)", boxShadow:"0 10px 30px rgba(0,0,0,0.4)" }}>
-              <svg viewBox="0 0 180 270" xmlns="http://www.w3.org/2000/svg"
-                style={{ position:"absolute", inset:0, width:"100%", height:"100%", opacity:0.55 }}>
-                <defs>
-                  <pattern id="gem1" x="0" y="0" width="36" height="36" patternUnits="userSpaceOnUse">
-                    <polygon points="18,2 34,18 18,34 2,18" fill="none" stroke="#C7A24D" strokeWidth="1" opacity="0.9"/>
-                    <polygon points="18,8 28,18 18,28 8,18" fill="none" stroke="#D9BA78" strokeWidth="0.6" opacity="0.6"/>
-                    <circle cx="18" cy="18" r="2" fill="#C7A24D"/>
-                  </pattern>
-                </defs>
-                <rect width="180" height="270" fill="url(#gem1)"/>
-              </svg>
-              <div style={{ position:"absolute", inset:0,
-                background:"linear-gradient(to top,rgba(61,32,16,0.9) 0%,transparent 55%)" }}/>
-              <div style={{ position:"absolute", bottom:0, left:0, right:0, padding:"12px 10px" }}>
-                <div style={{ fontSize:7, color:T.gold, letterSpacing:2, textTransform:"uppercase",
-                  fontFamily:"'Inter',system-ui,sans-serif", marginBottom:2 }}>LUXURY PACKAGING</div>
-                <div style={{ fontSize:10, color:"#F7F4ED", fontFamily:"Georgia,serif" }}>Gifting & Spa</div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
@@ -4846,85 +4769,48 @@ function ClientView() {
             Available for non-exclusive, regional exclusive, and global exclusive licensing.
           </div>
         </div>
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))",
           gap:24, maxWidth:1200, margin:"0 auto 40px" }}>
           {[
-            { name:"Midnight Siam — Classic", motif:"Kanok · กนก", badge:"Available", badgeColor:T.jade,
-              bg:"linear-gradient(160deg,#0A3528 0%,#1A5C46 100%)",
-              desc:"The sacred Kanok flame scroll in warm emerald and antique gold — heritage luxury for contemporary interiors.",
-              svgId:"ms-classic",
-              svgPattern: `<defs>
-                <pattern id="ms-classic" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-                  <path d="M30 5C30 5 38 20 30 30C22 20 30 5 30 5Z" fill="#C7A24D" opacity="0.75"/>
-                  <path d="M30 55C30 55 38 40 30 30C22 40 30 55 30 55Z" fill="#C7A24D" opacity="0.75"/>
-                  <path d="M5 30C5 30 20 38 30 30C20 22 5 30 5 30Z" fill="#C7A24D" opacity="0.75"/>
-                  <path d="M55 30C55 30 40 38 30 30C40 22 55 30 55 30Z" fill="#C7A24D" opacity="0.75"/>
-                  <path d="M30 12C30 12 33 18 30 22C27 18 30 12 30 12Z" fill="#F7F4ED" opacity="0.35"/>
-                  <circle cx="30" cy="30" r="3.5" fill="#D9BA78" opacity="0.8"/>
-                  <circle cx="30" cy="30" r="1.5" fill="#F7F4ED" opacity="0.9"/>
-                </pattern></defs>
-                <rect width="400" height="220" fill="url(#ms-classic)"/>` },
-            { name:"Midnight Siam — Premium", motif:"Kanok · กนก", badge:"Available", badgeColor:T.jade,
-              bg:"linear-gradient(160deg,#050F09 0%,#0A2A1A 100%)",
-              desc:"The dramatic flagship in Nila Black and antique gold — exclusive night elegance for global luxury licensing.",
-              svgId:"ms-premium",
-              svgPattern: `<defs>
-                <pattern id="ms-premium" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
-                  <path d="M25 4C25 4 32 16 25 25C18 16 25 4 25 4Z" fill="#DAAF37" opacity="0.85"/>
-                  <path d="M25 46C25 46 32 34 25 25C18 34 25 46 25 46Z" fill="#DAAF37" opacity="0.85"/>
-                  <path d="M4 25C4 25 16 32 25 25C16 18 4 25 4 25Z" fill="#DAAF37" opacity="0.85"/>
-                  <path d="M46 25C46 25 34 32 25 25C34 18 46 25 46 25Z" fill="#DAAF37" opacity="0.85"/>
-                  <circle cx="25" cy="25" r="4" fill="#0D0D0F"/>
-                  <circle cx="25" cy="25" r="2" fill="#DAAF37" opacity="0.9"/>
-                  <path d="M25 9C25 9 28 14 25 18C22 14 25 9 25 9Z" fill="#F6F3E8" opacity="0.3"/>
-                </pattern></defs>
-                <rect width="400" height="220" fill="url(#ms-premium)"/>` },
-            { name:"Lotus Blush", motif:"Lotus · บัว", badge:"Preview · Q3 2026", badgeColor:T.amber,
-              bg:"linear-gradient(160deg,#2E1A20 0%,#5C2E3A 100%)",
-              desc:"A soft luminous palette for wellness sanctuaries and refined hospitality spaces.",
-              svgId:"lotus-blush",
-              svgPattern: `<defs>
-                <pattern id="lotus-blush" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
-                  <ellipse cx="25" cy="14" rx="6" ry="10" fill="#E8A0B0" opacity="0.6"/>
-                  <ellipse cx="25" cy="14" rx="3.5" ry="6" fill="#F2C5D0" opacity="0.7"/>
-                  <ellipse cx="15" cy="25" rx="10" ry="6" fill="#E8A0B0" opacity="0.5"/>
-                  <ellipse cx="35" cy="25" rx="10" ry="6" fill="#E8A0B0" opacity="0.5"/>
-                  <ellipse cx="25" cy="36" rx="6" ry="10" fill="#E8A0B0" opacity="0.4"/>
-                  <circle cx="25" cy="25" r="4" fill="#D9BA78" opacity="0.8"/>
-                  <circle cx="25" cy="25" r="2" fill="#F7F4ED" opacity="0.9"/>
-                </pattern></defs>
-                <rect width="400" height="220" fill="url(#lotus-blush)"/>` },
+            { img:"/images/col-midnight-siam.png",
+              name:"Midnight Siam", motif:"Kanok · กนก", badge:"Available", badgeColor:T.jade,
+              desc:"The sacred Kanok flame scroll in indigo and antique gold — heritage luxury for contemporary interiors." },
+            { img:"/images/col-lotus-pink.png",
+              name:"Lotus Pink & Sage", motif:"Lotus · บัว", badge:"Available", badgeColor:T.jade,
+              desc:"Tropical banana leaves and golden Kranok art — a true reflection of Thai botanical heritage." },
+            { img:"/images/col-lotus-damask.png",
+              name:"Lotus Damask", motif:"Lotus · บัว", badge:"Preview · Q3 2026", badgeColor:T.amber,
+              desc:"A soft luminous palette for wellness sanctuaries and refined hospitality spaces." },
+            { img:"/images/col-tea-set.png",
+              name:"Lotus Pink & Sage — Lifestyle", motif:"Tea Set · เซรามิก", badge:"Licensing Available", badgeColor:T.jade,
+              desc:"Inspired by the sacred lotus — timeless beauty for everyday luxury tableware and gifting." },
           ].map((c,i)=>(
-            <div key={i} style={{ background:"#fff", overflow:"hidden",
+            <div key={i} style={{ background:"#fff", overflow:"hidden", borderRadius:4,
               boxShadow:"0 2px 16px rgba(10,53,40,0.07)", cursor:"pointer",
               transition:"transform 0.25s, box-shadow 0.25s" }}
               onClick={()=>setActiveSection("collections")}
               onMouseEnter={e=>{ e.currentTarget.style.transform="translateY(-6px)"; e.currentTarget.style.boxShadow="0 14px 40px rgba(10,53,40,0.16)"; }}
               onMouseLeave={e=>{ e.currentTarget.style.transform="translateY(0)"; e.currentTarget.style.boxShadow="0 2px 16px rgba(10,53,40,0.07)"; }}>
-              {/* Pattern preview — SVG inline */}
-              <div style={{ height:200, background:c.bg, position:"relative", overflow:"hidden" }}>
-                <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg"
-                  style={{ position:"absolute", inset:0, width:"100%", height:"100%" }}
-                  dangerouslySetInnerHTML={{ __html: c.svgPattern }} />
-                {/* Subtle vignette overlay */}
+              <div style={{ height:220, position:"relative", overflow:"hidden" }}>
+                <img src={c.img} alt={c.name}
+                  style={{ width:"100%", height:"100%", objectFit:"cover", display:"block",
+                    transition:"transform 0.4s" }}
+                  onMouseEnter={e=>e.currentTarget.style.transform="scale(1.04)"}
+                  onMouseLeave={e=>e.currentTarget.style.transform="scale(1)"} />
                 <div style={{ position:"absolute", inset:0,
-                  background:"radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }}/>
-                <span style={{ position:"absolute", top:12, right:12, background:`${c.badgeColor}ee`,
-                  color:"#fff", borderRadius:20, padding:"3px 12px", fontSize:9,
-                  fontWeight:600, letterSpacing:2, fontFamily:"'Inter',system-ui,sans-serif",
-                  backdropFilter:"blur(4px)" }}>{c.badge}</span>
-                {/* Surface label bottom-left */}
-                <div style={{ position:"absolute", bottom:12, left:14,
-                  fontSize:8, color:"rgba(247,244,237,0.55)", letterSpacing:3,
-                  textTransform:"uppercase", fontFamily:"'Inter',system-ui,sans-serif" }}>
-                  Wallcovering · Textile · Scarf
-                </div>
+                  background:"linear-gradient(to top,rgba(5,20,14,0.45) 0%,transparent 60%)" }}/>
+                <span style={{ position:"absolute", top:12, right:12,
+                  background:`${c.badgeColor}ee`, color:"#fff", borderRadius:20,
+                  padding:"3px 12px", fontSize:9, fontWeight:600, letterSpacing:2,
+                  fontFamily:"'Inter',system-ui,sans-serif", backdropFilter:"blur(4px)" }}>
+                  {c.badge}
+                </span>
               </div>
               <div style={{ padding:24 }}>
-                <div style={{ fontSize:20, color:T.indigo, marginBottom:4, fontFamily:"Georgia,serif" }}>{c.name}</div>
+                <div style={{ fontSize:18, color:T.indigo, marginBottom:4, fontFamily:"Georgia,serif" }}>{c.name}</div>
                 <div style={{ fontSize:10, color:T.gold, letterSpacing:3, textTransform:"uppercase",
-                  marginBottom:12, fontFamily:"'Inter',system-ui,sans-serif" }}>{c.motif}</div>
-                <div style={{ fontSize:12, color:T.mist, lineHeight:1.7,
+                  marginBottom:10, fontFamily:"'Inter',system-ui,sans-serif" }}>{c.motif}</div>
+                <div style={{ fontSize:12, color:T.mist, lineHeight:1.75,
                   fontFamily:"'Inter',system-ui,sans-serif" }}>{c.desc}</div>
               </div>
             </div>
