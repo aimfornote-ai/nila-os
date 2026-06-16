@@ -1165,6 +1165,15 @@ function LicensingCalculator() {
 // ────────────────────────────────────────────────────────────
 // CLIENT CRM  — All pre-loaded entries are fictional placeholders
 // ────────────────────────────────────────────────────────────
+const INIT_COLLECTIONS = [
+  { id:"C01", name:"Midnight Siam",         motif:"NIL-KNK", season:"Q2 2026", status:"In Production", designs:20, surfaces:"Wallcovering / Textile / Packaging", colorways:3, notes:"Flagship collection" },
+  { id:"C02", name:"Lotus Pink & Sage",     motif:"NIL-LTS", season:"Q3 2026", status:"In Production", designs:15, surfaces:"Textile / Spa / Tableware",           colorways:2, notes:"Lotus & banana leaf" },
+  { id:"C03", name:"Lotus Blush",           motif:"NIL-LTS", season:"Q4 2026", status:"Planned",       designs:0,  surfaces:"Wallcovering / Textile",              colorways:2, notes:"Soft wellness palette" },
+  { id:"C04", name:"Siam Tropical",         motif:"NIL-TRP", season:"Q3 2026", status:"In Production", designs:12, surfaces:"Textile / Resort Wear / Scarf",        colorways:2, notes:"Batik-inspired indigo gold" },
+  { id:"C05", name:"Royal Azure",           motif:"NIL-KNK", season:"Q3 2027", status:"Planned",       designs:0,  surfaces:"Wallcovering / Hospitality FF&E",      colorways:3, notes:"Phase 2" },
+  { id:"C06", name:"Loi Krathong Ceremony", motif:"NIL-LKR", season:"Q2 2028", status:"Planned",       designs:0,  surfaces:"Packaging / Textile / Gifting",         colorways:2, notes:"Phase 4 seasonal" },
+];
+
 const INIT_CLIENTS = [
   { id:1, company:"Maison du Décor (fictional placeholder)", contact:"Licensing Dept", email:"—", segment:"Surface Brand", stage:"Research", collection:"Midnight Siam", value:"USD 5,000–8,000", lastContact:"—", notes:"Sample research prospect only. No contact made." },
   { id:2, company:"Veranda Resort Group (fictional placeholder)", contact:"Design Manager", email:"—", segment:"Luxury Hospitality", stage:"Research", collection:"Midnight Siam", value:"USD 12,000+", lastContact:"—", notes:"Sample research prospect only. No contact made." },
