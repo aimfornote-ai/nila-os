@@ -4845,8 +4845,8 @@ function ClientView() {
             for Modern Living
           </div>
           <div style={{ width:44, height:1, background:T.gold, marginBottom:24 }} />
-          <div style={{ fontSize:"clamp(13px,1.4vw,16px)", color:"rgba(247,244,237,0.65)",
-            fontStyle:"italic", lineHeight:1.8, maxWidth:460, marginBottom:40 }}>
+          <div style={{ fontSize:"clamp(13px,1.4vw,16px)", color:"rgba(247,244,237,0.88)",
+            fontStyle:"normal", lineHeight:1.8, maxWidth:460, marginBottom:40 }}>
             Premium design collections rooted in Thai heritage — thoughtfully crafted
             for homes, hospitality, and lifestyle brands around the world.
           </div>
@@ -5940,6 +5940,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
