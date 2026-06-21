@@ -4414,8 +4414,8 @@ function SplashScreen({ onEnter }) {
         {/* Triple-click here to show admin login */}
         <div onClick={handleLogoClick} style={{ cursor:"default", userSelect:"none" }}>
           <div style={{ textAlign:"left", lineHeight:1 }}>
-            <div style={{ fontSize:22, fontWeight:900, color:"#F7F4ED", fontFamily:"Georgia,serif", letterSpacing:6, lineHeight:1 }}>NILA</div>
-            <div style={{ fontSize:7, fontWeight:700, color:"#C7A24D", letterSpacing:2.5, textTransform:"uppercase", lineHeight:1, marginTop:3 }}>HERITAGE LIVING™</div>
+            <div style={{ fontSize:26, fontWeight:900, color:"#F7F4ED", fontFamily:"Georgia,serif", letterSpacing:7, lineHeight:1 }}>NILA</div>
+            <div style={{ fontSize:8, fontWeight:700, color:"#C7A24D", letterSpacing:3, textTransform:"uppercase", lineHeight:1, marginTop:4 }}>HERITAGE LIVING™</div>
           </div>
         </div>
         <div style={{ fontSize:11, color:"rgba(247,244,237,0.45)", letterSpacing:3, fontStyle:"italic" }}>
@@ -4742,8 +4742,8 @@ function ClientView() {
       <div style={{ display:"flex", alignItems:"center", gap:10, cursor:"pointer" }}
         onClick={()=>{ setActiveSection("home"); setMobileOpen(false); }}>
         <div style={{ textAlign:"left", lineHeight:1 }}>
-            <div style={{ fontSize:22, fontWeight:900, color:"#F7F4ED", fontFamily:"Georgia,serif", letterSpacing:6, lineHeight:1 }}>NILA</div>
-            <div style={{ fontSize:7, fontWeight:700, color:"#C7A24D", letterSpacing:2.5, textTransform:"uppercase", lineHeight:1, marginTop:3 }}>HERITAGE LIVING™</div>
+            <div style={{ fontSize:26, fontWeight:900, color:"#F7F4ED", fontFamily:"Georgia,serif", letterSpacing:7, lineHeight:1 }}>NILA</div>
+            <div style={{ fontSize:8, fontWeight:700, color:"#C7A24D", letterSpacing:3, textTransform:"uppercase", lineHeight:1, marginTop:4 }}>HERITAGE LIVING™</div>
           </div>
       </div>
       {/* Desktop nav */}
@@ -4835,6 +4835,9 @@ function ClientView() {
             marginBottom:28, opacity:0.85, fontFamily:"'Inter',system-ui,sans-serif" }}>
             Cultural Design House · Thailand
           </div>
+          <div style={{ fontSize:9, color:"rgba(199,162,77,0.8)", letterSpacing:4, textTransform:"uppercase", marginBottom:20, fontFamily:"'Inter',system-ui,sans-serif" }}>
+            Thai Cultural IP · Surface Design · Licensing
+          </div>
           <div style={{ fontSize:"clamp(34px,4.5vw,68px)", fontWeight:300, color:"#F7F4ED",
             lineHeight:1.08, marginBottom:24, letterSpacing:"-0.5px" }}>
             Contemporary Thai<br/>
@@ -4892,12 +4895,11 @@ function ClientView() {
                 <img src={c.img} alt={c.name}
                   style={{ width:"100%", height:"100%", objectFit:"cover", display:"block" }} />
                 <div style={{ position:"absolute", inset:0,
-                  background:"linear-gradient(to top,rgba(5,20,14,0.82) 0%,transparent 55%)" }}/>
+                  background:"linear-gradient(to top,rgba(5,20,14,0.92) 0%,rgba(5,20,14,0.2) 60%,transparent 100%)" }}/>
                 <div style={{ position:"absolute", bottom:0, left:0, right:0, padding:"12px 10px" }}>
-                  <div style={{ fontSize:7, color:"#C7A24D", letterSpacing:2.5, textTransform:"uppercase",
+                  <div style={{ fontSize:9, color:"#C7A24D", letterSpacing:2.5, textTransform:"uppercase",
                     fontFamily:"'Inter',system-ui,sans-serif", marginBottom:2 }}>{c.label}</div>
-                  <div style={{ fontSize:11, color:"#F7F4ED", fontFamily:"Georgia,serif",
-                    fontStyle:"italic" }}>{c.name}</div>
+                  <div style={{ fontSize:13, color:"#F7F4ED", fontFamily:"Georgia,serif", fontStyle:"italic" }}>{c.name}</div>
                 </div>
               </div>
             ))}
@@ -5938,6 +5940,11 @@ export default function App() {
     </div>
   );
 }
+
+
+
+
+
 
 
 
