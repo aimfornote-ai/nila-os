@@ -5880,7 +5880,7 @@ function ClientView() {
 
   return (
     <div style={{ minHeight:"100vh", background:T.white,
-      fontFamily:"'Inter',system-ui,sans-serif", fontSize:T.base, color:T.ink }}>
+      fontFamily:"'Inter',system-ui,sans-serif", fontSize:T.base, color:T.ink, overflowX:"hidden", width:"100%" }}>
       <style>{`
         @media (max-width: 768px) {
           .nila-hero-split { flex-direction: column !important; }
@@ -5938,6 +5938,8 @@ export default function App() {
     </div>
   );
 }
+
+
 
 
 
