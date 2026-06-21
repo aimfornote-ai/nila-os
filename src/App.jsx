@@ -975,6 +975,8 @@ Shot on 35mm lens, f/2.8 bokeh background, photorealistic, premium brand adverti
     </div>
   );
 }
+const STATUSES = ["Planned","In Brief","In Production","Complete","On Hold","Released"];
+const STATUS_COLORS = { Planned:T.mist, "In Brief":T.amber, "In Production":T.gold, Complete:T.jade, "On Hold":T.crimson, Released:T.indigo };
 function CollectionPlanner() {
   const [collections, setCollections] = useState(INIT_COLLECTIONS);
   const [form, setForm] = useState({ name:"", motif:"NIL-KNK", season:"Q2 2026", status:"Planned", designs:0, surfaces:"", colorways:2, notes:"" });
@@ -5811,6 +5813,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
