@@ -1,4 +1,4 @@
-// ============================================================
+﻿// ============================================================
 // NILA™ HERITAGE LIVING — DESIGN OPERATING SYSTEM  v3.2
 // Emerald + Antique Gold Edition · Siamese Botanica
 // Pre-Launch Edition — Siamese Botanica Design Division
@@ -294,6 +294,7 @@ const NAV = [
   { id:"revmodel",    label:"Revenue Model",            icon:"◈", group:"business" },
   { id:"colarch",     label:"Collection Architecture",  icon:"◐", group:"business" },
   { id:"journey",     label:"Customer Journey",         icon:"◑", group:"business" },
+  { id:"design_agent", label:"Design Agent",    icon:"🎨", group:"tools"    },
 ];
 const NAV_GROUPS = { overview:"Overview", system:"Brand System", tools:"Studio Tools", business:"Business Strategy", intel:"Intelligence", ops:"Operations" };
 
@@ -4065,7 +4066,7 @@ const MODULE_MAP = {
   revenue:RevenueDashboard, workflow:StudioWorkflow, legal:PreLaunchLegal, action:ActionPlan,
   watermark:WatermarkStudio,
   framework:LicensingFramework, revmodel:RevenueModel,
-  colarch:CollectionArchitecture, journey:CustomerJourney,
+  colarch:CollectionArchitecture, journey:CustomerJourney, design_agent:DesignAgent,
 };
 
 
@@ -5667,3 +5668,5 @@ export default function App() {
     </div>
   );
 }
+
+
