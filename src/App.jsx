@@ -1088,7 +1088,7 @@ function LicensingCalculator() {
   const SelectRow = ({label,optKey,options}) => (
     <div style={{ marginBottom:14 }}>
       <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>{label}</label>
-      <select value={params[optKey]} onChange={e=>{ const v=isNaN(Number(e.target.value))?e.target.value:Number(e.target.value); set(optKey,v); }} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
+      <select value={params[optKey]} onChange={e=>{ const v=isNaN(Number(e.target.value))?e.target.value:Number(e.target.value); set(optKey,v); }} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit", color:T.ink }}>
         {options.map(([v,l])=><option key={v} value={v}>{l}</option>)}
       </select>
     </div>
@@ -1910,7 +1910,7 @@ function PortfolioGenerator() {
           <Divider label="Portfolio Configuration" />
           <div style={{ marginBottom:14 }}>
             <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Select Collection</label>
-            <select value={selCollection} onChange={e => { setSelCollection(e.target.value); setGenerated(false); }} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
+            <select value={selCollection} onChange={e => { setSelCollection(e.target.value); setGenerated(false); }} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit", color:T.ink }}>
               {collections.map(c => <option key={c}>{c}</option>)}
             </select>
           </div>
@@ -2504,13 +2504,13 @@ Important: Keep all [bracketed placeholders] for contact details (email, website
           <Divider label="Configuration" />
           <div style={{ marginBottom:14 }}>
             <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Select Prospect</label>
-            <select value={selProspect.id} onChange={e => setSelProspect(INIT_TARGETS.find(t => t.id===Number(e.target.value)))} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
+            <select value={selProspect.id} onChange={e => setSelProspect(INIT_TARGETS.find(t => t.id===Number(e.target.value)))} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit", color:T.ink }}>
               {INIT_TARGETS.map(t => <option key={t.id} value={t.id}>{t.name} — {t.cat}</option>)}
             </select>
           </div>
           <div style={{ marginBottom:14 }}>
             <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Select Collection</label>
-            <select value={selCollection} onChange={e => setSelCollection(e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
+            <select value={selCollection} onChange={e => setSelCollection(e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit", color:T.ink }}>
               {collections.map(c => <option key={c}>{c}</option>)}
             </select>
           </div>
@@ -5268,7 +5268,7 @@ function ClientView() {
                   <select value={calcParams[key]}
                     onChange={e=>setCalcParams(p=>({...p,[key]:isNaN(Number(e.target.value))?e.target.value:Number(e.target.value)}))}
                     style={{ width:"100%", padding:"9px 12px", borderRadius:T.radius,
-                      border:`1px solid ${T.border}`, fontSize:13, background:T.ground, fontFamily:"inherit" }}>
+                      border:`1px solid ${T.border}`, fontSize:13, background:T.ground, fontFamily:"inherit", color:T.ink }}>
                     {opts.map(([v,l])=><option key={v} value={v}>{l}</option>)}
                   </select>
                 </div>
@@ -5414,7 +5414,7 @@ function ClientView() {
                 textTransform:"uppercase", letterSpacing:2, marginBottom:6 }}>Segment</label>
               <select value={enquiry.segment} onChange={e=>setEnquiry(q=>({...q,segment:e.target.value}))}
                 style={{ width:"100%", padding:"12px 14px", borderRadius:T.radius,
-                  border:`1px solid ${T.border}`, fontSize:13, background:T.white, fontFamily:"inherit" }}>
+                  border:`1px solid ${T.border}`, fontSize:13, background:T.white, fontFamily:"inherit", color:T.ink }}>
                 {["Surface Brand","Luxury Hospitality","Consumer Brand","Interior Design Studio","POD Platform","Other"].map(s=><option key={s}>{s}</option>)}
               </select>
             </div>
@@ -5423,7 +5423,7 @@ function ClientView() {
                 textTransform:"uppercase", letterSpacing:2, marginBottom:6 }}>Collection of Interest</label>
               <select value={enquiry.collection} onChange={e=>setEnquiry(q=>({...q,collection:e.target.value}))}
                 style={{ width:"100%", padding:"12px 14px", borderRadius:T.radius,
-                  border:`1px solid ${T.border}`, fontSize:13, background:T.white, fontFamily:"inherit" }}>
+                  border:`1px solid ${T.border}`, fontSize:13, background:T.white, fontFamily:"inherit", color:T.ink }}>
                 {["Midnight Siam","Lotus Blush","Royal Azure","Loi Krathong","Bespoke Commission","Not sure yet"].map(c=><option key={c}>{c}</option>)}
               </select>
             </div>
@@ -5813,6 +5813,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
