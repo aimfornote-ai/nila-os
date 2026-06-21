@@ -295,6 +295,7 @@ const NAV = [
   { id:"colarch",     label:"Collection Architecture",  icon:"◐", group:"business" },
   { id:"journey",     label:"Customer Journey",         icon:"◑", group:"business" },
   { id:"design_agent", label:"Design Agent",    icon:"🎨", group:"tools"    },
+  { id:"deliverables", label:"Deliverables Tracker", icon:"📦", group:"tools" },
 ];
 const NAV_GROUPS = { overview:"Overview", system:"Brand System", tools:"Studio Tools", business:"Business Strategy", intel:"Intelligence", ops:"Operations" };
 
@@ -4167,6 +4168,164 @@ function DesignAgent() {
     </div>
   );
 }
+// ─────────────────────────────────────────────────────────────────────────────
+// DELIVERABLES TRACKER
+// ─────────────────────────────────────────────────────────────────────────────
+const DELIVERABLE_ITEMS = [
+  { id:"png",      label:"PNG Seamless 300dpi",        tier:["POD","COM","BRD","EXC"] },
+  { id:"svg",      label:"SVG Vector File",             tier:["COM","BRD","EXC"] },
+  { id:"eps",      label:"EPS Vector File",             tier:["COM","BRD","EXC"] },
+  { id:"tiff",     label:"TIFF 300dpi Production",      tier:["BRD","EXC"] },
+  { id:"colorway", label:"Colourway Variants",          tier:["COM","BRD","EXC"] },
+  { id:"mockup",   label:"Mockup Reference Images",     tier:["COM","BRD","EXC"] },
+  { id:"cultural", label:"Cultural Reference Document", tier:["COM","BRD","EXC"] },
+  { id:"licence",  label:"Licence Agreement (signed)",  tier:["POD","COM","BRD","EXC"] },
+  { id:"guide",    label:"Usage Guide (Do's & Don'ts)", tier:["POD","COM","BRD","EXC"] },
+  { id:"artdir",   label:"Art Direction Rounds",        tier:["BRD","EXC"] },
+  { id:"consult",  label:"Quarterly Consultation",      tier:["EXC"] },
+  { id:"excert",   label:"Exclusivity Certificate",     tier:["EXC"] },
+];
+
+const INIT_DELIVERIES = [
+  { id:1, client:"[Wallcovering Brand A — EU]", collection:"Midnight Siam", tier:"BRD", date:"—", items:{}, notes:"Sample entry — replace with real client" },
+];
+
+function DeliverablesTracker() {
+  const [deliveries, setDeliveries] = useState(INIT_DELIVERIES);
+  const [adding, setAdding]         = useState(false);
+  const [selected, setSelected]     = useState(null);
+  const [form, setForm]             = useState({ client:"", collection:"Midnight Siam", tier:"COM", date:"", notes:"" });
+
+  const addDelivery = () => {
+    if (!form.client.trim()) return;
+    setDeliveries(d => [...d, { ...form, id:Date.now(), items:{} }]);
+    setForm({ client:"", collection:"Midnight Siam", tier:"COM", date:"", notes:"" });
+    setAdding(false);
+  };
+
+  const toggleItem = (deliveryId, itemId) => {
+    setDeliveries(ds => ds.map(d => {
+      if (d.id !== deliveryId) return d;
+      const items = { ...d.items };
+      if (items[itemId] === "sent") items[itemId] = "confirmed";
+      else if (items[itemId] === "confirmed") delete items[itemId];
+      else items[itemId] = "sent";
+      return { ...d, items };
+    }));
+  };
+
+  const getStatus = (items, tier) => {
+    const required = DELIVERABLE_ITEMS.filter(i => i.tier.includes(tier));
+    const sent = required.filter(i => items[i.id]);
+    if (sent.length === 0) return { label:"Not Started", color:T.mist };
+    if (sent.length === required.length && required.every(i => items[i.id] === "confirmed")) return { label:"Complete", color:T.jade };
+    if (sent.length === required.length) return { label:"Sent — Awaiting Confirmation", color:T.gold };
+    return { label:`In Progress (${sent.length}/${required.length})`, color:T.amber };
+  };
+
+  const TIER_COLORS = { POD:T.jade, COM:T.goldL, BRD:T.indigoL, EXC:T.crimson };
+
+  return (
+    <div>
+      <SectionHead icon="📦" title="Deliverables Tracker" subtitle="Track what has been delivered to each licensed client" />
+      <AlertBox type="info">Click each deliverable to cycle through: Pending → Sent → Confirmed. All entries are for internal tracking only.</AlertBox>
+
+      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:16 }}>
+        <div style={{ display:"flex", gap:10 }}>
+          {["POD","COM","BRD","EXC"].map(t => (
+            <div key={t} style={{ display:"flex", alignItems:"center", gap:5 }}>
+              <div style={{ width:8, height:8, borderRadius:"50%", background:TIER_COLORS[t] }} />
+              <span style={{ fontSize:T.xs, color:T.mist, fontWeight:600 }}>{t}</span>
+            </div>
+          ))}
+        </div>
+        <Button onClick={() => setAdding(!adding)} variant="gold" size="sm">{adding ? "Cancel" : "+ Add Client"}</Button>
+      </div>
+
+      {adding && (
+        <Card style={{ marginBottom:16, border:`1px solid ${T.gold}44` }}>
+          <Divider label="New Delivery Record" />
+          <Grid cols={3} gap={10}>
+            {[["Client / Brand","client"],["Collection","collection"],["Notes","notes"]].map(([l,k]) => (
+              <div key={k}>
+                <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:4 }}>{l}</label>
+                <input value={form[k]} onChange={e => setForm(f => ({...f,[k]:e.target.value}))}
+                  style={{ width:"100%", padding:"7px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, fontSize:T.base, boxSizing:"border-box", color:T.ink }} />
+              </div>
+            ))}
+            <div>
+              <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:4 }}>Licence Tier</label>
+              <select value={form.tier} onChange={e => setForm(f => ({...f,tier:e.target.value}))}
+                style={{ width:"100%", padding:"7px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, fontSize:T.base, color:T.ink }}>
+                {["POD","COM","BRD","EXC"].map(t => <option key={t}>{t}</option>)}
+              </select>
+            </div>
+            <div>
+              <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:4 }}>Licence Date</label>
+              <input type="date" value={form.date} onChange={e => setForm(f => ({...f,date:e.target.value}))}
+                style={{ width:"100%", padding:"7px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, fontSize:T.base, color:T.ink }} />
+            </div>
+          </Grid>
+          <div style={{ marginTop:12 }}><Button onClick={addDelivery}>Add to Tracker</Button></div>
+        </Card>
+      )}
+
+      {deliveries.map(d => {
+        const required = DELIVERABLE_ITEMS.filter(i => i.tier.includes(d.tier));
+        const status = getStatus(d.items, d.tier);
+        const isOpen = selected === d.id;
+        return (
+          <Card key={d.id} style={{ marginBottom:12, borderLeft:`3px solid ${TIER_COLORS[d.tier]||T.mist}` }}>
+            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:isOpen?16:0, cursor:"pointer" }}
+              onClick={() => setSelected(isOpen ? null : d.id)}>
+              <div>
+                <div style={{ fontWeight:800, color:T.indigo, fontSize:T.lg, fontFamily:"Georgia,serif" }}>{d.client}</div>
+                <div style={{ display:"flex", gap:8, marginTop:4, flexWrap:"wrap" }}>
+                  <Tag color="indigo" size="xs">{d.tier}</Tag>
+                  <span style={{ fontSize:T.xs, color:T.mist }}>{d.collection}</span>
+                  {d.date && <span style={{ fontSize:T.xs, color:T.mist }}>· {d.date}</span>}
+                  <span style={{ fontSize:T.xs, fontWeight:700, color:status.color }}>● {status.label}</span>
+                </div>
+                {d.notes && <div style={{ fontSize:T.xs, color:T.mist, marginTop:4, fontStyle:"italic" }}>{d.notes}</div>}
+              </div>
+              <span style={{ color:T.mist, fontSize:18 }}>{isOpen ? "▲" : "▼"}</span>
+            </div>
+
+            {isOpen && (
+              <div>
+                <Divider label="Deliverables Checklist" />
+                <div style={{ display:"grid", gridTemplateColumns:"repeat(2,1fr)", gap:8 }}>
+                  {required.map(item => {
+                    const st = d.items[item.id];
+                    const bg = st==="confirmed"?`${T.jade}18`:st==="sent"?`${T.gold}18`:T.ground;
+                    const border = st==="confirmed"?T.jade:st==="sent"?T.gold:T.border;
+                    const icon = st==="confirmed"?"✓":st==="sent"?"→":"○";
+                    const color = st==="confirmed"?T.jade:st==="sent"?T.amber:T.mist;
+                    return (
+                      <div key={item.id} onClick={() => toggleItem(d.id, item.id)}
+                        style={{ display:"flex", gap:10, alignItems:"center", padding:"10px 12px",
+                          borderRadius:T.radius, background:bg, border:`1px solid ${border}`,
+                          cursor:"pointer", transition:"all 0.15s" }}>
+                        <span style={{ fontSize:16, color, fontWeight:700, flexShrink:0 }}>{icon}</span>
+                        <div>
+                          <div style={{ fontSize:T.sm, fontWeight:600, color:T.ink }}>{item.label}</div>
+                          <div style={{ fontSize:T.xs, color:T.mist }}>{st||"Pending"}</div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div style={{ marginTop:12, padding:"10px 14px", background:"#FEF9EC", border:`1px solid ${T.gold}44`, borderRadius:T.radius, fontSize:T.xs, color:"#7A5C10" }}>
+                  Click once = Sent · Click twice = Confirmed · Click three times = Reset to Pending
+                </div>
+              </div>
+            )}
+          </Card>
+        );
+      })}
+    </div>
+  );
+}
 const MODULE_MAP = {
   dashboard:Dashboard, brand:BrandBible, design:DesignLanguage, motifs:MotifLibrary,
   prompts:PromptGenerator, collections:CollectionPlanner, vault:AssetVault,
@@ -4175,7 +4334,7 @@ const MODULE_MAP = {
   revenue:RevenueDashboard, workflow:StudioWorkflow, legal:PreLaunchLegal, action:ActionPlan,
   watermark:WatermarkStudio,
   framework:LicensingFramework, revmodel:RevenueModel,
-  colarch:CollectionArchitecture, journey:CustomerJourney, design_agent:DesignAgent,
+  colarch:CollectionArchitecture, journey:CustomerJourney, design_agent:DesignAgent, deliverables:DeliverablesTracker,
 };
 
 
@@ -5777,6 +5936,8 @@ export default function App() {
     </div>
   );
 }
+
+
 
 
 
