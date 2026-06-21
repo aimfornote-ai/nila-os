@@ -4610,9 +4610,9 @@ function ClientView() {
             width:"100%", maxWidth:520 }}>
             {[
               { img:"/images/hero-wallcovering.png", label:"WALLCOVERING", name:"Midnight Siam" },
-              { img:"/images/hero-scarf.png",        label:"SILK SCARF · TEXTILE", name:"Siam Tropical" },
+              { img:"/images/col-midnight-siam.png",        label:"SILK SCARF · TEXTILE", name:"Siam Tropical" },
               { img:"/images/hero-hospitality.png",  label:"HOSPITALITY · FF&E", name:"Interior Application" },
-              { img:"/images/hero-spa.png",          label:"GIFTING & LIFESTYLE", name:"Lotus & Plumeria" },
+              { img:"/images/col-tea-set.png",          label:"GIFTING & LIFESTYLE", name:"Lotus & Plumeria" },
             ].map((c,i)=>(
               <div key={i} style={{ borderRadius:10, overflow:"hidden", position:"relative",
                 aspectRatio:"1/1",
