@@ -4413,9 +4413,7 @@ function SplashScreen({ onEnter }) {
         </div>
         {/* Triple-click here to show admin login */}
         <div onClick={handleLogoClick} style={{ cursor:"default", userSelect:"none" }}>
-          <img src="/nila-logo.png.png" alt="NILA Heritage Living"
-            style={{ width:220, height:"auto", marginBottom:16,
-              filter:"drop-shadow(0 4px 32px rgba(199,162,77,0.3))" }} />
+          <div style={{ textAlign:"center" }}><div style={{ fontSize:20, fontWeight:900, color:"#F7F4ED", fontFamily:"Georgia,serif", letterSpacing:4, lineHeight:1 }}>NILA</div><div style={{ fontSize:8, fontWeight:700, color:"#C7A24D", letterSpacing:3, textTransform:"uppercase", lineHeight:1, marginTop:2 }}>HERITAGE LIVING™</div></div>
         </div>
         <div style={{ fontSize:11, color:"rgba(247,244,237,0.45)", letterSpacing:3, fontStyle:"italic" }}>
           Inspired by Thai Heritage. Crafted for the World.
@@ -4740,9 +4738,7 @@ function ClientView() {
       padding:"0 clamp(16px,4vw,40px)" }}>
       <div style={{ display:"flex", alignItems:"center", gap:10, cursor:"pointer" }}
         onClick={()=>{ setActiveSection("home"); setMobileOpen(false); }}>
-        <img src="/nila-logo.png.png" alt="NILA Heritage Living"
-          style={{ height:38, width:"auto", filter:"brightness(0) invert(1) sepia(1) saturate(2) hue-rotate(5deg)",
-            opacity:0.92 }} />
+        <div style={{ textAlign:"center" }}><div style={{ fontSize:20, fontWeight:900, color:"#F7F4ED", fontFamily:"Georgia,serif", letterSpacing:4, lineHeight:1 }}>NILA</div><div style={{ fontSize:8, fontWeight:700, color:"#C7A24D", letterSpacing:3, textTransform:"uppercase", lineHeight:1, marginTop:2 }}>HERITAGE LIVING™</div></div>
       </div>
       {/* Desktop nav */}
       <div style={{ display:"flex", gap:28, "@media(max-width:768px)":{display:"none"} }}
@@ -5936,6 +5932,8 @@ export default function App() {
     </div>
   );
 }
+
+
 
 
 
