@@ -4063,60 +4063,40 @@ function ExportBar() {
 // ─────────────────────────────────────────────────────────────────────────────
 // DESIGN AGENT
 // ─────────────────────────────────────────────────────────────────────────────
+// DESIGN AGENT
+// ─────────────────────────────────────────────────────────────────────────────
 function DesignAgent() {
   const MODES = [
-    { id:"brief",  icon:"📋", label:"Collection Brief", desc:"Gen collection concept & mood" },
+    { id:"brief",  icon:"📋", label:"Collection Brief", desc:"Collection concept & mood" },
     { id:"story",  icon:"✍️", label:"Pattern Story",    desc:"Storytelling สำหรับ licensing deck" },
-    { id:"prompt", icon:"🖼️", label:"Image Prompt",     desc:"Gen prompt สำหรับ Midjourney / DALL-E" },
-    { id:"chat",   icon:"💬", label:"Free Chat",        desc:"ถามอะไรก็ได้เกี่ยวกับ NILA design" },
+    { id:"prompt", icon:"🖼️", label:"Image Prompt",     desc:"Prompt สำหรับ Midjourney / DALL-E" },
+    { id:"chat",   icon:"💬", label:"Design Notes",     desc:"Design direction & brand notes" },
   ];
   const COLLECTIONS = ["Midnight Siam","Lotus Pink & Sage","Lotus Damask","Siam Tropical"];
   const PALETTES    = ["Emerald & Antique Gold","Indigo & Gold","Lotus Rose & Ivory","Sage & Blush"];
   const MARKETS     = ["Wallcovering","Silk Scarf & Textile","Hospitality FF&E","Gifting & Lifestyle","Ceramics & Tableware"];
+  const TEMPLATES = {
+    brief: (col,pal,mkt,mot) => `NILA™ COLLECTION BRIEF\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nCOLLECTION: ${col}\nTAGLINE: "Where Thai Heritage Meets Contemporary Living"\n\n1. CULTURAL INSPIRATION\nThe ${col} collection draws from the classical ${mot.name} (${mot.thai}) motif — ${mot.era}. ${mot.meaning}\n\n2. MOOD & ATMOSPHERE\nRefined · Heritage · Liveable Luxury · Culturally Grounded\nA design vocabulary that honours Thai ornamental tradition while speaking to the contemporary global interior market.\n\n3. COLOUR PALETTE — ${pal}\nPrimary tones drawn from the ${pal} palette. Each colourway is calibrated for production-ready surface application across wallcovering, textile, and packaging substrates.\n\n4. KEY MOTIFS & MEANING\n• ${mot.name} (${mot.thai}) — ${mot.meaning}\n• Surface form: ${mot.form||"Classical repeat structure"}\n• Applications: ${mot.surfaces}\n\n5. SURFACE APPLICATIONS\nTarget surface: ${mkt}\nAdditional surfaces: Wallcovering · Textile · Premium Packaging · Silk Scarf · Hotel FF&E\n\n6. TARGET LICENSING PARTNERS\n• Premium ${mkt} brands — European and APAC markets\n• Luxury hospitality groups seeking cultural identity\n• Heritage lifestyle brands with global distribution\n\n7. IP & LICENSING\nAll designs are original NILA™ cultural IP. Available under Commercial, Brand Collection, and Exclusive Commission licence tiers.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nNILA™ Heritage Living · Siamese Botanica · Thailand\n[Personalise bracketed sections before use]`,
+    story: (col,pal,mkt,mot) => `PATTERN STORY — ${mot.name} (${mot.thai})\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nCOLLECTION: ${col}\n\nHISTORICAL & CULTURAL CONTEXT\nThe ${mot.name} motif carries deep roots in Thai decorative arts. ${mot.era}. As a design form, it represents ${mot.meaning}\n\nVISUAL DESCRIPTION\nThe pattern presents as ${mot.form||"an elegant repeat"} — rendered in the ${pal} palette. The composition balances ornamental density with breathing space, creating a surface that reads with clarity at scale and intimacy at close range.\n\nSYMBOLIC MEANING\n${mot.meaning} In the NILA™ interpretation, this symbolism is carried forward without pastiche — the cultural source is honoured, not costumed.\n\nMODERN APPLICATION\nApplied to ${mkt}, the ${mot.name} pattern brings cultural depth to contemporary interiors. The repeat is engineered for production at wallcovering scale while retaining legibility as a textile or packaging motif.\n\nWHY THIS PATTERN FOR ${mkt.toUpperCase()}\nThe ${mot.name} form translates exceptionally to ${mkt} applications. Its structural clarity and cultural resonance position it as a distinctive alternative to generic heritage surface designs in the global luxury market.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nNILA™ Heritage Living · Cultural IP Library`,
+    prompt: (col,pal,mkt,mot) => `IMAGE GENERATION PROMPTS — ${col}\nTarget: ${mkt} · Palette: ${pal}\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nPROMPT 1 — Pattern Design (Allover Repeat)\nIntricate Thai ${mot.name} (${mot.thai}) ornamental pattern, seamless allover repeat, ${pal} colour palette, antique gold linework on deep emerald ground, classical flame scroll motifs, high resolution 300dpi surface design, luxury wallcovering application, heritage Thai decorative arts, warm ambient lighting, production ready, --tile --ar 1:1 --v 6 --style raw\n\nPROMPT 2 — Product Mockup (${mkt})\nEditorial luxury commercial photograph of a premium ${mkt} product featuring NILA™ ${col} pattern, ${pal} colourway with intricate Thai ${mot.name} heritage motifs, 5-star hotel interior setting, soft natural daylight through sheer curtains, pattern detail clearly visible, no other brand names, shot on 35mm lens f/2.8, photorealistic, premium brand advertising quality, --ar 4:3 --v 6\n\nPROMPT 3 — Lifestyle Scene\nLuxury lifestyle flat lay featuring ${col} patterned ${mkt} on Italian marble surface, ${pal} palette, Thai botanical elements, warm golden hour light, minimalist luxury styling, NILA™ brand aesthetic, high-end editorial photography, --ar 3:2 --v 6 --style raw\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nCopy each prompt individually into Midjourney or DALL-E 3`,
+    chat: (col,pal,mkt,mot) => `DESIGN DIRECTION NOTES — ${col}\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nBRAND VOICE REMINDER\nScholarly Artisan · Quiet Authority · Culturally Grounded · Precise and Poetic\n\nCOLLECTION DIRECTION: ${col}\n• Primary motif: ${mot.name} (${mot.thai})\n• Palette: ${pal}\n• Target market: ${mkt}\n\nDESIGN DOs\n✓ Reference specific Thai motif names and historical periods\n✓ Use: "heritage", "classical", "contemporary interpretation"\n✓ Lead with cultural story before commercial value\n✓ Pair emerald + antique gold as primary palette\n\nDESIGN DONTs\n✗ Never use: "oriental", "exotic", "Asian-inspired"\n✗ Avoid tourist-souvenir aesthetics\n✗ No cartoonish or flat graphic treatments\n\nMOTIF USAGE NOTES\n${mot.name}: ${mot.do||"Use in refined repeat, wallpaper border, medallion layouts."}\nAvoid: ${mot.dont||"Avoid cartoonish or generic interpretations."}\n\nSURFACE APPLICATIONS FOR ${mkt.toUpperCase()}\n${mot.surfaces}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nNILA™ Heritage Living · Internal Design Reference`,
+  };
   const [mode, setMode]             = useState("brief");
   const [collection, setCollection] = useState(COLLECTIONS[0]);
   const [palette, setPalette]       = useState(PALETTES[0]);
   const [market, setMarket]         = useState(MARKETS[0]);
-  const [chatInput, setChatInput]   = useState("");
-  const [customNote, setCustomNote] = useState("");
   const [output, setOutput]         = useState("");
-  const [loading, setLoading]       = useState(false);
-  const [error, setError]           = useState("");
   const [copied, setCopied]         = useState(false);
   const motif = MOTIFS.find(m => collection.includes(m.name.split(" ")[0])) || MOTIFS[0];
-  const SYSTEM = `You are the NILA Design Intelligence, a creative AI for NILA Heritage Living, a Thai cultural IP licensing brand. Brand voice: Scholarly Artisan. Quiet Authority. Culturally Grounded. Precise and Poetic. Reference specific Thai motif names, historical periods, and precise surface descriptions. Never use oriental, exotic, or vague cultural references. Tone: warm but precise, story-first, culturally specific. Always position NILA as a premium heritage IP brand.`;
-  const buildPrompt = () => {
-    const base = `Collection: ${collection}\nPalette: ${palette}\nTarget market: ${market}\nMotif: ${motif.name} (${motif.thai}) - ${motif.meaning}`;
-    if (mode==="brief")  return `${base}\n\nWrite a full Collection Brief for NILA including:\n1. Collection Name & Tagline\n2. Cultural Inspiration\n3. Mood & Atmosphere\n4. Colour Palette Description\n5. Key Motifs & Their Meaning\n6. Surface Applications\n7. Target Licensing Partners\n\nWrite in NILA brand voice. Be specific and poetic.`;
-    if (mode==="story")  return `${base}\n\nWrite a Pattern Story for the ${motif.name} motif for use in a NILA licensing deck.\nInclude:\n1. Historical & Cultural Context\n2. Visual Description of the Pattern\n3. Symbolic Meaning\n4. Modern Application Story\n5. Why this pattern for ${market}\n\nKeep it elegant, 200-250 words.`;
-    if (mode==="prompt") return `${base}\n\nGenerate 3 detailed image generation prompts (Midjourney / DALL-E style) for the ${collection} collection applied to ${market}.\nEach prompt should describe the visual scene precisely, include colour palette: ${palette}, reference the ${motif.name} motif, specify lighting texture mood, and end with style tags.\nFormat each as: Prompt 1: [prompt text]`;
-    if (mode==="chat")   return chatInput;
-    return "";
-  };
-  const generate = async () => {
-    if (mode==="chat" && !chatInput.trim()) return;
-    setLoading(true); setError(""); setOutput("");
-    try {
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
-        method:"POST", headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({ model:"claude-sonnet-4-6", max_tokens:1000, system:SYSTEM, messages:[{ role:"user", content:buildPrompt()+(customNote?`\n\nAdditional context: ${customNote}`:"") }] }),
-      });
-      const data = await res.json();
-      if (data.content?.[0]?.text) setOutput(data.content[0].text);
-      else if (data.error) setError(`API error: ${data.error.message}`);
-    } catch(err) { setError(`Network error: ${err.message}`); }
-    finally { setLoading(false); }
-  };
-  const copyOutput = () => {
-    if (!output) return;
-    navigator.clipboard?.writeText(output).then(()=>{ setCopied(true); setTimeout(()=>setCopied(false),2000); });
-  };
+  const generate = () => { const t = TEMPLATES[mode]; if(t) setOutput(t(collection,palette,market,motif)); };
+  const copyOutput = () => { if(!output) return; navigator.clipboard?.writeText(output).then(()=>{ setCopied(true); setTimeout(()=>setCopied(false),2000); }); };
   return (
     <div>
-      <SectionHead icon="🎨" title="Design Agent" subtitle="AI creative assistant for NILA collection development" />
+      <SectionHead icon="🎨" title="Design Agent" subtitle="Template-based creative tool for NILA™ collection development" />
+      <AlertBox type="info">Template mode — outputs are structured starting points. Personalise all content before client use. AI generation available when API key is connected.</AlertBox>
       <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:10, marginBottom:20 }}>
         {MODES.map(m => (
-          <div key={m.id} onClick={() => { setMode(m.id); setOutput(""); setError(""); }}
+          <div key={m.id} onClick={() => { setMode(m.id); setOutput(""); }}
             style={{ padding:"14px 12px", borderRadius:T.radiusL, border:`2px solid ${mode===m.id?T.gold:T.border}`,
               background:mode===m.id?`${T.gold}12`:T.white, cursor:"pointer", textAlign:"center" }}>
             <div style={{ fontSize:22, marginBottom:6 }}>{m.icon}</div>
@@ -4128,73 +4108,57 @@ function DesignAgent() {
       <Grid cols={2} gap={14}>
         <Card>
           <Divider label="Configuration" />
-          {mode !== "chat" && (<>
-            <div style={{ marginBottom:12 }}>
-              <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Collection</label>
-              <select defaultValue={collection} onChange={e=>setCollection(e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit", color:T.ink }}>
-                {COLLECTIONS.map(c=><option key={c} value={c}>{c}</option>)}
-              </select>
-            </div>
-            <div style={{ marginBottom:12 }}>
-              <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Palette</label>
-              <select defaultValue={palette} onChange={e=>setPalette(e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit", color:T.ink }}>
-                {PALETTES.map(p=><option key={p} value={p}>{p}</option>)}
-              </select>
-            </div>
-            <div style={{ marginBottom:12 }}>
-              <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Target Market</label>
-              <select defaultValue={market} onChange={e=>setMarket(e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit", color:T.ink }}>
-                {MARKETS.map(m=><option key={m} value={m}>{m}</option>)}
-              </select>
-            </div>
-            <div style={{ padding:"10px 12px", background:`${T.gold}0A`, borderRadius:T.radius, border:`1px solid ${T.gold}33`, marginBottom:12 }}>
-              <div style={{ fontSize:T.xs, fontWeight:700, color:T.amber, marginBottom:2 }}>Motif: {motif.name} ({motif.thai})</div>
-              <div style={{ fontSize:T.xs, color:T.mist, lineHeight:1.5 }}>{motif.meaning}</div>
-            </div>
-          </>)}
-          {mode==="chat" && (
-            <div style={{ marginBottom:12 }}>
-              <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Your Question</label>
-              <textarea value={chatInput} onChange={e=>setChatInput(e.target.value)}
-                placeholder="ถามเรื่อง design direction, motif usage, collection naming, brand voice..."
-                style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, fontSize:T.sm, fontFamily:"inherit", resize:"vertical", minHeight:100, boxSizing:"border-box", color:T.ink }} />
-            </div>
-          )}
-          <Divider label="Additional Context" />
-          <textarea value={customNote} onChange={e=>setCustomNote(e.target.value)}
-            placeholder="เพิ่ม context พิเศษ เช่น target licensee, season, occasion..."
-            style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, fontSize:T.sm, fontFamily:"inherit", resize:"vertical", minHeight:60, boxSizing:"border-box", color:T.ink, marginBottom:12 }} />
-          <button onClick={generate} disabled={loading}
+          <div style={{ marginBottom:12 }}>
+            <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Collection</label>
+            <select value={collection} onChange={e=>setCollection(e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit", color:T.ink }}>
+              {COLLECTIONS.map(c=><option key={c} value={c}>{c}</option>)}
+            </select>
+          </div>
+          <div style={{ marginBottom:12 }}>
+            <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Palette</label>
+            <select value={palette} onChange={e=>setPalette(e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit", color:T.ink }}>
+              {PALETTES.map(p=><option key={p} value={p}>{p}</option>)}
+            </select>
+          </div>
+          <div style={{ marginBottom:12 }}>
+            <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Target Market</label>
+            <select value={market} onChange={e=>setMarket(e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit", color:T.ink }}>
+              {MARKETS.map(m=><option key={m} value={m}>{m}</option>)}
+            </select>
+          </div>
+          <div style={{ padding:"10px 12px", background:`${T.gold}0A`, borderRadius:T.radius, border:`1px solid ${T.gold}33`, marginBottom:16 }}>
+            <div style={{ fontSize:T.xs, fontWeight:700, color:T.amber, marginBottom:2 }}>Motif: {motif.name} ({motif.thai})</div>
+            <div style={{ fontSize:T.xs, color:T.mist, lineHeight:1.5 }}>{motif.meaning}</div>
+          </div>
+          <button onClick={generate}
             style={{ width:"100%", padding:"10px", borderRadius:T.radius, border:"none",
-              background:loading?T.ground:`linear-gradient(135deg,${T.indigo},${T.indigoL})`,
-              color:loading?T.mist:"#fff", fontWeight:700, fontSize:T.base, cursor:loading?"not-allowed":"pointer" }}>
-            {loading ? "⏳ Generating..." : "✦ Generate with Claude"}
+              background:`linear-gradient(135deg,${T.indigo},${T.indigoL})`,
+              color:"#fff", fontWeight:700, fontSize:T.base, cursor:"pointer", letterSpacing:"0.02em" }}>
+            ✦ Generate Template
           </button>
-          {error && <div style={{ marginTop:8, fontSize:T.xs, color:T.crimson, padding:"6px 10px", background:"#FEF2F2", borderRadius:6 }}>{error}</div>}
+          <div style={{ marginTop:10, padding:"10px 14px", background:"#FEF9EC", border:`1px solid ${T.gold}44`, borderRadius:T.radius, fontSize:T.xs, color:"#7A5C10", lineHeight:1.5 }}>
+            ⚠ Template output — personalise all content before use in client-facing materials.
+          </div>
         </Card>
         <div style={{ position:"sticky", top:16, alignSelf:"flex-start" }}>
           <Card style={{ border:`2px solid ${output?T.gold:T.border}` }}>
             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:12 }}>
               <div style={{ display:"flex", gap:8, alignItems:"center" }}>
-                <Tag color={output?"gold":"jade"}>{output?"✦ Claude Output":"Awaiting generation"}</Tag>
+                <Tag color={output?"gold":"jade"}>{output?"✦ Template Output":"Awaiting generation"}</Tag>
                 {output && <Tag color="indigo" size="xs">{MODES.find(m=>m.id===mode)?.label}</Tag>}
               </div>
               {output && <Button onClick={copyOutput} variant="gold" size="sm">{copied?"✓ Copied":"Copy"}</Button>}
             </div>
-            {loading ? (
-              <div style={{ textAlign:"center", padding:"60px 20px" }}>
-                <div style={{ fontSize:28, marginBottom:12 }}>✦</div>
-                <div style={{ fontSize:T.sm, color:T.mist }}>Claude is creating...</div>
-              </div>
-            ) : output ? (
+            {output ? (
               <div style={{ background:T.indigoD, borderRadius:T.radius, padding:"14px 16px", color:"#C8D8FF",
-                fontFamily:"monospace", fontSize:T.xs, lineHeight:1.8, maxHeight:520, overflowY:"auto", whiteSpace:"pre-wrap", wordBreak:"break-word" }}>
+                fontFamily:"monospace", fontSize:T.xs, lineHeight:1.8, maxHeight:520,
+                overflowY:"auto", whiteSpace:"pre-wrap", wordBreak:"break-word" }}>
                 {output}
               </div>
             ) : (
               <div style={{ textAlign:"center", padding:"60px 20px", color:T.mist }}>
                 <div style={{ fontSize:32, marginBottom:12, opacity:0.3 }}>🎨</div>
-                <div style={{ fontSize:T.sm }}>เลือก mode และกด Generate</div>
+                <div style={{ fontSize:T.sm }}>เลือก mode และกด Generate Template</div>
               </div>
             )}
           </Card>
@@ -5813,6 +5777,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
