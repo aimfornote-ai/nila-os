@@ -4413,7 +4413,10 @@ function SplashScreen({ onEnter }) {
         </div>
         {/* Triple-click here to show admin login */}
         <div onClick={handleLogoClick} style={{ cursor:"default", userSelect:"none" }}>
-          <div style={{ textAlign:"center" }}><div style={{ fontSize:20, fontWeight:900, color:"#F7F4ED", fontFamily:"Georgia,serif", letterSpacing:4, lineHeight:1 }}>NILA</div><div style={{ fontSize:8, fontWeight:700, color:"#C7A24D", letterSpacing:3, textTransform:"uppercase", lineHeight:1, marginTop:2 }}>HERITAGE LIVING™</div></div>
+          <div style={{ textAlign:"left", lineHeight:1 }}>
+            <div style={{ fontSize:22, fontWeight:900, color:"#F7F4ED", fontFamily:"Georgia,serif", letterSpacing:6, lineHeight:1 }}>NILA</div>
+            <div style={{ fontSize:7, fontWeight:700, color:"#C7A24D", letterSpacing:2.5, textTransform:"uppercase", lineHeight:1, marginTop:3 }}>HERITAGE LIVING™</div>
+          </div>
         </div>
         <div style={{ fontSize:11, color:"rgba(247,244,237,0.45)", letterSpacing:3, fontStyle:"italic" }}>
           Inspired by Thai Heritage. Crafted for the World.
@@ -4738,7 +4741,10 @@ function ClientView() {
       padding:"0 clamp(16px,4vw,40px)" }}>
       <div style={{ display:"flex", alignItems:"center", gap:10, cursor:"pointer" }}
         onClick={()=>{ setActiveSection("home"); setMobileOpen(false); }}>
-        <div style={{ textAlign:"center" }}><div style={{ fontSize:20, fontWeight:900, color:"#F7F4ED", fontFamily:"Georgia,serif", letterSpacing:4, lineHeight:1 }}>NILA</div><div style={{ fontSize:8, fontWeight:700, color:"#C7A24D", letterSpacing:3, textTransform:"uppercase", lineHeight:1, marginTop:2 }}>HERITAGE LIVING™</div></div>
+        <div style={{ textAlign:"left", lineHeight:1 }}>
+            <div style={{ fontSize:22, fontWeight:900, color:"#F7F4ED", fontFamily:"Georgia,serif", letterSpacing:6, lineHeight:1 }}>NILA</div>
+            <div style={{ fontSize:7, fontWeight:700, color:"#C7A24D", letterSpacing:2.5, textTransform:"uppercase", lineHeight:1, marginTop:3 }}>HERITAGE LIVING™</div>
+          </div>
       </div>
       {/* Desktop nav */}
       <div style={{ display:"flex", gap:28, "@media(max-width:768px)":{display:"none"} }}
@@ -5932,6 +5938,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
