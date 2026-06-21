@@ -4414,11 +4414,11 @@ function SplashScreen({ onEnter }) {
         {/* Triple-click here to show admin login */}
         <div onClick={handleLogoClick} style={{ cursor:"default", userSelect:"none" }}>
           <div style={{ textAlign:"left", lineHeight:1 }}>
-            <div style={{ fontSize:26, fontWeight:900, color:"#F7F4ED", fontFamily:"Georgia,serif", letterSpacing:7, lineHeight:1 }}>NILA</div>
-            <div style={{ fontSize:8, fontWeight:700, color:"#C7A24D", letterSpacing:3, textTransform:"uppercase", lineHeight:1, marginTop:4 }}>HERITAGE LIVING™</div>
+            <div style={{ fontSize:48, fontWeight:900, color:"#F7F4ED", fontFamily:"Georgia,serif", letterSpacing:10, lineHeight:1 }}>NILA</div>
+            <div style={{ fontSize:11, fontWeight:700, color:"#C7A24D", letterSpacing:5, textTransform:"uppercase", lineHeight:1, marginTop:8 }}>HERITAGE LIVING™</div>
           </div>
         </div>
-        <div style={{ fontSize:11, color:"rgba(247,244,237,0.45)", letterSpacing:3, fontStyle:"italic" }}>
+        <div style={{ fontSize:13, color:"rgba(247,244,237,0.7)", letterSpacing:3, fontStyle:"italic" }}>
           Inspired by Thai Heritage. Crafted for the World.
         </div>
         <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:8, marginTop:20 }}>
@@ -4458,12 +4458,10 @@ function SplashScreen({ onEnter }) {
         onMouseLeave={e=>{ e.currentTarget.style.background="transparent"; e.currentTarget.style.letterSpacing="6px"; }}>
         ENTER
       </button>
-      <div style={{ marginTop:16, fontSize:10, color:"rgba(247,244,237,0.25)", letterSpacing:2 }}>
-        DESIGN OS  v3.2
-      </div>
+
       <div style={{ position:"absolute", bottom:40, fontSize:10,
         color:"rgba(199,162,77,0.4)", letterSpacing:3, textTransform:"uppercase" }}>
-        Siamese Botanica · Thailand
+        A Cultural Design House from Thailand
       </div>
       <style>{`@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}`}</style>
     </div>
@@ -4742,8 +4740,8 @@ function ClientView() {
       <div style={{ display:"flex", alignItems:"center", gap:10, cursor:"pointer" }}
         onClick={()=>{ setActiveSection("home"); setMobileOpen(false); }}>
         <div style={{ textAlign:"left", lineHeight:1 }}>
-            <div style={{ fontSize:26, fontWeight:900, color:"#F7F4ED", fontFamily:"Georgia,serif", letterSpacing:7, lineHeight:1 }}>NILA</div>
-            <div style={{ fontSize:8, fontWeight:700, color:"#C7A24D", letterSpacing:3, textTransform:"uppercase", lineHeight:1, marginTop:4 }}>HERITAGE LIVING™</div>
+            <div style={{ fontSize:48, fontWeight:900, color:"#F7F4ED", fontFamily:"Georgia,serif", letterSpacing:10, lineHeight:1 }}>NILA</div>
+            <div style={{ fontSize:11, fontWeight:700, color:"#C7A24D", letterSpacing:5, textTransform:"uppercase", lineHeight:1, marginTop:8 }}>HERITAGE LIVING™</div>
           </div>
       </div>
       {/* Desktop nav */}
@@ -5940,6 +5938,8 @@ export default function App() {
     </div>
   );
 }
+
+
 
 
 
