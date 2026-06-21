@@ -4823,7 +4823,7 @@ function ClientView() {
       <div className="nila-hero-split" style={{ minHeight:"100vh", background:"linear-gradient(160deg,#0A3528 0%,#0F4D3A 55%,#0A2A1E 100%)",
         display:"flex", alignItems:"stretch", position:"relative", overflow:"hidden", paddingTop:60 }}>
         {/* Kanok pattern overlay */}
-        <div style={{ position:"absolute", inset:0, opacity:0.04,
+        <div style={{ position:"absolute", inset:0, opacity:0.025,
           backgroundImage:`url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C7A24D'%3E%3Cpath d='M50 8C50 8 63 30 50 50C37 30 50 8 50 8Z'/%3E%3Cpath d='M50 92C50 92 63 70 50 50C37 70 50 92 50 92Z'/%3E%3Cpath d='M8 50C8 50 30 63 50 50C30 37 8 50 8 50Z'/%3E%3Cpath d='M92 50C92 50 70 63 50 50C70 37 92 50 92 50Z'/%3E%3C/g%3E%3C/svg%3E")`,
           backgroundSize:"100px 100px" }} />
 
@@ -5940,6 +5940,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
