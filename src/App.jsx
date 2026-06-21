@@ -4400,12 +4400,18 @@ function SplashScreen({ onEnter }) {
       display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center",
       opacity:fadeOut?0:1, transition:"opacity 0.8s ease" }}>
 
+      {/* Kanok watermark */}
+      <div style={{ position:"absolute", width:500, height:500, borderRadius:"50%",
+        background:"radial-gradient(circle,rgba(199,162,77,0.06) 0%,transparent 65%)",
+        top:"30%", left:"50%", transform:"translate(-50%,-50%)", pointerEvents:"none",
+        backgroundImage:`url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 10C50 10 65 35 50 50C35 35 50 10 50 10Z' fill='%23C7A24D' opacity='0.03'/%3E%3Cpath d='M50 90C50 90 65 65 50 50C35 65 50 90 50 90Z' fill='%23C7A24D' opacity='0.03'/%3E%3C/svg%3E")`,
+        backgroundSize:"80px 80px", opacity:0.4 }} />
       {/* Ambient glow */}
       <div style={{ position:"absolute", width:400, height:400, borderRadius:"50%",
         background:"radial-gradient(circle,rgba(199,162,77,0.08) 0%,transparent 70%)",
         top:"50%", left:"50%", transform:"translate(-50%,-50%)", pointerEvents:"none" }} />
 
-      <div style={{ textAlign:"center", marginBottom:48 }}>
+      <div style={{ textAlign:"center", marginBottom:32 }}>
         <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:12, marginBottom:32 }}>
           <div style={{ width:60, height:1, background:"linear-gradient(90deg,transparent,rgba(199,162,77,0.5))" }} />
           <div style={{ width:6, height:6, background:"#C7A24D", transform:"rotate(45deg)", opacity:0.7 }} />
@@ -4418,10 +4424,10 @@ function SplashScreen({ onEnter }) {
             <div style={{ fontSize:11, fontWeight:700, color:"#C7A24D", letterSpacing:5, textTransform:"uppercase", lineHeight:1, marginTop:8 }}>HERITAGE LIVING™</div>
           </div>
         </div>
-        <div style={{ fontSize:13, color:"rgba(247,244,237,0.7)", letterSpacing:3, fontStyle:"italic" }}>
+        <div style={{ fontSize:15, color:"rgba(247,244,237,0.82)", letterSpacing:3, fontStyle:"italic" }}>
           Inspired by Thai Heritage. Crafted for the World.
         </div>
-        <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:8, marginTop:20 }}>
+        <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:8, marginTop:32 }}>
           <div style={{ width:40, height:1, background:"linear-gradient(90deg,transparent,rgba(199,162,77,0.4))" }} />
           <span style={{ color:"#C7A24D", fontSize:14, opacity:0.6 }}>✦</span>
           <div style={{ width:40, height:1, background:"linear-gradient(90deg,rgba(199,162,77,0.4),transparent)" }} />
@@ -5671,7 +5677,7 @@ function ClientView() {
       </div>
       {/* Design Philosophy */}
       <div style={{ background:T.ground, padding:"clamp(64px,10vw,100px) clamp(24px,6vw,80px)" }}>
-        <div style={{ textAlign:"center", marginBottom:48 }}>
+        <div style={{ textAlign:"center", marginBottom:32 }}>
           <div style={{ fontSize:9, color:T.gold, letterSpacing:5, textTransform:"uppercase",
             marginBottom:16, fontFamily:"'Inter',system-ui,sans-serif" }}>How We Work</div>
           <div style={{ fontSize:"clamp(28px,3vw,44px)", fontWeight:300, color:T.indigo,
@@ -5938,6 +5944,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
