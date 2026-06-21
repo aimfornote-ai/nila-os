@@ -4058,6 +4058,141 @@ function ExportBar() {
 // ────────────────────────────────────────────────────────────
 // APP ROOT
 // ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// DESIGN AGENT
+// ─────────────────────────────────────────────────────────────────────────────
+function DesignAgent() {
+  const MODES = [
+    { id:"brief",  icon:"📋", label:"Collection Brief", desc:"Gen collection concept & mood" },
+    { id:"story",  icon:"✍️", label:"Pattern Story",    desc:"Storytelling สำหรับ licensing deck" },
+    { id:"prompt", icon:"🖼️", label:"Image Prompt",     desc:"Gen prompt สำหรับ Midjourney / DALL-E" },
+    { id:"chat",   icon:"💬", label:"Free Chat",        desc:"ถามอะไรก็ได้เกี่ยวกับ NILA design" },
+  ];
+  const COLLECTIONS = ["Midnight Siam","Lotus Pink & Sage","Lotus Damask","Siam Tropical"];
+  const PALETTES    = ["Emerald & Antique Gold","Indigo & Gold","Lotus Rose & Ivory","Sage & Blush"];
+  const MARKETS     = ["Wallcovering","Silk Scarf & Textile","Hospitality FF&E","Gifting & Lifestyle","Ceramics & Tableware"];
+  const [mode, setMode]             = React.useState("brief");
+  const [collection, setCollection] = React.useState(COLLECTIONS[0]);
+  const [palette, setPalette]       = React.useState(PALETTES[0]);
+  const [market, setMarket]         = React.useState(MARKETS[0]);
+  const [chatInput, setChatInput]   = React.useState("");
+  const [customNote, setCustomNote] = React.useState("");
+  const [output, setOutput]         = React.useState("");
+  const [loading, setLoading]       = React.useState(false);
+  const [error, setError]           = React.useState("");
+  const [copied, setCopied]         = React.useState(false);
+  const motif = MOTIFS.find(m => collection.includes(m.name.split(" ")[0])) || MOTIFS[0];
+  const SYSTEM = "You are the NILA Design Intelligence, a creative AI for NILA Heritage Living, a Thai cultural IP licensing brand. Brand voice: Scholarly Artisan. Quiet Authority. Culturally Grounded. Precise and Poetic. Reference specific Thai motif names, historical periods, and precise surface descriptions. Never use oriental, exotic, or vague cultural references. Tone: warm but precise, story-first, culturally specific. Always position NILA as a premium heritage IP brand.";
+  const buildPrompt = () => {
+    const base = "Collection: " + collection + "\nPalette: " + palette + "\nTarget market: " + market + "\nMotif: " + motif.name + " (" + motif.thai + ") - " + motif.meaning;
+    if (mode==="brief")  return base + "\n\nWrite a full Collection Brief for NILA including:\n1. Collection Name & Tagline\n2. Cultural Inspiration\n3. Mood & Atmosphere\n4. Colour Palette Description\n5. Key Motifs & Their Meaning\n6. Surface Applications\n7. Target Licensing Partners\n\nWrite in NILA brand voice. Be specific and poetic.";
+    if (mode==="story")  return base + "\n\nWrite a Pattern Story for the " + motif.name + " motif for use in a NILA licensing deck.\nInclude:\n1. Historical & Cultural Context\n2. Visual Description of the Pattern\n3. Symbolic Meaning\n4. Modern Application Story\n5. Why this pattern for " + market + "\n\nKeep it elegant, 200-250 words.";
+    if (mode==="prompt") return base + "\n\nGenerate 3 detailed image generation prompts (Midjourney / DALL-E style) for the " + collection + " collection applied to " + market + ".\nEach prompt should describe the visual scene precisely, include colour palette: " + palette + ", reference the " + motif.name + " motif, specify lighting texture mood, and end with style tags.\nFormat each as: Prompt 1: [prompt text]";
+    if (mode==="chat")   return chatInput;
+    return "";
+  };
+  const generate = async () => {
+    if (mode==="chat" && !chatInput.trim()) return;
+    setLoading(true); setError(""); setOutput("");
+    try {
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
+        method:"POST", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ model:"claude-sonnet-4-6", max_tokens:1000, system:SYSTEM, messages:[{ role:"user", content:buildPrompt()+(customNote?"\n\nAdditional context: "+customNote:"") }] }),
+      });
+      const data = await res.json();
+      if (data.content&&data.content[0]&&data.content[0].text) setOutput(data.content[0].text);
+      else if (data.error) setError("API error: "+data.error.message);
+    } catch(err) { setError("Network error: "+err.message); }
+    finally { setLoading(false); }
+  };
+  const copyOutput = () => {
+    if (!output) return;
+    navigator.clipboard&&navigator.clipboard.writeText(output).then(()=>{ setCopied(true); setTimeout(()=>setCopied(false),2000); });
+  };
+  return (
+    React.createElement("div", null,
+      React.createElement(SectionHead, { icon:"🎨", title:"Design Agent", subtitle:"AI creative assistant for NILA collection development" }),
+      React.createElement("div", { style:{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:10, marginBottom:20 } },
+        MODES.map(function(m) {
+          return React.createElement("div", { key:m.id, onClick:function(){ setMode(m.id); setOutput(""); setError(""); },
+            style:{ padding:"14px 12px", borderRadius:T.radiusL, border:"2px solid "+(mode===m.id?T.gold:T.border),
+              background:mode===m.id?T.gold+"12":T.white, cursor:"pointer", textAlign:"center" } },
+            React.createElement("div", { style:{ fontSize:22, marginBottom:6 } }, m.icon),
+            React.createElement("div", { style:{ fontSize:T.sm, fontWeight:700, color:mode===m.id?T.amber:T.ink, marginBottom:3 } }, m.label),
+            React.createElement("div", { style:{ fontSize:T.xs, color:T.mist, lineHeight:1.4 } }, m.desc)
+          );
+        })
+      ),
+      React.createElement(Grid, { cols:2, gap:14 },
+        React.createElement(Card, null,
+          React.createElement(Divider, { label:"Configuration" }),
+          mode !== "chat" && React.createElement(React.Fragment, null,
+            React.createElement("div", { style:{ marginBottom:12 } },
+              React.createElement("label", { style:{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 } }, "Collection"),
+              React.createElement("select", { value:collection, onChange:function(e){ setCollection(e.target.value); }, style:{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:"1px solid "+T.border, background:T.white, fontSize:T.base, fontFamily:"inherit" } },
+                COLLECTIONS.map(function(c){ return React.createElement("option", { key:c }, c); })
+              )
+            ),
+            React.createElement("div", { style:{ marginBottom:12 } },
+              React.createElement("label", { style:{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 } }, "Palette"),
+              React.createElement("select", { value:palette, onChange:function(e){ setPalette(e.target.value); }, style:{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:"1px solid "+T.border, background:T.white, fontSize:T.base, fontFamily:"inherit" } },
+                PALETTES.map(function(p){ return React.createElement("option", { key:p }, p); })
+              )
+            ),
+            React.createElement("div", { style:{ marginBottom:12 } },
+              React.createElement("label", { style:{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 } }, "Target Market"),
+              React.createElement("select", { value:market, onChange:function(e){ setMarket(e.target.value); }, style:{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:"1px solid "+T.border, background:T.white, fontSize:T.base, fontFamily:"inherit" } },
+                MARKETS.map(function(m){ return React.createElement("option", { key:m }, m); })
+              )
+            ),
+            React.createElement("div", { style:{ padding:"10px 12px", background:T.gold+"0A", borderRadius:T.radius, border:"1px solid "+T.gold+"33", marginBottom:12 } },
+              React.createElement("div", { style:{ fontSize:T.xs, fontWeight:700, color:T.amber, marginBottom:2 } }, "Motif: "+motif.name+" ("+motif.thai+")"),
+              React.createElement("div", { style:{ fontSize:T.xs, color:T.mist, lineHeight:1.5 } }, motif.meaning)
+            )
+          ),
+          mode==="chat" && React.createElement("div", { style:{ marginBottom:12 } },
+            React.createElement("label", { style:{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 } }, "Your Question"),
+            React.createElement("textarea", { value:chatInput, onChange:function(e){ setChatInput(e.target.value); },
+              placeholder:"ถามเรื่อง design direction, motif usage, collection naming, brand voice...",
+              style:{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:"1px solid "+T.border, fontSize:T.sm, fontFamily:"inherit", resize:"vertical", minHeight:100, boxSizing:"border-box", color:T.ink } })
+          ),
+          React.createElement(Divider, { label:"Additional Context" }),
+          React.createElement("textarea", { value:customNote, onChange:function(e){ setCustomNote(e.target.value); },
+            placeholder:"เพิ่ม context พิเศษ เช่น target licensee, season, occasion...",
+            style:{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:"1px solid "+T.border, fontSize:T.sm, fontFamily:"inherit", resize:"vertical", minHeight:60, boxSizing:"border-box", color:T.ink, marginBottom:12 } }),
+          React.createElement("button", { onClick:generate, disabled:loading,
+            style:{ width:"100%", padding:"10px", borderRadius:T.radius, border:"none",
+              background:loading?T.ground:"linear-gradient(135deg,"+T.indigo+","+T.indigoL+")",
+              color:loading?T.mist:"#fff", fontWeight:700, fontSize:T.base, cursor:loading?"not-allowed":"pointer" } },
+            loading ? "Generating..." : "Generate with Claude"
+          ),
+          error && React.createElement("div", { style:{ marginTop:8, fontSize:T.xs, color:T.crimson, padding:"6px 10px", background:"#FEF2F2", borderRadius:6 } }, error)
+        ),
+        React.createElement("div", { style:{ position:"sticky", top:16, alignSelf:"flex-start" } },
+          React.createElement(Card, { style:{ border:"2px solid "+(output?T.gold:T.border) } },
+            React.createElement("div", { style:{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:12 } },
+              React.createElement("div", { style:{ display:"flex", gap:8, alignItems:"center" } },
+                React.createElement(Tag, { color:output?"gold":"jade" }, output?"Claude Output":"Awaiting generation"),
+                output && React.createElement(Tag, { color:"indigo", size:"xs" }, MODES.find(function(m){ return m.id===mode; })&&MODES.find(function(m){ return m.id===mode; }).label)
+              ),
+              output && React.createElement(Button, { onClick:copyOutput, variant:"gold", size:"sm" }, copied?"Copied":"Copy")
+            ),
+            loading ? React.createElement("div", { style:{ textAlign:"center", padding:"60px 20px" } },
+              React.createElement("div", { style:{ fontSize:28, marginBottom:12 } }, "✦"),
+              React.createElement("div", { style:{ fontSize:T.sm, color:T.mist } }, "Claude is creating...")
+            ) : output ? React.createElement("div", { style:{ background:T.indigoD, borderRadius:T.radius, padding:"14px 16px", color:"#C8D8FF",
+              fontFamily:"monospace", fontSize:T.xs, lineHeight:1.8, maxHeight:520, overflowY:"auto", whiteSpace:"pre-wrap", wordBreak:"break-word" } }, output)
+            : React.createElement("div", { style:{ textAlign:"center", padding:"60px 20px", color:T.mist } },
+              React.createElement("div", { style:{ fontSize:32, marginBottom:12, opacity:0.3 } }, "🎨"),
+              React.createElement("div", { style:{ fontSize:T.sm } }, "เลือก mode และกด Generate")
+            )
+          )
+        )
+      )
+    )
+  );
+}
+
 const MODULE_MAP = {
   dashboard:Dashboard, brand:BrandBible, design:DesignLanguage, motifs:MotifLibrary,
   prompts:PromptGenerator, collections:CollectionPlanner, vault:AssetVault,
@@ -5668,5 +5803,6 @@ export default function App() {
     </div>
   );
 }
+
 
 
