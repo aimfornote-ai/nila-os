@@ -4129,19 +4129,19 @@ function DesignAgent() {
           {mode !== "chat" && (<>
             <div style={{ marginBottom:12 }}>
               <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Collection</label>
-              <select value={collection} onChange={e=>setCollection(e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
+              <select defaultValue={collection} onChange={e=>setCollection(e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
                 {COLLECTIONS.map(c=><option key={c} value={c}>{c}</option>)}
               </select>
             </div>
             <div style={{ marginBottom:12 }}>
               <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Palette</label>
-              <select value={palette} onChange={e=>setPalette(e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
+              <select defaultValue={palette} onChange={e=>setPalette(e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
                 {PALETTES.map(p=><option key={p} value={p}>{p}</option>)}
               </select>
             </div>
             <div style={{ marginBottom:12 }}>
               <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.09em", marginBottom:5 }}>Target Market</label>
-              <select value={market} onChange={e=>setMarket(e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
+              <select defaultValue={market} onChange={e=>setMarket(e.target.value)} style={{ width:"100%", padding:"8px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, background:T.white, fontSize:T.base, fontFamily:"inherit" }}>
                 {MARKETS.map(m=><option key={m} value={m}>{m}</option>)}
               </select>
             </div>
@@ -5811,6 +5811,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
