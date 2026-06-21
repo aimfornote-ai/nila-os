@@ -4250,7 +4250,7 @@ function DeliverablesTracker() {
               <div key={k}>
                 <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:4 }}>{l}</label>
                 <input value={form[k]} onChange={e => setForm(f => ({...f,[k]:e.target.value}))}
-                  style={{ width:"100%", padding:"7px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, fontSize:T.base, boxSizing:"border-box", color:T.ink }} />
+                  style={{ width:"100%", padding:"7px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, fontSize:T.base, boxSizing:"border-box", color:T.ink, background:T.white }} />
               </div>
             ))}
             <div>
@@ -5936,6 +5936,8 @@ export default function App() {
     </div>
   );
 }
+
+
 
 
 
