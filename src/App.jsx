@@ -4256,14 +4256,14 @@ function DeliverablesTracker() {
             <div>
               <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:4 }}>Licence Tier</label>
               <select value={form.tier} onChange={e => setForm(f => ({...f,tier:e.target.value}))}
-                style={{ width:"100%", padding:"7px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, fontSize:T.base, color:T.ink }}>
+                style={{ width:"100%", padding:"7px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, fontSize:T.base, color:T.ink, background:T.white }}>
                 {["POD","COM","BRD","EXC"].map(t => <option key={t}>{t}</option>)}
               </select>
             </div>
             <div>
               <label style={{ display:"block", fontSize:T.xs, fontWeight:700, color:T.mist, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:4 }}>Licence Date</label>
               <input type="date" value={form.date} onChange={e => setForm(f => ({...f,date:e.target.value}))}
-                style={{ width:"100%", padding:"7px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, fontSize:T.base, color:T.ink }} />
+                style={{ width:"100%", padding:"7px 10px", borderRadius:T.radius, border:`1px solid ${T.border}`, fontSize:T.base, color:T.ink, background:T.white }} />
             </div>
           </Grid>
           <div style={{ marginTop:12 }}><Button onClick={addDelivery}>Add to Tracker</Button></div>
@@ -5936,6 +5936,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
