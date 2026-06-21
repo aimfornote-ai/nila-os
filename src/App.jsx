@@ -5911,11 +5911,14 @@ function ClientView() {
 export default function App() {
   const [active, setActive]   = useState("dashboard");
   const [mvpMode, setMvpMode] = useState(false);
-  const [mode, setMode]       = useState("splash"); // splash | client | admin
+  const [mode, setMode]       = useState(() => {
+    const seen = sessionStorage.getItem("nila_entered");
+    return seen ? "client" : "splash";
+  }); // splash | client | admin
   const ActiveModule = MODULE_MAP[active] || Dashboard;
 
   if (mode === "splash") {
-    return <SplashScreen onEnter={(isAdmin) => setMode(isAdmin?"admin":"client")} />;
+    return <SplashScreen onEnter={(isAdmin) => { sessionStorage.setItem("nila_entered","1"); setMode(isAdmin?"admin":"client"); }} />;
   }
 
   if (mode === "client") {
@@ -5944,6 +5947,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
