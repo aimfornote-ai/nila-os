@@ -4456,7 +4456,7 @@ function SplashScreen({ onEnter }) {
         cursor:"pointer", transition:"all 0.3s" }}
         onMouseEnter={e=>{ e.currentTarget.style.background="rgba(199,162,77,0.12)"; e.currentTarget.style.letterSpacing="8px"; }}
         onMouseLeave={e=>{ e.currentTarget.style.background="transparent"; e.currentTarget.style.letterSpacing="6px"; }}>
-        ENTER
+        ENTER NILA
       </button>
 
       <div style={{ position:"absolute", bottom:40, fontSize:10,
@@ -5938,6 +5938,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
